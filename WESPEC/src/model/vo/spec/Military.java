@@ -4,7 +4,7 @@ import java.util.Date;
 
 import model.vo.Spec;
 
-public class Military  extends Spec{
+public class Military  {
 	//militray 변수
 	
 	private boolean militaryDone;				// 필&미필

@@ -4,15 +4,16 @@ import java.util.Date;
 
 import model.vo.Spec;
 
-public class Trainning extends Spec {
+public class Trainning  {
 	
 	//member 변수	
 	private String trainingName;				// 교육/연수 내용
 	private String trainingPeriod;				// 교육/연수 기간
-	private String trainingOrganization;		// 교육/연수 기관
+	private String trainingOrg;					// 교육/연수 기관
 	private int regNo;							// 등록번호
 	private int publicScope;					// 공개범위
 	private Date regDate;						// 등록일
+	
 	public String getTrainingName() {
 		return trainingName;
 	}
@@ -25,11 +26,11 @@ public class Trainning extends Spec {
 	public void setTrainingPeriod(String trainingPeriod) {
 		this.trainingPeriod = trainingPeriod;
 	}
-	public String getTrainingOrganization() {
-		return trainingOrganization;
+	public String getTrainingOrg() {
+		return trainingOrg;
 	}
-	public void setTrainingOrganization(String trainingOrganization) {
-		this.trainingOrganization = trainingOrganization;
+	public void setTrainingOrg(String trainingOrg) {
+		this.trainingOrg = trainingOrg;
 	}
 	public int getRegNo() {
 		return regNo;
@@ -49,6 +50,12 @@ public class Trainning extends Spec {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

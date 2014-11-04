@@ -1,6 +1,7 @@
 package model.vo;
 
 public class Resume {
+	
 	private Profile profile;
 	private Spec spec;
 	

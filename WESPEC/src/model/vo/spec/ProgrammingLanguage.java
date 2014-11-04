@@ -4,7 +4,7 @@ import java.util.Date;
 
 import model.vo.Spec;
 
-public class ProgrammingLanguage extends Spec {
+public class ProgrammingLanguage {
 	
 	//language 변수
 	private String languageName;			// 프로그래밍언어 명

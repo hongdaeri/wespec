@@ -3,14 +3,14 @@ package model.vo.spec;
 import java.util.Date;
 import model.vo.Spec;
 
-public class Academic extends Spec{
+public class Academic {
 	
 	//academic 변수	
 	private String academicName;			// 학교명
 	private String academicMajor;			// 전공
 	private String academicPeriod;			// 재학기간
 	private String academicState;			// 상태 : { 졸업, 재학, 중퇴 }
-	private int academicScore;				// 성적
+	private String academicScore;			// 성적
 	private int regNo;						// 등록번호
 	private int publicScope;				// 공개범위
 	private Date regDate;					// 등록일
@@ -39,10 +39,10 @@ public class Academic extends Spec{
 	public void setAcademicState(String academicState) {
 		this.academicState = academicState;
 	}
-	public int getAcademicScore() {
+	public String getAcademicScore() {
 		return academicScore;
 	}
-	public void setAcademicScore(int academicScore) {
+	public void setAcademicScore(String academicScore) {
 		this.academicScore = academicScore;
 	}
 	public int getRegNo() {

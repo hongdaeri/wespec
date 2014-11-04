@@ -4,7 +4,7 @@ import java.util.Date;
 
 import model.vo.Spec;
 
-public class Portfolio extends Spec {
+public class Portfolio  {
 	
 	//portfolio 변수			
 	private String portfolioName;				// 포트폴리오명

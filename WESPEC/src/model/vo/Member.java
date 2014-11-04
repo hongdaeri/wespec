@@ -6,8 +6,9 @@ public class Member {
 	private String memberPassword;	// 유저 패스워드
 	private String memberName;		// 학생 이름
 	private char memberGroup;		// 유저 그룹 : S-학생 , P-교수, A-관리자
-	private int memberGrade;		// 학생 학년
-	private int memberHit;			// 학생 상세 페이지 조횟수
+	private int studentGrade;		// 학생 학년
+	private char studentGender;		// 학생 성별
+	private int studentHit;			// 학생 상세 페이지 조횟수
 	
 	public String getMemberId() {
 		return memberId;
@@ -33,19 +34,25 @@ public class Member {
 	public void setMemberGroup(char memberGroup) {
 		this.memberGroup = memberGroup;
 	}
-	public int getMemberGrade() {
-		return memberGrade;
+	public int getStudentGrade() {
+		return studentGrade;
 	}
-	public void setMemberGrade(int memberGrade) {
-		this.memberGrade = memberGrade;
+	public void setStudentGrade(int studentGrade) {
+		this.studentGrade = studentGrade;
 	}
-	public int getMemberHit() {
-		return memberHit;
+	public char getStudentGender() {
+		return studentGender;
 	}
-	public void setMemberHit(int memberHit) {
-		this.memberHit = memberHit;
+	public void setStudentGender(char studentGender) {
+		this.studentGender = studentGender;
 	}
-	
+	public int getStudentHit() {
+		return studentHit;
+	}
+	public void setStudentHit(int studentHit) {
+		this.studentHit = studentHit;
+	}
+
 	
 
 
