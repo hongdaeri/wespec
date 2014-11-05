@@ -16,18 +16,18 @@ public class Spec {
 	public Award award;
 	public Academic academic;
 	public Portfolio portfolio;
-	public Trainning trainning;
+	public Training training;
 	public ProgrammingLanguage programmingLanguage;
 	public Language language;
 	public Military military;								//병역사항
 	
-	private List <Certificate> certificates;					//자격증 리스트
-	private List <Language> languages;						//어학능력 리스트
-	private List <Award> awards;								//수상실적 리스트
-	private List <Academic> academics;						//학력사항 리스트
-	private List <Portfolio> portfolios;						//포트폴리오 리스트
-	private List <Trainning> trainnings;						//교육연수 리스트
-	private List <ProgrammingLanguage> programmingLanguages;	//선호프로그래밍언어 리스트
+	public List <Certificate> certificates;					//자격증 리스트
+	public List <Language> languages;						//어학능력 리스트
+	public List <Award> awards;								//수상실적 리스트
+	public List <Academic> academics;						//학력사항 리스트
+	public List <Portfolio> portfolios;						//포트폴리오 리스트
+	public List <Training> trainings;						//교육연수 리스트
+	public List <ProgrammingLanguage> programmingLanguages;	//선호프로그래밍언어 리스트
 
 
 	
@@ -37,7 +37,7 @@ public class Spec {
 		this.language = new Language();
 		this.academic = new Academic();
 		this.portfolio = new Portfolio();
-		this.trainning = new Trainning();
+		this.training = new Training();
 		this.programmingLanguage = new ProgrammingLanguage();		
 		this.military = new Military();
 		
@@ -46,7 +46,7 @@ public class Spec {
 		this.awards = new ArrayList <Award>();
 		this.academics = new ArrayList <Academic>();
 		this.portfolios = new ArrayList <Portfolio>();
-		this.trainnings = new ArrayList <Trainning>();		
+		this.trainings = new ArrayList <Training>();		
 		this.programmingLanguages = new ArrayList <ProgrammingLanguage>();		
 	}
 
@@ -124,14 +124,14 @@ public class Spec {
 
 
 
-	public Trainning getTrainning() {
-		return trainning;
+	public Training getTraining() {
+		return training;
 	}
 
 
 
-	public void setTrainning(Trainning trainning) {
-		this.trainning = trainning;
+	public void setTraining(Training training) {
+		this.training = training;
 	}
 
 
@@ -232,14 +232,14 @@ public class Spec {
 
 
 
-	public List<Trainning> getTrainnings() {
-		return trainnings;
+	public List<Training> getTrainings() {
+		return trainings;
 	}
 
 
 
-	public void setTrainnings(List<Trainning> trainnings) {
-		this.trainnings = trainnings;
+	public void setTrainings(List<Training> trainings) {
+		this.trainings = trainings;
 	}
 
 
@@ -253,9 +253,5 @@ public class Spec {
 	public void setProgrammingLanguages(
 			List<ProgrammingLanguage> programmingLanguages) {
 		this.programmingLanguages = programmingLanguages;
-	}
-	
-	
-	
-	
+	}	
 }

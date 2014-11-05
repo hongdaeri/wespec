@@ -4,7 +4,7 @@ import java.util.Date;
 
 import model.vo.Spec;
 
-public class Trainning  {
+public class Training  {
 	
 	//member 변수	
 	private String trainingName;				// 교육/연수 내용
@@ -50,6 +50,7 @@ public class Trainning  {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+		
 	
 	
 	

@@ -23,8 +23,8 @@
 	
 	try {
 		//localhost:80 --> localhost:3306
-		String jdbcDriver ="jdbc:apache:commons:dbcp:/pool";		
-		String query = "select * from testTable";
+		String jdbcDriver ="jdbc:apache:commons:dbcp:/wespec";		
+		String query = "select * from member";
 		
 		conn = DriverManager.getConnection(jdbcDriver);
 		
@@ -40,9 +40,9 @@
 %>
 
 		<tr>
-			<td><%= rs.getString("id") %></td>
-			<td><%=rs.getString("name") %></td>
-			<td><%=rs.getString("grade") %>
+			<td><%= rs.getString("member_id") %></td>
+			<td><%=rs.getString("member_group") %></td>
+			<td><%=rs.getString("member_name") %>
 		</tr>
 <%	
 		}

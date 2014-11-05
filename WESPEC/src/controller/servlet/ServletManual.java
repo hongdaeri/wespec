@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import model.vo.Resume;
 import model.vo.Spec;
 import model.vo.spec.*;
 import model.dao.ResumeDao;
+import model.dao.SpecDao;
 
 /**
  * 프로필/이력 등록 서블릿 클래스
@@ -28,8 +30,10 @@ import model.dao.ResumeDao;
 
 @WebServlet(urlPatterns = {"/Test" , "/test", "/TEST"})
 
-public class ServletManual extends HttpServlet{
-	
+
+public class ServletManual extends HttpServlet{	
+
+	SpecDao specDao = null;
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
@@ -48,79 +52,106 @@ public class ServletManual extends HttpServlet{
 		request.setCharacterEncoding("euc-kr");
 		PrintWriter out = response.getWriter();
 		
-		
-		Spec c = getSpecSection(request);
-		
-		
-		Enumeration<String> names = request.getParameterNames();
-		while(names.hasMoreElements())
-		{
-			String n = names.nextElement();
-			String value = request.getParameter(n);
-			
-			out.println(n + ": " + value + "<br>");		
-			
-		}
-		
-		
-		
-		
-		
-		
-		
-		out.print("<h1>POST 방식에 대한 처리 예) 폼 데이터 처리하기</h1>");
-	}
-	public Spec getSpecSection(HttpServletRequest request)
-	{
-		
 		String param = request.getParameter("param");
 		
-		if(param.equals("s1"))
+		
+		specDao = new SpecDao();
+	
+		if(param.equals("s1"))	// 자격증
 		{
 			Certificate certificate = new Certificate();
 			certificate.setCertificateDate(request.getParameter("certificateDate"));
 			certificate.setCertificateName(request.getParameter("certificateName"));
 			certificate.setCertificateGrade(request.getParameter("certificateGrade"));
-			certificate.setCertificateOrganization(request.getParameter("certificateOrganization"));
-			certificate.setCertificateDate(request.getParameter("certificateDate"));
+			certificate.setCertificateOrg(request.getParameter("certificateOrg"));
 			certificate.setPublicScope(Integer.parseInt(request.getParameter("publicScope")));
 			
-			return certificate;
-		}
-		else if(param.equals("s2"))
-		{
+			this.specDao.insert(certificate);
 			
-			return new Language();
+			out.print("성공");
+			
 		}
-		else if(param.equals("s3"))
-		{
-			return new Award();
+		else if(param.equals("s2"))	// 어학능력
+		{			
+			 Language language = new Language();
+			 language.setLanguageName(request.getParameter("languageName"));
+			 language.setLanguageExamName(request.getParameter("languageExamName"));
+			 language.setLanguageExamGrade(request.getParameter("languageExamGrade"));
+			 language.setLanguageExamOrg(request.getParameter("languageExamOrg"));
+			 language.setPublicScope(Integer.parseInt(request.getParameter("publicScope")));
+			 
+			this.specDao.insert(language);
 		}
-		else if(param.equals("s4"))
+		else if(param.equals("s3")) // 수상실적
 		{
-			return new Trainning();
+			Award award = new Award();
+			award.setAwardDate(request.getParameter("awardDate"));
+			award.setAwardSubject(request.getParameter("awardSubject"));
+			award.setAwardOrg(request.getParameter("awardOrg"));
+			award.setPublicScope(Integer.parseInt(request.getParameter("publicScope")));
+			 
+			this.specDao.insert(award);
 		}
-		else if(param.equals("s5"))
+		else if(param.equals("s4")) // 교육 및 연수
 		{
-			return new Portfolio();
+			Training trainning = new Training();
+			trainning.setTrainingName(request.getParameter("trainingName"));
+			trainning.setTrainingPeriod(request.getParameter("trainingPeriod"));
+			trainning.setTrainingOrg(request.getParameter("trainingOrg"));
+			trainning.setPublicScope(Integer.parseInt(request.getParameter("publicScope")));
+			 
+			this.specDao.insert(trainning);
 		}
-		else if(param.equals("s6"))
+		else if(param.equals("s5")) // 포트폴리오
 		{
-			return new ProgrammingLanguage();
+			Portfolio portfolio = new Portfolio();
+			portfolio.setPortfolioName(request.getParameter("portfolioName"));
+			portfolio.setPortfolioPeriod(request.getParameter("portfolioPeriod"));
+			portfolio.setPortfolioLink(request.getParameter("portfolioLink"));
+			portfolio.setPublicScope(Integer.parseInt(request.getParameter("publicScope")));
+			 
+			this.specDao.insert(portfolio);
 		}
-		else if(param.equals("s7"))
+		else if(param.equals("s6")) // 선호프로그래밍 랭귀지
 		{
-			return new Academic();
+			ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
+			programmingLanguage.setLanguageName(request.getParameter("languageName"));
+			programmingLanguage.setLanguageLevel(request.getParameter("languageLevel"));
+			programmingLanguage.setPublicScope(Integer.parseInt(request.getParameter("publicScope")));
+			 
+			this.specDao.insert(programmingLanguage);
 		}
-		else if(param.equals("s8"))
+		else if(param.equals("s7")) // 학력사항
 		{
-			return new Military();
+			Academic academic = new Academic();
+			
+			academic.setAcademicName(request.getParameter("academicName"));
+			academic.setAcademicMajor(request.getParameter("academicMajor"));
+			academic.setAcademicPeriod(request.getParameter("academicPeriod"));
+			academic.setAcademicState(request.getParameter("academicState"));
+			academic.setPublicScope(Integer.parseInt(request.getParameter("publicScope")));
+			 
+			this.specDao.insert(academic);
+		}
+		else if(param.equals("s8")) // 병역
+		{
+			Military military = new Military();
+			
+			military.setMilitaryPeriod(request.getParameter("militaryPeriod"));
+			military.setMilitaryGroup(request.getParameter("militaryGroup"));
+			military.setMilitaryRank(request.getParameter("militaryRank"));
+			military.setMilitaryWork(request.getParameter("militaryWork"));
+			military.setPublicScope(Integer.parseInt(request.getParameter("publicScope")));
+						 
+			this.specDao.insert(military);
 		}
 		else
 		{
-			return null;
+			
 		}
+	
 	}
+
 	
 	
 	

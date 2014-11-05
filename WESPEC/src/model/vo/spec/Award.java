@@ -13,6 +13,7 @@ public class Award  {
 	private int regNo;						// 등록번호
 	private int publicScope;				// 공개범위
 	private Date regDate;					// 등록일
+	
 	public String getAwardDate() {
 		return awardDate;
 	}

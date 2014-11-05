@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>JDBC TEST </h1>
-<h3>mysql:testdb</h3>
+<h3><%=  new Date(System.currentTimeMillis()) %></h3>
 <hr>
 <table border=1>
 	<tr>
@@ -16,6 +16,7 @@
 	
 
 <%
+	
 	// 1. JDBC 드라이버 로딩.
 	Class.forName("com.mysql.jdbc.Driver");
 	
