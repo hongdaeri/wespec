@@ -38,6 +38,14 @@ public class ServletManual extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
+		specDao = new SpecDao();
+		Spec spec = new Spec();
+				
+		spec = specDao.select("h0ngz");	
+		
+		request.setAttribute("spec", spec);		
+		
 		
 		RequestDispatcher requestDispatcher =
 				request.getRequestDispatcher("/skin/module/RegisterModifyTest.jsp");
@@ -149,11 +157,7 @@ public class ServletManual extends HttpServlet{
 		{
 			
 		}
-	
+		
+		response.sendRedirect(request.getContextPath() +"/test");
 	}
-
-	
-	
-	
-
 }

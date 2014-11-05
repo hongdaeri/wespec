@@ -9,6 +9,8 @@
 	
 	<object class="org.apache.commons.pool.impl.GenericObjectPool">
 		<object class="org.apache.commons.pool.PoolableObjectFactory" null="true" />
+		<int value="30"/>
+		<byte value="2"/>
 	</object>
 	
 	<object class="org.apache.commons.pool.KeyedObjectPoolFactory" null="true"/>

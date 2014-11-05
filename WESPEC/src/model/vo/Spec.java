@@ -28,6 +28,7 @@ public class Spec {
 	public List <Portfolio> portfolios;						//포트폴리오 리스트
 	public List <Training> trainings;						//교육연수 리스트
 	public List <ProgrammingLanguage> programmingLanguages;	//선호프로그래밍언어 리스트
+	public List <Military> militarys;
 
 
 	
@@ -47,7 +48,8 @@ public class Spec {
 		this.academics = new ArrayList <Academic>();
 		this.portfolios = new ArrayList <Portfolio>();
 		this.trainings = new ArrayList <Training>();		
-		this.programmingLanguages = new ArrayList <ProgrammingLanguage>();		
+		this.programmingLanguages = new ArrayList <ProgrammingLanguage>();	
+		this.militarys = new ArrayList<Military>();
 	}
 
 
@@ -253,5 +255,19 @@ public class Spec {
 	public void setProgrammingLanguages(
 			List<ProgrammingLanguage> programmingLanguages) {
 		this.programmingLanguages = programmingLanguages;
+	}
+
+
+
+	public List<Military> getMilitarys() {
+		return militarys;
+	}
+
+
+
+	public void setMilitarys(List<Military> militarys) {
+		this.militarys = militarys;
 	}	
+	
+	
 }

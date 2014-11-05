@@ -1,7 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ include file="/common/common.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="model.vo.Spec" %>
+
+<%
+	
+%>
 <jsp:include page="/head.jsp" flush="false"/>
+
+
 <div class="row">
   <div class="col-md-12">
     <div class="row">
@@ -90,14 +99,25 @@
 		   <th class="col-md-2">공개범위</th>
 		   <th class="col-md-2 text-right"><button title="자격증 추가" type="button" class="btn btn-primary btn-xs" onclick="addItem_s1()">추가</button></th>
 		 </tr>
-		 <tr>
-		   <td class="col-md-2">2012.08.12</td>
-		   <td class="col-md-2">워드프로세서</td>
-		   <td class="col-md-2">1급</td>
-		   <td class="col-md-2">한국교통대학교</td>
-		   <td class="col-md-2">전체공개</td>
-		   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
-		</tr>
+		 <c:choose>
+			<c:when test="${spec.certificates}==null">
+			<tr>
+				<td align="center" colspan="6">등록된 자격증이 없습니다.</td>
+			</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="certificate" items="${spec.certificates}" >
+					 <tr>
+					   <td class="col-md-2">${certificate.certificateDate}</td>
+					   <td class="col-md-2">${certificate.certificateName}</td>	
+					   <td class="col-md-2">${certificate.certificateGrade}</td>	
+					   <td class="col-md-2">${certificate.certificateOrg}</td>						  		
+					   <td class="col-md-2">${certificate.publicScope}</td>
+					   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</c:otherwise>
+		  </c:choose>
       </table>		  
 	</div>  <!--  section END -->
 	
@@ -119,14 +139,25 @@
 		   <th class="col-md-2">공개범위</th>
 		   <th class="col-md-2 text-right"><button title="어학능력 추가" type="button" class="btn btn-primary btn-xs" onclick="addItem_s2()">추가</button></th>
 		 </tr>
-		 <tr>
-		   <td class="col-md-2">영어</td>
-		   <td class="col-md-2">TOEIC</td>
-		   <td class="col-md-2">750점</td>
-		   <td class="col-md-2">미교육평가위원회</td>
-		   <td class="col-md-2">전체공개</td>
-		   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
-		</tr>
+		 <c:choose>
+			<c:when test="${spec.languages}==null">
+			<tr>
+				<td align="center" colspan="6">등록된 어학능력이 없습니다.</td>
+			</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="language" items="${spec.languages}" >
+					 <tr>
+					   <td class="col-md-2">${language.languageName}</td>
+					   <td class="col-md-2">${language.languageExamName}</td>	
+					   <td class="col-md-2">${language.languageExamGrade}</td>	
+					   <td class="col-md-2">${language.languageExamOrg}</td>						  		
+					   <td class="col-md-2">${language.publicScope}</td>
+					   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</c:otherwise>
+		  </c:choose>
       </table>		  
 	</div>  <!--  section END -->
 	
@@ -144,13 +175,24 @@
 		   <th class="col-md-2">공개범위</th>
 		   <th class="col-md-2 text-right"><button title="수상실적 추가" type="button" class="btn btn-primary btn-xs" onclick="addItem_s3()">추가</button></th>
 		 </tr>
-		 <tr>
-		   <td class="col-md-2">2012.08.12</td>
-		   <td class="col-md-4">한이음 모바일 어플리케이션 공모전 대상</td>
-		   <td class="col-md-2">한이음</td>		
-		   <td class="col-md-2">전체공개</td>
-		   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
-		</tr>
+	 	 <c:choose>
+			<c:when test="${spec.awards}==null">
+			<tr>
+				<td align="center" colspan="5">등록된 수상내역이 없습니다.</td>
+			</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="award" items="${spec.awards}" >
+					 <tr>
+					   <td class="col-md-2">${award.awardDate}</td>
+					   <td class="col-md-4">${award.awardSubject}</td>	
+					   <td class="col-md-2">${award.awardOrg}</td>						  		
+					   <td class="col-md-2">${award.publicScope}</td>
+					   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</c:otherwise>
+		  </c:choose>
       </table>		  
 	</div>  <!--  section END -->
 	
@@ -168,13 +210,24 @@
 		   <th class="col-md-2">공개범위</th>
 		   <th class="col-md-2 text-right"><button title="교육/연수 추가" type="button" class="btn btn-primary btn-xs" onclick="addItem_s4()">추가</button></th>
 		 </tr>
-		 <tr>
-		   <td class="col-md-2">2012.08.12 ~ 2013.02.14</td>
-		   <td class="col-md-4">빅데이터 전문가 양성과정</td>		  
-		   <td class="col-md-2">한국교통대학교</td>
-		   <td class="col-md-2">전체공개</td>
-		   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
-		</tr>
+	 	 <c:choose>
+			<c:when test="${spec.trainings}==null">
+			<tr>
+				<td align="center" colspan="5">등록된 교육/연수 내용이 없습니다.</td>
+			</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="training" items="${spec.trainings}" >
+					 <tr>
+					   <td class="col-md-2">${training.trainingPeriod}</td>
+					   <td class="col-md-4">${training.trainingName}</td>	
+					   <td class="col-md-2">${training.trainingOrg}</td>						  		
+					   <td class="col-md-2">${training.publicScope}</td>
+					   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</c:otherwise>
+		  </c:choose>
       </table>		  
 	</div>  <!--  section END -->
 	
@@ -191,13 +244,24 @@
 		   <th class="col-md-2">공개범위</th>
 		   <th class="col-md-2 text-right"><button title="포트폴리오 추가" type="button" class="btn btn-primary btn-xs" onclick="addItem_s5()">추가</button></th>
 		 </tr>
-		 <tr>
-		   <td class="col-md-2">2012.08.12 ~ 2013.02.14</td>
-		   <td class="col-md-3">개방형 이력시스템 - 위스펙</td>		  
-		   <td class="col-md-3"><a href="#">http://wesepc.co.kr/adsfji</a></td>
-		   <td class="col-md-2">전체공개</td>
-		   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
-		</tr>
+	 	 <c:choose>
+			<c:when test="${spec.portfolios}==null">
+			<tr>
+				<td align="center" colspan="5">등록된 포트폴리오가 없습니다.</td>
+			</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="portfolio" items="${spec.portfolios}" >
+					 <tr>
+					   <td class="col-md-2">${portfolio.portfolioPeriod}</td>
+					   <td class="col-md-3">${portfolio.portfolioName}</td>	
+					   <td class="col-md-3">${portfolio.portfolioLink}</td>						  		
+					   <td class="col-md-2">${portfolio.publicScope}</td>
+					   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</c:otherwise>
+		  </c:choose>
       </table>		  
 	</div>  <!--  section END -->
 	
@@ -215,14 +279,25 @@
 		   <th class="col-md-2">공개범위</th>
 		   <th class="col-md-2 text-right"><button title="개발능력 추가" type="button" class="btn btn-primary btn-xs" onclick="addItem_s6()">추가</button></th>
 		 </tr>
-		 <tr>
-		   <td class="col-md-2">Java</td>
-		   <td class="col-md-2">상</td>	
-		    <th class="col-md-2"></th>	
-		   <th class="col-md-2"></th>		
-		   <td class="col-md-2">전체공개</td>
-		   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
-		</tr>
+	 	 <c:choose>
+			<c:when test="${spec.programmingLanguages}==null">
+			<tr>
+				<td align="center" colspan="6">등록된 사항이 없습니다.</td>
+			</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="programmingLanguage" items="${spec.programmingLanguages}" >
+					 <tr>
+					   <td class="col-md-2">${programmingLanguage.languageName}</td>
+					   <td class="col-md-2">${programmingLanguage.languageLevel}</td>	
+					   <td class="col-md-2"></td>	
+					   <td class="col-md-2"></td>		
+					   <td class="col-md-2">${programmingLanguage.publicScope}</td>
+					   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</c:otherwise>
+		  </c:choose>
       </table>		  
 	</div>  <!--  section END -->
 	
@@ -240,14 +315,25 @@
 		   <th class="col-md-2">공개범위</th>
 		   <th class="col-md-2 text-right"><button title="학력 추가" type="button" class="btn btn-primary btn-xs" onclick="addItem_s7()">추가</button></th>
 		 </tr>
-		 <tr>
-		   <td class="col-md-2">2004.03 ~ 2007.02</td>
-		   <td class="col-md-2">청담정보통신고등학교</td>	
-		   <td class="col-md-2">네트워크디자인과</td>	
-		   <td class="col-md-2">졸업</td>		
-		   <td class="col-md-2">전체공개</td>
-		   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
-		</tr>
+		 <c:choose>
+			<c:when test="${spec.academics}==null">
+			<tr>
+				<td align="center" colspan="6">등록된 학력사항이 없습니다.</td>
+			</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="academic" items="${spec.academics}" >
+					 <tr>
+					   <td class="col-md-2">${academic.academicPeriod}</td>
+					   <td class="col-md-2">${academic.academicName}</td>	
+					   <td class="col-md-2">${academic.academicMajor}</td>	
+					   <td class="col-md-2">${academic.academicState}</td>		
+					   <td class="col-md-2">${academic.publicScope}</td>
+					   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>		
       </table>		  
 	</div>  <!--  section END -->
 	 
@@ -263,16 +349,25 @@
 		   <th class="col-md-2">계급</th>	
 		   <th class="col-md-2">병과</th>		  		   
 		   <th class="col-md-2">공개범위</th>
-		   <th class="col-md-2 text-right"><button title="학력 추가" type="button" class="btn btn-primary btn-xs" onclick="addItem_s8()">추가</button></th>
+		   <th class="col-md-2 text-right"><button title="병역 추가" type="button" class="btn btn-primary btn-xs" onclick="addItem_s8()">추가</button></th>
 		 </tr>
-		 <tr>
-		   <td class="col-md-2">2008.07 ~ 2010.08</td>
-		   <td class="col-md-2">육군</td>	
-		   <td class="col-md-2">병장</td>	
-		   <td class="col-md-2">보병</td>		
-		   <td class="col-md-2">전체공개</td>
-		   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
-		</tr>
+			<c:choose>
+				<c:when test="${spec.military.publicScope>0}">
+					<tr>
+						   <td class="col-md-2">${spec.military.militaryPeriod}</td>
+						   <td class="col-md-2">${spec.military.militaryGroup}</td>	
+						   <td class="col-md-2">${spec.military.militaryRank}</td>	
+						   <td class="col-md-2">${spec.military.militaryWork}</td>		
+						   <td class="col-md-2">${spec.military.publicScope}</td>
+						   <td class="col-md-2 text-right"><button title="항목 삭제" type="button" class="btn btn-default btn-xs">삭제</button></td>
+					</tr>				
+				</c:when>
+				<c:otherwise>
+					<tr>
+						<td align="center" colspan="6">등록된 병역사항이 없습니다.</td>
+					</tr>	
+				</c:otherwise>
+			</c:choose>					 
       </table>		  
 	</div>  <!--  section END -->
 	

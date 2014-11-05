@@ -7,7 +7,7 @@ import model.vo.Spec;
 public class Military  {
 	//militray 변수
 	
-	private boolean militaryDone;				// 필&미필
+	private int militaryDone;				// 필&미필
 	private String militaryReason;				// 미필사유
 	private String militaryGroup;				// 군별
 	private String militaryRank;				// 계급
@@ -17,10 +17,10 @@ public class Military  {
 	private int publicScope;					// 공개범위
 	private Date regDate;						// 등록일
 	
-	public boolean isMilitaryDone() {
+	public int isMilitaryDone() {
 		return militaryDone;
 	}
-	public void setMilitaryDone(boolean militaryDone) {
+	public void setMilitaryDone(int militaryDone) {
 		this.militaryDone = militaryDone;
 	}
 	public String getMilitaryReason() {
