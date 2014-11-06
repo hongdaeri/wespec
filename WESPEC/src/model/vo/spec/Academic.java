@@ -1,7 +1,7 @@
 package model.vo.spec;
 
 import java.util.Date;
-import model.vo.Spec;
+
 
 public class Academic {
 	
@@ -12,7 +12,7 @@ public class Academic {
 	private String academicState;			// 상태 : { 졸업, 재학, 중퇴 }
 	private String academicScore;			// 성적
 	private int regNo;						// 등록번호
-	private int publicScope;				// 공개범위
+	private String publicScope;				// 공개범위
 	private Date regDate;					// 등록일
 	
 	public String getAcademicName() {
@@ -51,17 +51,18 @@ public class Academic {
 	public void setRegNo(int regNo) {
 		this.regNo = regNo;
 	}
-	public int getPublicScope() {
-		return publicScope;
-	}
-	public void setPublicScope(int publicScope) {
-		this.publicScope = publicScope;
-	}
+
 	public Date getRegDate() {
 		return regDate;
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+	public String getPublicScope() {
+		return publicScope;
+	}
+	public void setPublicScope(String publicScope) {
+		this.publicScope = publicScope;
 	}
 	
 

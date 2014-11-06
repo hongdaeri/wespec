@@ -23,6 +23,7 @@
 	<link rel="stylesheet" href="<%=skinPath %>/css/style.css" />
 	    
 	<!-- js -->
+	<script src="<%=skinPath %>/js/wespec.js"></script>
 	<script src="<%=skinPath %>/js/jquery-1.9.1.min.js"></script>
 	<script src="<%=skinPath %>/js/modernizr.js"></script>
 	<script src="<%=skinPath %>/js/additem.js" charset="utf-8"></script>

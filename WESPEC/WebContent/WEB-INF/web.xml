@@ -21,7 +21,7 @@
 		<session-timeout>180</session-timeout>
 	</session-config>	
 
-	<!-- DBCP 설정 -->
+	<!-- DBCP 설정 
 	<servlet>
 		<servlet-name>DBCPInit</servlet-name>
 		<servlet-class>jdbc.loader.DBCPInit</servlet-class>
@@ -30,7 +30,7 @@
 			<param-value>com.mysql.jdbc.Driver</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
-	</servlet>
+	</servlet>-->
 	
 	<resource-ref>
 		<description>Connection</description>

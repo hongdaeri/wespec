@@ -5,9 +5,7 @@ import javax.naming.InitialContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.sql.DataSource;
 
-import com.mysql.jdbc.Connection;
 
 import java.util.StringTokenizer;
 

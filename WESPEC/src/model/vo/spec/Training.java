@@ -2,7 +2,6 @@ package model.vo.spec;
 
 import java.util.Date;
 
-import model.vo.Spec;
 
 public class Training  {
 	
@@ -11,46 +10,46 @@ public class Training  {
 	private String trainingPeriod;				// 교육/연수 기간
 	private String trainingOrg;					// 교육/연수 기관
 	private int regNo;							// 등록번호
-	private int publicScope;					// 공개범위
+	private String publicScope;					// 공개범위
 	private Date regDate;						// 등록일
 	
 	public String getTrainingName() {
 		return trainingName;
 	}
-	public void setTrainingName(String trainingName) {
-		this.trainingName = trainingName;
-	}
 	public String getTrainingPeriod() {
 		return trainingPeriod;
-	}
-	public void setTrainingPeriod(String trainingPeriod) {
-		this.trainingPeriod = trainingPeriod;
 	}
 	public String getTrainingOrg() {
 		return trainingOrg;
 	}
-	public void setTrainingOrg(String trainingOrg) {
-		this.trainingOrg = trainingOrg;
-	}
 	public int getRegNo() {
 		return regNo;
 	}
-	public void setRegNo(int regNo) {
-		this.regNo = regNo;
-	}
-	public int getPublicScope() {
+	public String getPublicScope() {
 		return publicScope;
-	}
-	public void setPublicScope(int publicScope) {
-		this.publicScope = publicScope;
 	}
 	public Date getRegDate() {
 		return regDate;
 	}
+	public void setTrainingName(String trainingName) {
+		this.trainingName = trainingName;
+	}
+	public void setTrainingPeriod(String trainingPeriod) {
+		this.trainingPeriod = trainingPeriod;
+	}
+	public void setTrainingOrg(String trainingOrg) {
+		this.trainingOrg = trainingOrg;
+	}
+	public void setRegNo(int regNo) {
+		this.regNo = regNo;
+	}
+	public void setPublicScope(String publicScope) {
+		this.publicScope = publicScope;
+	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-		
+	
 	
 	
 	

@@ -2,8 +2,6 @@ package model.vo.spec;
 
 import java.util.Date;
 
-import model.vo.Spec;
-
 
 public class Certificate {
 	
@@ -13,54 +11,49 @@ public class Certificate {
 	private String certificateGrade;			// 자격증 등급
 	private String certificateOrg;				// 기관
 	private int regNo;							// 등록번호
-	private int publicScope;					// 공개범위
+	private String publicScope;					// 공개범위
 	private Date regDate;						// 등록일
 	
 	public String getCertificateName() {
 		return certificateName;
 	}
-	public void setCertificateName(String certificateName) {
-		this.certificateName = certificateName;
-	}
 	public String getCertificateDate() {
 		return certificateDate;
-	}
-	public void setCertificateDate(String certificateDate) {
-		this.certificateDate = certificateDate;
 	}
 	public String getCertificateGrade() {
 		return certificateGrade;
 	}
-	public void setCertificateGrade(String certificateGrade) {
-		this.certificateGrade = certificateGrade;
+	public String getCertificateOrg() {
+		return certificateOrg;
 	}
-	
 	public int getRegNo() {
 		return regNo;
 	}
-	public void setRegNo(int regNo) {
-		this.regNo = regNo;
-	}
-	public int getPublicScope() {
+	public String getPublicScope() {
 		return publicScope;
-	}
-	public void setPublicScope(int publicScope) {
-		this.publicScope = publicScope;
 	}
 	public Date getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
+	public void setCertificateName(String certificateName) {
+		this.certificateName = certificateName;
 	}
-	public String getCertificateOrg() {
-		return certificateOrg;
+	public void setCertificateDate(String certificateDate) {
+		this.certificateDate = certificateDate;
+	}
+	public void setCertificateGrade(String certificateGrade) {
+		this.certificateGrade = certificateGrade;
 	}
 	public void setCertificateOrg(String certificateOrg) {
 		this.certificateOrg = certificateOrg;
 	}
-	
-	
-	
-	
+	public void setRegNo(int regNo) {
+		this.regNo = regNo;
+	}
+	public void setPublicScope(String publicScope) {
+		this.publicScope = publicScope;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
 }
