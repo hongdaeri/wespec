@@ -3,13 +3,12 @@ package controller.servlet;
 import javax.servlet.annotation.WebServlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.vo.*;
 import model.vo.spec.*;
@@ -33,15 +32,24 @@ public class RegService extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		response.setContentType("text/html; charset=euc-kr");
+		request.setCharacterEncoding("euc-kr");
+		
 		SpecDao specDao = new SpecDao();
 		ProfileDao profileDao = new ProfileDao();
 		Profile profile = new Profile();
 		Spec spec = new Spec();	
 		
-		profile = profileDao.select("h0ngz");			
+		// 로그인 체크
+		if(!ExceptionService.isLogin(request))			
+			ExceptionService.printAlert(request, response, "로그인하지 않으셨습니다.","/login");
+				
+		HttpSession session = request.getSession(false);
+		String memberId = (String)session.getAttribute("memberId");			
+	
+		profile = profileDao.select(memberId);			
 		request.setAttribute("profile", profile);	
 				
-		spec = specDao.selectSpec("h0ngz");			
+		spec = specDao.selectSpec(memberId);			
 		request.setAttribute("spec", spec);			
 		
 		RequestDispatcher requestDispatcher = 
@@ -55,14 +63,22 @@ public class RegService extends HttpServlet{
 	{
 		response.setContentType("text/html; charset=euc-kr");
 		request.setCharacterEncoding("euc-kr");
-		PrintWriter out = response.getWriter();		
+			
 		String param = request.getParameter("param");		
 		SpecDao specDao = new SpecDao();
 		ProfileDao profileDao = new ProfileDao();
+		
+		// 로그인 체크
+		if(!ExceptionService.isLogin(request))			
+			ExceptionService.printAlert(request, response, "잘못된 접근입니다.","/login");
+				
+		HttpSession session = request.getSession(false);
+		String memberId = (String)session.getAttribute("memberId");		
 	
+		
 		if(param.equals("p")){ 	// 프로필
 			Profile profile = new Profile();
-			profile.setMemberId(request.getParameter("memberId"));
+			profile.setMemberId(memberId);
 			profile.setProfileChiName(request.getParameter("chiName")); 
 			profile.setProfileEngName(request.getParameter("engName")); 
 			profile.setProfileAddress(request.getParameter("address")); 
@@ -91,12 +107,13 @@ public class RegService extends HttpServlet{
 			certificate.setCertificateGrade(request.getParameter("certificateGrade"));
 			certificate.setCertificateOrg(request.getParameter("certificateOrg"));
 			certificate.setPublicScope(request.getParameter("publicScope"));
-			
+			certificate.setMemberId(memberId);
 			specDao.insert(certificate);					
 		}
 		else if(param.equals("s2"))	// 어학능력
 		{			
 			 Language language = new Language();
+			 language.setMemberId(memberId);
 			 language.setLanguageName(request.getParameter("languageName"));
 			 language.setLanguageExamName(request.getParameter("languageExamName"));
 			 language.setLanguageExamGrade(request.getParameter("languageExamGrade"));
@@ -108,6 +125,7 @@ public class RegService extends HttpServlet{
 		else if(param.equals("s3")) // 수상실적
 		{
 			Award award = new Award();
+			award.setMemberId(memberId);
 			award.setAwardDate(request.getParameter("awardDate"));
 			award.setAwardSubject(request.getParameter("awardSubject"));
 			award.setAwardOrg(request.getParameter("awardOrg"));
@@ -118,6 +136,7 @@ public class RegService extends HttpServlet{
 		else if(param.equals("s4")) // 교육 및 연수
 		{
 			Training trainning = new Training();
+			trainning.setMemberId(memberId);
 			trainning.setTrainingName(request.getParameter("trainingName"));
 			trainning.setTrainingPeriod(request.getParameter("trainingPeriod"));
 			trainning.setTrainingOrg(request.getParameter("trainingOrg"));
@@ -128,6 +147,7 @@ public class RegService extends HttpServlet{
 		else if(param.equals("s5")) // 포트폴리오
 		{
 			Portfolio portfolio = new Portfolio();
+			portfolio.setMemberId(memberId);
 			portfolio.setPortfolioName(request.getParameter("portfolioName"));
 			portfolio.setPortfolioPeriod(request.getParameter("portfolioPeriod"));
 			portfolio.setPortfolioLink(request.getParameter("portfolioLink"));
@@ -138,6 +158,7 @@ public class RegService extends HttpServlet{
 		else if(param.equals("s6")) // 선호프로그래밍 랭귀지
 		{
 			ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
+			programmingLanguage.setMemberId(memberId);
 			programmingLanguage.setLanguageName(request.getParameter("languageName"));
 			programmingLanguage.setLanguageLevel(request.getParameter("languageLevel"));
 			programmingLanguage.setPublicScope(request.getParameter("publicScope"));
@@ -147,7 +168,7 @@ public class RegService extends HttpServlet{
 		else if(param.equals("s7")) // 학력사항
 		{
 			Academic academic = new Academic();
-			
+			academic.setMemberId(memberId);
 			academic.setAcademicName(request.getParameter("academicName"));
 			academic.setAcademicMajor(request.getParameter("academicMajor"));
 			academic.setAcademicPeriod(request.getParameter("academicPeriod"));
@@ -159,7 +180,7 @@ public class RegService extends HttpServlet{
 		else if(param.equals("s8")) // 병역
 		{
 			Military military = new Military();
-			
+			military.setMemberId(memberId);
 			military.setMilitaryPeriod(request.getParameter("militaryPeriod"));
 			military.setMilitaryGroup(request.getParameter("militaryGroup"));
 			military.setMilitaryRank(request.getParameter("militaryRank"));
@@ -168,18 +189,14 @@ public class RegService extends HttpServlet{
 			military.setRegister(true);			 
 			specDao.insert(military);
 		}
-		else
-		{
-			/* request가 무엇인가 잘못되었다 */
-		}				
+		else		
+			ExceptionService.printAlert(request, response, "잘못된 접근입니다.","/Register");
+						
 		
-		if(param.equals("p") || param.equals("p_sns") || param.equals("p_photo"))
-		{
-			String scriptCode = "<script language='javascript'>alert('회원님의 프로필이 정상적으로 변경되었습니다'); location.href='"+ request.getContextPath() +"/Register';</script>";
-			out.print(scriptCode);			
-			out.flush();
-			out.close();			
-		}		
+		if(param.equals("p") || param.equals("p_sns") || param.equals("p_photo"))			
+			ExceptionService.printAlert(request, response, "회원님의 프로필이 정상적으로 변경되었습니다","/Register");
+					
+				
 		response.sendRedirect(request.getContextPath() +"/Register");		
 	}
 }

@@ -2,6 +2,7 @@ package model.vo;
 
 
 import model.vo.spec.*;
+
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Spec {
 	public ProgrammingLanguage programmingLanguage;
 	public Language language;
 	public Military military;								//병역사항
+	private String memberId;								// 사용자 ID
 	
 	public List <Certificate> certificates;					//자격증 리스트
 	public List <Language> languages;						//어학능력 리스트
@@ -30,6 +32,8 @@ public class Spec {
 	public List <ProgrammingLanguage> programmingLanguages;	//선호프로그래밍언어 리스트
 	public List <Military> militarys;
 
+	
+	
 
 	
 	public Spec() {
@@ -52,7 +56,12 @@ public class Spec {
 		this.militarys = new ArrayList<Military>();
 	}
 
-
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 
 	public int getSpec_change_point() {
 		return spec_change_point;

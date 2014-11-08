@@ -67,7 +67,6 @@
 					<div class="col-md-12">
 						<div class="col-md-3"></div>
 						<div class="col-md-6">
-							<input type="hidden" name="memberId" value="${profile.memberId}" />
 							<button type="button" class="btn btn-primary btn-lg btn-block"
 								onClick="submit()">프로필 등록</button>
 						</div>

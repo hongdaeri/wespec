@@ -22,7 +22,7 @@ public class Profile {
 	private String profileSnsPinterest;	// 학생 핀터레스트 주소	
 	private String profilePhotoURL;		// 학생 프로필 사진 URL
 	private int hit;					// 학생페이지 조횟수
-	private Date regDate;	// 프로필 등록일.
+	private Date regDate;				// 프로필 등록일.
 	
 	public String getMemberId() {
 		return memberId;

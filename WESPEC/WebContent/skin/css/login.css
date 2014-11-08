@@ -2,16 +2,20 @@ body {
 	background: #333 !important;	
 }
 
+
 .wrapper {	
-  margin-top: 180px;
+  margin-top: 10%;
+  margin-left:50%;
   margin-bottom: 80px;
 }
 
 .form-signin {
+  z-index: 1;
   max-width: 380px;
   padding: 15px 35px 45px;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: rgba(0,0,0,0.5);
+  color:white;
   border: 1px solid rgba(0,0,0,0.1);  
 
   .form-signin-heading,
@@ -46,4 +50,17 @@ body {
 	  border-top-left-radius: 0;
 	  border-top-right-radius: 0;
 	}
+}
+
+
+#videobcg { 
+     position: absolute;
+     top: 0px;
+     left: 0px;
+     min-width: 100%;
+     min-height: 100%;
+     width: auto;
+     height: auto;
+     z-index: -1000;
+     overflow: hidden;
 }

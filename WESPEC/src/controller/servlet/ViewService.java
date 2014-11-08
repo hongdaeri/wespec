@@ -3,9 +3,6 @@ package controller.servlet;
 import javax.servlet.annotation.WebServlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
-
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.vo.Spec;
-import model.vo.spec.*;
+import model.vo.*;
+import model.dao.ProfileDao;
 import model.dao.SpecDao;
 
 /**
@@ -34,21 +31,35 @@ public class ViewService extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		response.setContentType("text/html; charset=euc-kr");
-		SpecDao specDao = new SpecDao();
-		Spec spec = new Spec();			
+		request.setCharacterEncoding("euc-kr");
 		
-		String stuName = request.getRequestURI().substring(
-				request.getContextPath().length() + "/register".length());
+		// 로그인 체크
+		if(!ExceptionService.isLogin(request))			
+			ExceptionService.printAlert(request, response, "로그인하지 않으셨습니다.","/login");
+		
+		SpecDao specDao = new SpecDao();
+		Spec spec = new Spec();	
+		ProfileDao profileDao = new ProfileDao();
+		Profile profile = new Profile();
+		
+		String memberId = request.getRequestURI().substring(
+				request.getContextPath().length() + "/open".length());
 		
 		// URL : OPEN/학생이름   URL에 대한 처리 
-		if(stuName.length()>1)
-			stuName = stuName.substring(1);
-				
-		spec = specDao.selectSpec("h0ngz");			
-		request.setAttribute("spec", spec);			
+		if(memberId.length()>2)
+			memberId = memberId.substring(1);
+		
+		// Profile DAO 클래스를 이용해 request에 Profile 객체 실어 전송
+		profile = profileDao.select(memberId);	
+		request.setAttribute("profile", profile);
+		
+		// SpecDAO 클래스를 이용해 request에 Spec 객체 실어 전송
+		spec = specDao.selectSpec(memberId);			
+		request.setAttribute("spec", spec);	
+		
 		
 		RequestDispatcher requestDispatcher = 
-				request.getRequestDispatcher("/skin/module/RegisterModifyTest.jsp");
+				request.getRequestDispatcher("/skin/module/Open.jsp");
 		requestDispatcher.forward(request, response);
 			
 	}

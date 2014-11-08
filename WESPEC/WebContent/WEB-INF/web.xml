@@ -1,42 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-
-	<display-name>WESPEC</display-name>
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
-	
-	<!-- ErrorPage 설정 -->
-	<error-page>
-		<error-code>404</error-code>
-		<location>/skin/error/error_404.jsp</location>
-	</error-page>
-	<error-page>
-		<error-code>505</error-code>
-		<location>/skin/error/error_505.jsp</location>
-	</error-page>
-
-	<!-- 세션 시간 설정 -->
-	<session-config>
-		<session-timeout>180</session-timeout>
-	</session-config>	
-
-	<!-- DBCP 설정 
-	<servlet>
-		<servlet-name>DBCPInit</servlet-name>
-		<servlet-class>jdbc.loader.DBCPInit</servlet-class>
-		<init-param>
-			<param-name>jdbcdriver</param-name>
-			<param-value>com.mysql.jdbc.Driver</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>-->
-	
-	<resource-ref>
-		<description>Connection</description>
-		<res-ref-name>jdbc/mysql</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>Container</res-auth>
-</resource-ref>
-
+  <display-name>WESPEC</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/skin/error/error_404.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>505</error-code>
+    <location>/skin/error/error_505.jsp</location>
+  </error-page>
+  <session-config>
+    <session-timeout>180</session-timeout>
+  </session-config>
+  <resource-ref>
+    <description>Connection</description>
+    <res-ref-name>jdbc/mysql</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
 </web-app>

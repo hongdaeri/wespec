@@ -18,24 +18,24 @@ public class SpecDao {
 	 ********************************************************************************/
 	
 	// 스팩 검색 (통합 메소드)
-	public Spec selectSpec(String memberID) {
+	public Spec selectSpec(String memberId) {
 		
 		this.spec = new Spec();	
 		
-		this.selectByAcademic(memberID);
-		this.selectByCertificate(memberID);
-		this.selectByLanguage(memberID);
-		this.selectByMilitary(memberID);
-		this.selectByPortfolio(memberID);
-		this.selectByProgrammingLanguage(memberID);
-		this.selectByTraining(memberID);
-		this.selectByAward(memberID);	
+		this.selectByAcademic(memberId);
+		this.selectByCertificate(memberId);
+		this.selectByLanguage(memberId);
+		this.selectByMilitary(memberId);
+		this.selectByPortfolio(memberId);
+		this.selectByProgrammingLanguage(memberId);
+		this.selectByTraining(memberId);
+		this.selectByAward(memberId);	
 		
 		return spec;		
 	}
 		
 	// 학력검색
-	private void selectByAcademic(String memberID) { 		
+	private void selectByAcademic(String memberId) { 		
 				
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
@@ -46,7 +46,7 @@ public class SpecDao {
 		try {				
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, memberId);
 			rs = pstmt.executeQuery();			
 			
 			while(rs.next())
@@ -70,7 +70,7 @@ public class SpecDao {
 	}
 	
 	// 자격증검색
-	private void selectByCertificate(String memberID) { 	
+	private void selectByCertificate(String memberId) { 	
 		
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
@@ -81,7 +81,7 @@ public class SpecDao {
 		try {	
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, memberId);
 			rs = pstmt.executeQuery();			
 			
 			while(rs.next())
@@ -105,7 +105,7 @@ public class SpecDao {
 	}
 	
 	// 어학능력검색
-	private void selectByLanguage(String memberID) { 
+	private void selectByLanguage(String memberId) { 
 		
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
@@ -116,7 +116,7 @@ public class SpecDao {
 		try {	
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, memberId);
 			rs = pstmt.executeQuery();			
 		
 			while(rs.next())
@@ -140,7 +140,7 @@ public class SpecDao {
 	}
 		
 	// 병역검색
-	private void selectByMilitary(String memberID) { 
+	private void selectByMilitary(String memberId) { 
 		
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
@@ -151,7 +151,7 @@ public class SpecDao {
 		try {	
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, memberId);
 			rs = pstmt.executeQuery();			
 		
 			while(rs.next())
@@ -178,7 +178,7 @@ public class SpecDao {
 	}
 	
 	//포트폴리오 검색
-	private void selectByPortfolio(String memberID) { 
+	private void selectByPortfolio(String memberId) { 
 		
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
@@ -189,7 +189,7 @@ public class SpecDao {
 		try {
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, memberId);
 			rs = pstmt.executeQuery();			
 		
 			while(rs.next())
@@ -212,7 +212,7 @@ public class SpecDao {
 	}
 	
 	//선호프로그래밍언어 검색
-	private void selectByProgrammingLanguage(String memberID) { 
+	private void selectByProgrammingLanguage(String memberId) { 
 		
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
@@ -223,7 +223,7 @@ public class SpecDao {
 		try {	
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, memberId);
 			rs = pstmt.executeQuery();			
 		
 			while(rs.next())
@@ -244,7 +244,7 @@ public class SpecDao {
 	}
 	
 	// 교육/연수 검색
-	private void selectByTraining(String memberID) { 
+	private void selectByTraining(String memberId) { 
 		
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
@@ -255,7 +255,7 @@ public class SpecDao {
 		try {	
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, memberId);
 			rs = pstmt.executeQuery();			
 		
 			while(rs.next())
@@ -277,7 +277,7 @@ public class SpecDao {
 	}
 	
 	// 수상내역 검색
-	private void selectByAward(String memberID) { 
+	private void selectByAward(String memberId) { 
 		
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
@@ -288,7 +288,7 @@ public class SpecDao {
 		try {
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, memberId);
 			rs = pstmt.executeQuery();			
 		
 			while(rs.next())
@@ -332,11 +332,11 @@ public class SpecDao {
 		try {
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, certificate.getMemberId());
 			pstmt.setString(2, certificate.getCertificateName());
 			pstmt.setString(3, certificate.getCertificateDate());
 			pstmt.setString(4, certificate.getCertificateGrade());
-			pstmt.setString(5,  certificate.getCertificateOrg());
+			pstmt.setString(5, certificate.getCertificateOrg());
 			pstmt.setString(6, certificate.getPublicScope());
 			pstmt.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
 			pstmt.executeUpdate();
@@ -360,7 +360,7 @@ public class SpecDao {
 		try {
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, academic.getMemberId());
 			pstmt.setString(2, academic.getAcademicPeriod());
 			pstmt.setString(3, academic.getAcademicName());
 			pstmt.setString(4, academic.getAcademicState());
@@ -388,7 +388,7 @@ public class SpecDao {
 		try {
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, award.getMemberId());
 			pstmt.setString(2, award.getAwardDate());
 			pstmt.setString(3, award.getAwardSubject());
 			pstmt.setString(4, award.getAwardOrg());	
@@ -415,7 +415,7 @@ public class SpecDao {
 		try {
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, language.getMemberId());
 			pstmt.setString(2, language.getLanguageName());
 			pstmt.setString(3, language.getLanguageExamName());
 			pstmt.setString(4, language.getLanguageExamGrade());	
@@ -443,7 +443,7 @@ public class SpecDao {
 		try {
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, military.getMemberId());
 			pstmt.setString(2, military.getMilitaryPeriod());
 			pstmt.setString(3, military.getMilitaryGroup());
 			pstmt.setString(4, military.getMilitaryRank());	
@@ -472,7 +472,7 @@ public class SpecDao {
 		try {
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, portfolio.getMemberId());
 			pstmt.setString(2, portfolio.getPortfolioPeriod());
 			pstmt.setString(3, portfolio.getPortfolioName());
 			pstmt.setString(4, portfolio.getPortfolioLink());
@@ -499,7 +499,7 @@ public class SpecDao {
 		try {
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, programmingLanguage.getMemberId());
 			pstmt.setString(2, programmingLanguage.getLanguageName());
 			pstmt.setString(3, programmingLanguage.getLanguageLevel());
 			pstmt.setString(4, programmingLanguage.getPublicScope());
@@ -525,7 +525,7 @@ public class SpecDao {
 		try {
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "h0ngz");
+			pstmt.setString(1, training.getMemberId());
 			pstmt.setString(2, training.getTrainingPeriod());
 			pstmt.setString(3, training.getTrainingName());
 			pstmt.setString(4, training.getTrainingOrg());

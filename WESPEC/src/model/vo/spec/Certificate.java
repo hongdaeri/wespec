@@ -13,7 +13,14 @@ public class Certificate {
 	private int regNo;							// 등록번호
 	private String publicScope;					// 공개범위
 	private Date regDate;						// 등록일
+	private String memberId;					// 사용자 ID
 	
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	public String getCertificateName() {
 		return certificateName;
 	}

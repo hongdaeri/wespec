@@ -1,7 +1,4 @@
 package jdbc.loader;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,6 +8,11 @@ import java.util.StringTokenizer;
 
 public class DBCPInit extends HttpServlet {
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public void init(ServletConfig config) throws ServletException {
 		try {

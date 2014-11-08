@@ -3,9 +3,10 @@ package model.dao;
 import java.sql.*;
 
 import jdbc.util.JdbcUtil;
+import model.vo.Member;
 import model.vo.Profile;
 
-public class ProfileDao {		
+public class AccountDao {		
 	
 	
 	
@@ -18,52 +19,35 @@ public class ProfileDao {
 	 * 																				* 
 	 ********************************************************************************/
 	
-	// 프로필 검색
-	public Profile select(String memberId) {	
-		Profile profile = null;
+	// 멤버검색
+	public Member select(String memberId) {	
+		Member member = null;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		Connection conn = null;		
 		
-		String query = "SELECT * FROM PROFILE WHERE MEMBER_ID = ?";
+		String query = "SELECT * FROM MEMBER WHERE MEMBER_ID = ?";
 		
 		try {				
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, memberId);
 			rs = pstmt.executeQuery();			
-			
-			
-			
+						
 			while(rs.next())
 			{			
-				
-				profile = new Profile();	
-				profile.setMemberId(rs.getString("MEMBER_ID"));			
-				profile.setProfileName(rs.getString("PROFILE_NAME"));			
-				profile.setProfileGrade(rs.getInt("PROFILE_GRADE"));			
-				profile.setProfileGender(rs.getString("PROFILE_GENDER"));			
-				profile.setProfileChiName(rs.getString("PROFILE_CHI_NAME"));			
-				profile.setProfileEngName(rs.getString("PROFILE_ENG_NAME"));			
-				profile.setProfileAddress(rs.getString("PROFILE_ADDRESS"));			
-				profile.setProfileBirth(rs.getString("PROFILE_BIRTH"));			
-				profile.setProfilePhone(rs.getString("PROFILE_PHONE"));			
-				profile.setProfileEmail(rs.getString("PROFILE_EMAIL"));			
-				profile.setProfileSnsFacebook(rs.getString("PROFILE_SNS_FACEBOOK"));			
-				profile.setProfileSnsTwitter(rs.getString("PROFILE_SNS_TWITTER"));			
-				profile.setProfileSnsNBlog(rs.getString("PROFILE_SNS_NBLOG"));			
-				profile.setProfileSnsInstagram(rs.getString("PROFILE_SNS_INSTAGRAM"));			
-				profile.setProfileSnsTumblr(rs.getString("PROFILE_SNS_TUMBLR"));			
-				profile.setProfileSnsPinterest(rs.getString("PROFILE_SNS_PINTEREST"));		
-				profile.setProfilePhotoURL(rs.getString("PROFILE_PHOTO_URL"));			
-				profile.setHit(rs.getInt("PROFILE_HIT"));			
+				member = new Member();	
+				member.setMemberId(rs.getString("MEMBER_ID"));			
+				member.setMemberPassword(rs.getString("MEMBER_PASSWORD"));			
+				member.setMemberGroup(rs.getString("MEMBER_GROUP"));			
+				member.setRegDate(rs.getTimestamp("MEMBER_REG_DATE"));		
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn );
-		}	
-		return profile;				
+		}			
+		return member;				
 	}
 		
 

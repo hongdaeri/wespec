@@ -41,14 +41,14 @@
                   <input type="text" class="form-control" placeholder="Search..">
                   <span class="input-group-btn">
                     <button class="btn btn-success" type="button">Search</button>
-                    <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#searchModal">
 					  Detail
 					</button>
                   </span>                
                 </div>
               </form>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#loginModal">Login</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">

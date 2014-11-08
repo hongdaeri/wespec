@@ -17,7 +17,14 @@ public class Military  {
 	private String publicScope;					// 공개범위
 	private boolean isRegister;					// 병역 등록여부
 	private Date regDate;						// 등록일
+	private String memberId;					// 사용자 ID
 	
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	public int getMilitaryDone() {
 		return militaryDone;
 	}
