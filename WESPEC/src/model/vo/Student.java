@@ -2,8 +2,9 @@ package model.vo;
 
 import java.sql.Date;
 
-public class Profile {
-	 
+
+public class Student {
+	
 	private String memberId;			// 학생 아이디 : 학번
 	private String profileName;			// 학생 이름
 	private int profileGrade;			// 학생 학년
@@ -22,127 +23,174 @@ public class Profile {
 	private String profileSnsPinterest;	// 학생 핀터레스트 주소	
 	private String profilePhotoURL;		// 학생 프로필 사진 URL
 	private int hit;					// 학생페이지 조횟수
-	private Date regDate;				// 프로필 등록일.
-	private String primarySpec;			//주요스펙
+	private Date regDate;				// 프로필 등록일.	
+	private Spec spec;
 	
+	public Student()
+	{		
+		this.spec = new Spec();
+	}
+
 	public String getMemberId() {
 		return memberId;
 	}
+
 	public String getProfileName() {
 		return profileName;
 	}
+
 	public int getProfileGrade() {
 		return profileGrade;
 	}
+
 	public String getProfileGender() {
 		return profileGender;
 	}
+
 	public String getProfileChiName() {
 		return profileChiName;
 	}
+
 	public String getProfileEngName() {
 		return profileEngName;
 	}
+
 	public String getProfileAddress() {
 		return profileAddress;
 	}
+
 	public String getProfileBirth() {
 		return profileBirth;
 	}
+
 	public String getProfilePhone() {
 		return profilePhone;
 	}
+
 	public String getProfileEmail() {
 		return profileEmail;
 	}
+
 	public String getProfileSnsFacebook() {
 		return profileSnsFacebook;
 	}
+
 	public String getProfileSnsTwitter() {
 		return profileSnsTwitter;
 	}
+
 	public String getProfileSnsNBlog() {
 		return profileSnsNBlog;
 	}
+
 	public String getProfileSnsInstagram() {
 		return profileSnsInstagram;
 	}
+
 	public String getProfileSnsTumblr() {
 		return profileSnsTumblr;
 	}
+
 	public String getProfileSnsPinterest() {
 		return profileSnsPinterest;
 	}
+
 	public String getProfilePhotoURL() {
 		return profilePhotoURL;
 	}
+
 	public int getHit() {
 		return hit;
 	}
+
 	public Date getRegDate() {
 		return regDate;
 	}
+
+	public Spec getSpec() {
+		return spec;
+	}
+
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+
 	public void setProfileName(String profileName) {
 		this.profileName = profileName;
 	}
+
 	public void setProfileGrade(int profileGrade) {
 		this.profileGrade = profileGrade;
 	}
+
 	public void setProfileGender(String profileGender) {
 		this.profileGender = profileGender;
 	}
+
 	public void setProfileChiName(String profileChiName) {
 		this.profileChiName = profileChiName;
 	}
+
 	public void setProfileEngName(String profileEngName) {
 		this.profileEngName = profileEngName;
 	}
+
 	public void setProfileAddress(String profileAddress) {
 		this.profileAddress = profileAddress;
 	}
+
 	public void setProfileBirth(String profileBirth) {
 		this.profileBirth = profileBirth;
 	}
+
 	public void setProfilePhone(String profilePhone) {
 		this.profilePhone = profilePhone;
 	}
+
 	public void setProfileEmail(String profileEmail) {
 		this.profileEmail = profileEmail;
 	}
+
 	public void setProfileSnsFacebook(String profileSnsFacebook) {
 		this.profileSnsFacebook = profileSnsFacebook;
 	}
+
 	public void setProfileSnsTwitter(String profileSnsTwitter) {
 		this.profileSnsTwitter = profileSnsTwitter;
 	}
+
 	public void setProfileSnsNBlog(String profileSnsNBlog) {
 		this.profileSnsNBlog = profileSnsNBlog;
 	}
+
 	public void setProfileSnsInstagram(String profileSnsInstagram) {
 		this.profileSnsInstagram = profileSnsInstagram;
 	}
+
 	public void setProfileSnsTumblr(String profileSnsTumblr) {
 		this.profileSnsTumblr = profileSnsTumblr;
 	}
+
 	public void setProfileSnsPinterest(String profileSnsPinterest) {
 		this.profileSnsPinterest = profileSnsPinterest;
 	}
+
 	public void setProfilePhotoURL(String profilePhotoURL) {
 		this.profilePhotoURL = profilePhotoURL;
 	}
+
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
+
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	public String getPrimarySpec() {
-		return primarySpec;
+
+	public void setSpec(Spec spec) {
+		this.spec = spec;
 	}
-	public void setPrimarySpec(String primarySpec) {
-		this.primarySpec = primarySpec;
-	}
+
+	
+	
 }

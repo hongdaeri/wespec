@@ -1,6 +1,9 @@
 package model.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import jdbc.util.JdbcUtil;
 import model.vo.spec.*;
 import model.vo.Spec;
@@ -17,7 +20,40 @@ public class SpecDao {
 	 * 																				* 
 	 ********************************************************************************/
 	
-	// 스팩 검색 (통합 메소드)
+	// 학생 프로필 개별 검색
+	public List<Spec> select() {	
+		List<Spec> specs = new ArrayList<Spec>();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;		
+		
+		String query = "SELECT * FROM SPEC";
+		
+		try {				
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);		
+			rs = pstmt.executeQuery();	
+			
+			while(rs.next())
+			{						
+				Spec spec = new Spec();	
+				spec.setMemberId(rs.getString("MEMBER_ID"));
+				spec.setSpec_last_change_date(rs.getTimestamp("SPEC_LAST_CHANGE_DATE"));
+				spec.setSpec_change_point(rs.getInt("SPEC_CHANGE_POINT"));
+				spec.setMemberId(rs.getString("SPEC_CHANGE_LOCATION"));
+				specs.add(spec);
+				this.spec=null;
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn );
+		}	
+		return specs;				
+	}
+	
+	
+	// 학생 스팩 검색 (통합 메소드)
 	public Spec selectSpec(String memberId) {
 		
 		this.spec = new Spec();	

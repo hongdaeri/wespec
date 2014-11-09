@@ -3,6 +3,8 @@ package controller.servlet;
 import javax.servlet.annotation.WebServlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,15 +35,14 @@ public class RegService extends HttpServlet{
 	{
 		response.setContentType("text/html; charset=euc-kr");
 		request.setCharacterEncoding("euc-kr");
+		// 로그인 체크
+		if(!ExceptionService.isLogin(request))			
+			ExceptionService.printAlert(request, response, "로그인하지 않으셨습니다.","/login");
 		
 		SpecDao specDao = new SpecDao();
 		ProfileDao profileDao = new ProfileDao();
 		Profile profile = new Profile();
-		Spec spec = new Spec();	
-		
-		// 로그인 체크
-		if(!ExceptionService.isLogin(request))			
-			ExceptionService.printAlert(request, response, "로그인하지 않으셨습니다.","/login");
+		Spec spec = new Spec();		
 				
 		HttpSession session = request.getSession(false);
 		String memberId = (String)session.getAttribute("memberId");			
@@ -108,6 +109,8 @@ public class RegService extends HttpServlet{
 			certificate.setCertificateOrg(request.getParameter("certificateOrg"));
 			certificate.setPublicScope(request.getParameter("publicScope"));
 			certificate.setMemberId(memberId);
+			String primarySpec = certificate.getCertificateName() + " " + certificate.getCertificateGrade();
+			profileDao.updatePrimarySpec(memberId, primarySpec);
 			specDao.insert(certificate);					
 		}
 		else if(param.equals("s2"))	// 어학능력
@@ -119,7 +122,8 @@ public class RegService extends HttpServlet{
 			 language.setLanguageExamGrade(request.getParameter("languageExamGrade"));
 			 language.setLanguageExamOrg(request.getParameter("languageExamOrg"));
 			 language.setPublicScope(request.getParameter("publicScope"));
-			 
+			 String primarySpec = language.getLanguageExamName() + " " + language.getLanguageExamGrade();
+			 profileDao.updatePrimarySpec(memberId, primarySpec);
 			 specDao.insert(language);
 		}
 		else if(param.equals("s3")) // 수상실적
@@ -130,7 +134,10 @@ public class RegService extends HttpServlet{
 			award.setAwardSubject(request.getParameter("awardSubject"));
 			award.setAwardOrg(request.getParameter("awardOrg"));
 			award.setPublicScope(request.getParameter("publicScope"));
-			 
+			PrintWriter out = response.getWriter();	
+			out.print(profileDao.selectBySection("h0ngz", "PROFILE_PRIMARY_SPEC"));	
+			String primarySpec = award.getAwardSubject();
+			profileDao.updatePrimarySpec(memberId, primarySpec);
 			specDao.insert(award);
 		}
 		else if(param.equals("s4")) // 교육 및 연수
@@ -190,13 +197,11 @@ public class RegService extends HttpServlet{
 			specDao.insert(military);
 		}
 		else		
-			ExceptionService.printAlert(request, response, "잘못된 접근입니다.","/Register");
-						
+			ExceptionService.printAlert(request, response, "잘못된 접근입니다.","/Register");					
 		
 		if(param.equals("p") || param.equals("p_sns") || param.equals("p_photo"))			
 			ExceptionService.printAlert(request, response, "회원님의 프로필이 정상적으로 변경되었습니다","/Register");
 					
-				
 		response.sendRedirect(request.getContextPath() +"/Register");		
 	}
 }

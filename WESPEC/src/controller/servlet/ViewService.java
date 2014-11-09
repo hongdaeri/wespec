@@ -60,7 +60,6 @@ public class ViewService extends HttpServlet{
 		
 		RequestDispatcher requestDispatcher = 
 				request.getRequestDispatcher("/skin/module/Open.jsp");
-		requestDispatcher.forward(request, response);
-			
+		requestDispatcher.forward(request, response);			
 	}
 }

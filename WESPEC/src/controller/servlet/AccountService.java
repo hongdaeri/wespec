@@ -19,7 +19,7 @@ import model.dao.AccountDao;
  * @author wespec.co.kr
  **/
 
-@WebServlet(urlPatterns = {"/join", "/logout" ,"/login"})
+@WebServlet(urlPatterns = {"/login","/join", "/logout"})
 public class AccountService extends HttpServlet{	
 	private static final long serialVersionUID = -8567273307264010369L;
 	
@@ -72,7 +72,8 @@ public class AccountService extends HttpServlet{
 		{	
 			HttpSession session = request.getSession();
 			session.setAttribute("memberId",memberId);
-			session.setAttribute("memberGroup",member.getMemberGroup());				
+			session.setAttribute("memberGroup",member.getMemberGroup());
+			response.sendRedirect(request.getContextPath() + "/List");
 		}
 		else 
 			ExceptionService.printAlert(request, response, "계정 정보가 올바르지 않습니다. 확인후 다시 입력해주세요.");

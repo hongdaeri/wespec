@@ -1,14 +1,14 @@
 package model.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import jdbc.util.JdbcUtil;
 import model.vo.Profile;
 
 public class ProfileDao {		
-	
-	
-	
+
 	/********************************************************************************
 	 *																				* 
 	 *																				*  
@@ -18,7 +18,7 @@ public class ProfileDao {
 	 * 																				* 
 	 ********************************************************************************/
 	
-	// 프로필 검색
+	// 학생 프로필 개별 검색
 	public Profile select(String memberId) {	
 		Profile profile = null;
 		ResultSet rs = null;
@@ -31,13 +31,10 @@ public class ProfileDao {
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, memberId);
-			rs = pstmt.executeQuery();			
-			
-			
+			rs = pstmt.executeQuery();	
 			
 			while(rs.next())
-			{			
-				
+			{						
 				profile = new Profile();	
 				profile.setMemberId(rs.getString("MEMBER_ID"));			
 				profile.setProfileName(rs.getString("PROFILE_NAME"));			
@@ -56,7 +53,7 @@ public class ProfileDao {
 				profile.setProfileSnsTumblr(rs.getString("PROFILE_SNS_TUMBLR"));			
 				profile.setProfileSnsPinterest(rs.getString("PROFILE_SNS_PINTEREST"));		
 				profile.setProfilePhotoURL(rs.getString("PROFILE_PHOTO_URL"));			
-				profile.setHit(rs.getInt("PROFILE_HIT"));			
+				profile.setHit(rs.getInt("PROFILE_HIT"));	
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -65,8 +62,80 @@ public class ProfileDao {
 		}	
 		return profile;				
 	}
+	
+	// 학생 프로필 개별 검색
+	public List<Profile> select() {	
+		List<Profile> profiles = new ArrayList<Profile>();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;		
 		
-
+		String query = "SELECT * FROM PROFILE";
+		
+		try {				
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);		
+			rs = pstmt.executeQuery();	
+			
+			while(rs.next())
+			{						
+				Profile profile = new Profile();	
+				profile.setMemberId(rs.getString("MEMBER_ID"));			
+				profile.setProfileName(rs.getString("PROFILE_NAME"));			
+				profile.setProfileGrade(rs.getInt("PROFILE_GRADE"));			
+				profile.setProfileGender(rs.getString("PROFILE_GENDER"));			
+				profile.setProfileChiName(rs.getString("PROFILE_CHI_NAME"));			
+				profile.setProfileEngName(rs.getString("PROFILE_ENG_NAME"));			
+				profile.setProfileAddress(rs.getString("PROFILE_ADDRESS"));			
+				profile.setProfileBirth(rs.getString("PROFILE_BIRTH"));			
+				profile.setProfilePhone(rs.getString("PROFILE_PHONE"));			
+				profile.setProfileEmail(rs.getString("PROFILE_EMAIL"));			
+				profile.setProfileSnsFacebook(rs.getString("PROFILE_SNS_FACEBOOK"));			
+				profile.setProfileSnsTwitter(rs.getString("PROFILE_SNS_TWITTER"));			
+				profile.setProfileSnsNBlog(rs.getString("PROFILE_SNS_NBLOG"));			
+				profile.setProfileSnsInstagram(rs.getString("PROFILE_SNS_INSTAGRAM"));			
+				profile.setProfileSnsTumblr(rs.getString("PROFILE_SNS_TUMBLR"));			
+				profile.setProfileSnsPinterest(rs.getString("PROFILE_SNS_PINTEREST"));		
+				profile.setProfilePhotoURL(rs.getString("PROFILE_PHOTO_URL"));			
+				profile.setHit(rs.getInt("PROFILE_HIT"));	
+				profile.setPrimarySpec(rs.getString("PROFILE_PRIMARY_SPEC"));
+				profiles.add(profile);
+				profile=null;
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn );
+		}	
+		return profiles;				
+	}
+		
+	// 프로필 항목 검사
+	public String selectBySection(String memberId, String sectionName) 
+	{
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;	
+		String query = "SELECT " + sectionName + " FROM PROFILE WHERE MEMBER_ID = ?";
+		String sectionResult="";
+			
+		try {
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();	
+			while(rs.next())
+			{							
+				sectionResult += rs.getString(sectionName);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt, conn);
+		}		
+		return sectionResult;
+	}	
 	/********************************************************************************
 	 *																				* 
 	 *																				*  
@@ -114,7 +183,7 @@ public class ProfileDao {
 		PreparedStatement pstmt = null;
 		Connection conn = null;	
 		
-		String query = "UPDATE FROM PROFILE ";
+		String query = "UPDATE PROFILE ";
 		   	   query += "SET PROFILE_SNS_FACEBOOK=?, PROFILE_SNS_TWITTER=?, PROFILE_SNS_NBLOG=?, PROFILE_SNS_INSTAGRAM=?, PROFILE_SNS_TUMBLR=?, PROFILE_SNS_PINTEREST=?, PROFILE_REG_DATE =? ";
 		   	   query += "WHERE MEMBER_ID = ? ";
 		
@@ -146,7 +215,7 @@ public class ProfileDao {
 		PreparedStatement pstmt = null;
 		Connection conn = null;	
 		
-		String query = "UPDATE FROM PROFILE ";
+		String query = "UPDATE PROFILE ";
 		   	   query += "SET PROFILE_PHOTO_URL=? ";
 		   	   query += "WHERE MEMBER_ID = ? ";
 		
@@ -164,5 +233,34 @@ public class ProfileDao {
 		} finally {
 			JdbcUtil.close(pstmt, conn);
 		}	
+	}
+	
+	// 프로필 주요스펙 항목 추가
+	public void updatePrimarySpec(String memberId, String primarySpec) 
+	{
+		PreparedStatement pstmt = null;
+		Connection conn = null;			
+		
+		String primarySpecResult = this.selectBySection(memberId, "PROFILE_PRIMARY_SPEC");
+		primarySpecResult +=(" / " + primarySpec);
+		
+		String query = "UPDATE PROFILE ";
+	   	   query += "SET PROFILE_PRIMARY_SPEC = ? ";
+	   	   query += "WHERE MEMBER_ID = ? ";
+		
+		try {
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, primarySpecResult);
+			pstmt.setString(2, memberId);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt, conn);
+		}			
 	}	
 }
