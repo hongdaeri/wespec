@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>    
 <%@ include file="/head_sub.jsp" %>
 
-
 <body>
     <header>
         <nav class="navbar navbar-default" role="navigation">
@@ -14,7 +13,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#"><strong>WESPEC</strong></a>
+              <a class="navbar-brand" href="<%=request.getContextPath()%>" title="메인화면"><strong>WESPEC</strong></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,15 +35,15 @@
               </ul>
                
               <!-- Search bar -->
-              <form class="navbar-form navbar-left" role="search">
-                <div class="input-group">                   
-                  <input type="text" class="form-control" placeholder="Search..">
-                  <span class="input-group-btn">
-                    <button class="btn btn-success" type="button">Search</button>
+              <form class="navbar-form navbar-left" action="<%=request.getContextPath() %>/Search" role="search">
+                <div class="input-group">                            
+                  <input type="text" class="form-control" placeholder="Search.." name="s_name">
+                  <span class="input-group-btn">                   
+                    <button class="btn btn-success" type="button" onClick="submit();">Search</button>                 
                     <button class="btn btn-danger" data-toggle="modal" data-target="#searchModal">
 					  Detail
 					</button>
-                  </span>                
+                  </span>                                 
                 </div>
               </form>
               <ul class="nav navbar-nav navbar-right">
@@ -52,10 +51,10 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">내 프로필/이력 보기</a></li>
-                    <li><a href="#">프로필/이력 등록</a></li>                   
+                    <li><a href="<%=request.getContextPath()%>/OPEN/<%=memberId%>">내 프로필/이력 보기</a></li>
+                    <li><a href="<%=request.getContextPath()%>/Register">프로필/이력 등록</a></li>                   
                     <li class="divider"></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="<%=request.getContextPath()%>/logout">Logout</a></li>
                   </ul>
                 </li>
               </ul>

@@ -10,7 +10,7 @@
 				<div class="jumbotron">
                		<h1>What is WESPEC</h1>
                		<p>WESPEC으로 당신의 이력을 관리해보세요.</p>
-               		<p><a class="btn btn-default btn-lg" role="button">Register</a></p>
+               		<p><a class="btn btn-default btn-lg" role="button" href="<%=request.getContextPath() %>/Register">Register</a></p>
              	</div>                            
 			</div>
 		</div>

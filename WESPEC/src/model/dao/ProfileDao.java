@@ -136,6 +136,34 @@ public class ProfileDao {
 		}		
 		return sectionResult;
 	}	
+	
+	
+	// 프로필 항목 검사
+	public String selectByName(String studentName) 
+	{
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;	
+		String query = "SELECT MEMBER_ID FROM PROFILE WHERE PROFILE_NAME = ?";
+		String resultId="";
+			
+		try {
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, studentName);
+			rs = pstmt.executeQuery();	
+			while(rs.next())
+			{							
+				resultId = rs.getString("MEMBER_ID");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt, conn);
+		}		
+		return resultId;
+	}	
 	/********************************************************************************
 	 *																				* 
 	 *																				*  

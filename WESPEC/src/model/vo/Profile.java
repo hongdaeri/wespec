@@ -23,7 +23,7 @@ public class Profile {
 	private String profilePhotoURL;		// 학생 프로필 사진 URL
 	private int hit;					// 학생페이지 조횟수
 	private Date regDate;				// 프로필 등록일.
-	private String primarySpec;			//주요스펙
+	private String primarySpec;			// 주요스펙
 	
 	public String getMemberId() {
 		return memberId;

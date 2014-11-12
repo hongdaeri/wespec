@@ -20,11 +20,6 @@
 
 <%-- /* 로그인 상태 확인 및 DISPLAY 처리 */ --%>
 <%				
-	String memberId = (String)session.getAttribute("MEMBER_ID");
+	String memberId = (String)session.getAttribute("memberId");
 	boolean login = memberId == null ? false : true;
-	
-	if(login)
-	{		
-		login_display_state="inline";
-	}
 %>

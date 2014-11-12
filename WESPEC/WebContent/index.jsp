@@ -6,11 +6,11 @@
 	
 	if(loginState != null)
 	{
-		response.sendRedirect( rootPath + "/List");
+		response.sendRedirect( rootPath + "/list");
 	}
 	else
 	{
-		response.sendRedirect(rootPath + "/skin/module/login.jsp");
+		response.sendRedirect(rootPath + "/login");
 	}
 %>
 

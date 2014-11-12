@@ -15,7 +15,7 @@
 						<div class="img">
 							<img src="<%=imagesPath%>/tumb.jpg" alt="">
 							<div class="overlay">
-								<a href="#" class="expand">+</a> <a class="close-overlay hidden">x</a>
+								<a href="#" class="expand" data-toggle="modal" data-target="#photoModal">+</a> <a class="close-overlay hidden">x</a>
 							</div>
 						</div>
 					</div>
@@ -61,7 +61,7 @@
 						</tr>
 						<tr>
 							<td class="active">활동 SNS</td>
-							<td colspan="3"><button title="활동 SNS 추가 및 변경" type="button" class="btn btn-danger btn-xs">SNS 추가 및 변경</button> : 미구현 상태입니다. </td>
+							<td colspan="3"><button title="활동 SNS 추가 및 변경" type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#snsModal">SNS 추가 및 변경</button></td>
 						</tr>
 					</table>
 					<div class="col-md-12">
@@ -311,8 +311,7 @@
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="programmingLanguage"
-								items="${spec.programmingLanguages}">
+							<c:forEach var="programmingLanguage" items="${spec.programmingLanguages}">
 								<tr>
 									<td class="col-md-2">${programmingLanguage.languageName}</td>
 									<td class="col-md-2">${programmingLanguage.languageLevel}</td>
@@ -412,4 +411,74 @@
 	</div>
 </div>
 
+<!-- SNS REGISTER Modal -->
+<div class="modal fade" id="snsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+     <form action="<%=rootPath%>/register" role="form" method="post">
+      <div class="modal-header"  style="background-color:#efefef;">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title text-center" id="myModalLabel">SNS 등록 및 변경</h4>
+      </div>
+      <div class="modal-body">
+      
+       		<input type="hidden" name="param" value="sns"/>
+       		<table class="table text-right">
+       			<tr>
+       				<td><h5>페이스북 ( facebook.com /</h5></td>
+       				<td><input type="text" class="form-control" name="facebookUrl" placeholder="계정명" value="${profile.profileSnsFacebook}"/></td>
+       				<td><h5>)</h5></td>
+       			</tr>       				
+       			<tr>
+       				<td><h5>트위터 ( twitter.com /</h5></td>
+       				<td><input type="text" class="form-control" name="twitterUrl" placeholder="계정명" value="${profile.profileSnsTwitter}"/></td>
+       				<td><h5>)</h5></td>
+       			</tr> 
+       			<tr>
+       				<td><h5>네이버 블로그 ( blog.naver.com /</h5></td>
+       				<td><input type="text" class="form-control" name="nBlogUrl" placeholder="계정명" value="${profile.profileSnsNBlog}"/></td>
+       				<td><h5>)</h5></td>
+       			</tr> 
+       			<tr>
+       				<td><h5>인스타그램 ( instagram.com /</h5></td>
+       				<td><input type="text" class="form-control" name="instagramUrl" placeholder="계정명" value="${profile.profileSnsInstagram}"/></td>
+       				<td><h5>)</h5></td>
+       			</tr> 
+       			<tr>
+       				<td><h5>텀블러 ( tumblr.com /</h5></td>
+       				<td><input type="text" class="form-control" name="tumblrUrl" placeholder="계정명" value="${profile.profileSnsTumblr}"/></td>
+       				<td><h5>)</h5></td>
+       			</tr> 
+       			<tr>
+       				<td><h5>핀터레스트 ( pinterest.com /</h5></td>
+       				<td><input type="text" class="form-control" name="pinterestUrl" placeholder="계정명" value="${profile.profileSnsPinterest}"/></td>
+       				<td><h5>)</h5></td>	
+       			</tr> 
+       		</table>       	
+       
+      </div>
+      <div class="modal-footer">	        
+        <button type="button" class="btn btn-warning text-center" onClick="submit();">등록 및 변경 완료</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- PHOTO REGISTER Modal -->
+<div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">SNS Search</h4>
+      </div>
+      <div class="modal-body">
+        <p>자세한 검색 yo</p>
+      </div>
+      <div class="modal-footer">	        
+        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-filter"></span> RUN</button>
+      </div>
+    </div>
+  </div>
+</div>
 <jsp:include page="/tail.jsp" flush="false" />

@@ -89,17 +89,25 @@ public class RegService extends HttpServlet{
 			profile.setProfileGrade(Integer.parseInt(request.getParameter("grade")));
 			
 			/* 아직 미구현..
-			profile.setProfileSnsFacebook(request.getParameter(""));
-			profile.setProfileSnsTwitter(request.getParameter(""));
-			profile.setProfileSnsNBlog(request.getParameter(""));
-			profile.setProfileSnsInstagram(request.getParameter(""));
-			profile.setProfileSnsTumblr(request.getParameter(""));
-			profile.setProfileSnsPinterest(request.getParameter(""));
-			
+					
 			profile.setProfilePhotoURL(request.getParameter(""));			
 			*/
 			profileDao.update(profile);
-		}		
+		}	
+		else if(param.equals("sns"))	// SNS 등록
+		{
+			Profile profile = new Profile();
+			profile.setMemberId(memberId);
+			profile.setProfileSnsFacebook(request.getParameter("facebookUrl"));
+			profile.setProfileSnsTwitter(request.getParameter("twitterUrl"));
+			profile.setProfileSnsNBlog(request.getParameter("nBlogUrl"));
+			profile.setProfileSnsInstagram(request.getParameter("instagramUrl"));
+			profile.setProfileSnsTumblr(request.getParameter("tumblrUrl"));
+			profile.setProfileSnsPinterest(request.getParameter("pinterestUrl"));
+			
+			profileDao.updateSNS(profile);
+			
+		}
 		else if(param.equals("s1"))	// 자격증
 		{
 			Certificate certificate = new Certificate();
@@ -135,7 +143,7 @@ public class RegService extends HttpServlet{
 			award.setAwardOrg(request.getParameter("awardOrg"));
 			award.setPublicScope(request.getParameter("publicScope"));
 			PrintWriter out = response.getWriter();	
-			out.print(profileDao.selectBySection("h0ngz", "PROFILE_PRIMARY_SPEC"));	
+			out.print(profileDao.selectBySection(memberId, "PROFILE_PRIMARY_SPEC"));	
 			String primarySpec = award.getAwardSubject();
 			profileDao.updatePrimarySpec(memberId, primarySpec);
 			specDao.insert(award);

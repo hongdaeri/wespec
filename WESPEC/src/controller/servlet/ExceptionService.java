@@ -3,6 +3,7 @@ package controller.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,19 +18,27 @@ import javax.servlet.http.HttpSession;
 public class ExceptionService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ExceptionService() {
-        super();
-        // TODO Auto-generated constructor stub
+        super();    
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.setContentType("text/html; charset=euc-kr");
+		request.setCharacterEncoding("euc-kr");
+		
+		String ex = request.getParameter("ex");
+		String nextPage = request.getContextPath();
+		if(ex.equals("NotFoundStudent"))
+		{
+			nextPage = "/skin/module/exception/notFoundStudent.jsp";
+		}
+		PrintWriter out = response.getWriter();	
+		out.print("ex : " + ex + "<br>");
+		out.print("nextpage : " + nextPage);
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+		requestDispatcher.forward(request, response);
 	}
 
 	/**

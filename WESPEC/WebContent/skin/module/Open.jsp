@@ -2,6 +2,14 @@
 <%@ include file="/common/common.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/head.jsp" flush="false" />
+${profile.profilePhotoURL}
+
+<%-- 해당 페이지가 없으면 리다이렉션.  --%> 
+<c:if test="${profile.profileName eq null}">
+	<jsp:forward page="/Exception">
+		<jsp:param name="ex" value="NotFoundStudent" />
+	</jsp:forward>	
+</c:if>
 
 <div class="row">
 	<div class="col-md-12">
@@ -11,7 +19,14 @@
 				<!--  이미지 이펙트  -->
 				<div id="effect-6" class="effects clearfix">
 					<div class="img">
-						<img src="<%=imagesPath%>/tumb.jpg" alt="">
+						
+						<c:if test="${profile.profilePhotoURL eq null}">
+							<img src="<%=imagesPath %>/tumb.jpg" alt="">
+						</c:if>
+						<c:if test="${profile.profilePhotoURL ne null}">
+							<img src="user/upload/${profile.profilePhotoURL}" width="300">
+						</c:if>
+						
 					</div>
 				</div>
 				<!-- 이미지이펙트끝 -->
@@ -25,7 +40,7 @@
 					</div>
 				</div>
 
-				<table class="table table-hover">
+				<table class="table table-bordered">
 					<tr>
 						<td class="active">학년</td>
 						<td class="">${profile.profileGrade}학년</td>
@@ -46,7 +61,27 @@
 					</tr>
 					<tr>
 						<td class="active">활동 SNS</td>
-						<td colspan="3">미구현 상태입니다. </td>
+						<td colspan="3">
+							<c:if test="${profile.profileSnsFacebook ne null}">
+								<a href="http://facebook.com/${profile.profileSnsFacebook}" target="_blank"><img src="<%=imagesPath%>/icon_facebook.gif"></a>	
+							</c:if>
+							<c:if test="${profile.profileSnsTwitter ne null}">
+								<a href="http://twitter.com/${profile.profileSnsTwitter}" target="_blank"><img src="<%=imagesPath%>/icon_twitter.gif"></a>	
+							</c:if>
+							<c:if test="${profile.profileSnsNBlog ne null}">
+								<a href="http://blog.naver.com/${profile.profileSnsNBlog}" target="_blank"><img src="<%=imagesPath%>/icon_n_blog.gif"></a>	
+							</c:if>
+							<c:if test="${profile.profileSnsInstagram ne null}">
+								<a href="http://instagram.com/${profile.profileSnsInstagram}" target="_blank"><img src="<%=imagesPath%>/icon_instagram.gif"></a>	
+							</c:if>
+							<c:if test="${profile.profileSnsTumblr ne null}">
+								<a href="http://tumblr.com/${profile.profileSnsTumblr}" target="_blank"><img src="<%=imagesPath%>/icon_tumblr.gif"></a>	
+							</c:if>
+							<c:if test="${profile.profileSnsPinterest ne null}">
+								<a href="http://pinterest.com/${profile.profileSnsPinterest}" target="_blank"><img src="<%=imagesPath%>/icon_pinterest.gif"></a>	
+							</c:if>
+						
+						</td>
 					</tr>
 				</table>
 				<div class="col-md-12">
@@ -369,5 +404,6 @@
 		<!--  section END -->
 	</div>
 </div>
+
 
 <jsp:include page="/tail.jsp" flush="false" />
