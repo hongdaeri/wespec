@@ -62,22 +62,22 @@ ${profile.profilePhotoURL}
 					<tr>
 						<td class="active">È°µ¿ SNS</td>
 						<td colspan="3">
-							<c:if test="${profile.profileSnsFacebook ne null}">
+							<c:if test="${profile.profileSnsFacebook ne null && profile.profileSnsFacebook ne ''}">
 								<a href="http://facebook.com/${profile.profileSnsFacebook}" target="_blank"><img src="<%=imagesPath%>/icon_facebook.gif"></a>	
 							</c:if>
-							<c:if test="${profile.profileSnsTwitter ne null}">
+							<c:if test="${profile.profileSnsTwitter ne null && profile.profileSnsTwitter ne ''}">
 								<a href="http://twitter.com/${profile.profileSnsTwitter}" target="_blank"><img src="<%=imagesPath%>/icon_twitter.gif"></a>	
 							</c:if>
-							<c:if test="${profile.profileSnsNBlog ne null}">
+							<c:if test="${profile.profileSnsNBlog ne null && profile.profileSnsNBlog ne ''}">
 								<a href="http://blog.naver.com/${profile.profileSnsNBlog}" target="_blank"><img src="<%=imagesPath%>/icon_n_blog.gif"></a>	
 							</c:if>
-							<c:if test="${profile.profileSnsInstagram ne null}">
+							<c:if test="${profile.profileSnsInstagram ne null && profile.profileSnsInstagram ne ''}">
 								<a href="http://instagram.com/${profile.profileSnsInstagram}" target="_blank"><img src="<%=imagesPath%>/icon_instagram.gif"></a>	
 							</c:if>
-							<c:if test="${profile.profileSnsTumblr ne null}">
+							<c:if test="${profile.profileSnsTumblr ne null && profile.profileSnsTumblr ne ''}">
 								<a href="http://tumblr.com/${profile.profileSnsTumblr}" target="_blank"><img src="<%=imagesPath%>/icon_tumblr.gif"></a>	
 							</c:if>
-							<c:if test="${profile.profileSnsPinterest ne null}">
+							<c:if test="${profile.profileSnsPinterest ne null && profile.profileSnsPinterest ne ''}">
 								<a href="http://pinterest.com/${profile.profileSnsPinterest}" target="_blank"><img src="<%=imagesPath%>/icon_pinterest.gif"></a>	
 							</c:if>
 						

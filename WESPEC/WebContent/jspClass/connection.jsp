@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="java.sql.*"%>
-<%@ page import="model.vo.Spec" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+
+<h1> hello world!:</h1>
 <%
-	Spec spec = (Spec)request.getAttribute("spec");
+	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -14,22 +12,19 @@
 	try {
 		Class.forName("com.mysql.jdbc.Driver");
 											
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:80/testdb","wespec","18gkdans");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wespec","wespec","18gkdans");
 
-		String query="select * from userinfo";
+		String query="select * from member";
 		pstmt = conn.prepareStatement(query);
 		rs = pstmt.executeQuery();
 		
 		while(rs.next())
 		{
-			String name = rs.getString(1);
-			String id = rs.getString("id");
-			String email = rs.getString("email");
-			String part = rs.getString("part");
-			int count = rs.getInt("count");
-			int level = rs.getInt("level");
+			String name = rs.getString("member_id");
+			String id = rs.getString("member_group");
+		
 			
-			out.println(name + " " +id + " " +email + " " +part + " " +count + " " +level + " ");
+			out.println(name + " " +id);
 		}
 		
 	}
