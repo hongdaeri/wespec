@@ -35,20 +35,15 @@
 	               		<p>&nbsp;</p> 
 	               		<div class="row text-center">	
 	               		<c:forEach var="profile" items="${profiles}" varStatus="status">   
-							<div class="col-sm-6 col-md-3"> 					
-								<div class="thumbnail">																	
-									<!--  썸네일 이미지 -->	
-									<div class="img">	
-										<a href="<%=rootPath %>/Open/${profile.memberId}">					
-											<img data-src="holder.js/200X300" src="${profile.profilePhotoURL}" class="img-responsive img-circle" style="min-height:300px;" alt="Responsive image">
-										</a>							
-									</div>										
-									<!--  주요스펙 -->						
-									<div class="caption">									
-										<h3><a href="<%=rootPath %>/Open/${profile.memberId}">${profile.profileName}</a></h3>
-										<p>${profile.profileGrade }학년 /${profile.primarySpec }</p>										
-									</div>
-								</div>	
+							<div class="col-xs-6 col-sm-4 col-md-3"> 					
+								<div class="person">
+									<a href="<%=rootPath %>/Open/${profile.memberId}">
+										<img src="<%=imagesPath %>/basic_profile_icon_male.jpg" class="img-responsive img-rounded" alt="Profile image">
+										<h2>${profile.profileName}</h2>
+										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
+										<span>프로필 보기&nbsp;&raquo;</span>
+									</a>
+								</div><!-- /.person -->	
 							</div>
 						</c:forEach>												
 						</div>						
@@ -59,21 +54,16 @@
 	              		<div class="row text-center">
 						<c:forEach var="profile" items="${profiles}">
 						<c:if test="${profile.profileGrade eq 4}">
-							<div class="col-sm-6 col-md-3"> 					
-								<div class="thumbnail">																	
-									<!--  썸네일 이미지 -->	
-									<div class="img">	
-										<a href="<%=rootPath %>/Open/${profile.memberId}">					
-											<img data-src="holder.js/200X300" src="${profile.profilePhotoURL}" class="img-responsive img-circle" style="min-height:300px;" alt="Responsive image">
-										</a>							
-									</div>										
-									<!--  주요스펙 -->						
-									<div class="caption">									
-										<h3><a href="<%=rootPath %>/Open/${profile.memberId}">${profile.profileName}</a></h3>
-										<p>${profile.profileGrade }학년 /${profile.primarySpec }</p>										
-									</div>
-								</div>	
-							</div>	
+							<div class="col-xs-6 col-sm-4 col-md-3"> 					
+								<div class="person">
+									<a href="<%=rootPath %>/Open/${profile.memberId}">
+										<img src="<%=imagesPath %>/basic_profile_icon_male.jpg" class="img-responsive img-rounded" alt="Profile image">
+										<h2>${profile.profileName}</h2>
+										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
+										<span>프로필 보기&nbsp;&raquo;</span>
+									</a>
+								</div><!-- /.person -->	
+							</div>
 						</c:if>					
 						</c:forEach> 
 						</div>
@@ -84,23 +74,17 @@
 	              		<p>&nbsp;</p>              		
 	              		<div class="row text-center">
 						<c:forEach var="profile" items="${profiles}">
-						<c:if test="${profile.profileGrade eq 3}">
-							<div class="col-sm-6 col-md-3"> 
-							<div class="col-sm-6 col-md-3"> 					
-								<div class="thumbnail">																	
-									<!--  썸네일 이미지 -->	
-									<div class="img">	
-										<a href="<%=rootPath %>/Open/${profile.memberId}">					
-											<img data-src="holder.js/200X300" src="${profile.profilePhotoURL}" class="img-responsive img-circle" style="min-height:300px;" alt="Responsive image">
-										</a>							
-									</div>										
-									<!--  주요스펙 -->						
-									<div class="caption">									
-										<h3><a href="<%=rootPath %>/Open/${profile.memberId}">${profile.profileName}</a></h3>
-										<p>${profile.profileGrade }학년 /${profile.primarySpec }</p>										
-									</div>
-								</div>	
-							</div>		
+						<c:if test="${profile.profileGrade eq 3}">						
+							<div class="col-xs-6 col-sm-4 col-md-3"> 					
+								<div class="person">
+									<a href="<%=rootPath %>/Open/${profile.memberId}">
+										<img src="<%=imagesPath %>/basic_profile_icon_male.jpg" class="img-responsive img-rounded" alt="Profile image">
+										<h2>${profile.profileName}</h2>
+										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
+										<span>프로필 보기&nbsp;&raquo;</span>
+									</a>
+								</div><!-- /.person -->	
+							</div>	
 						</c:if>					
 						</c:forEach> 
 						</div>
@@ -112,21 +96,16 @@
 	              		<div class="row text-center">
 						<c:forEach var="profile" items="${profiles}">
 						<c:if test="${profile.profileGrade eq 2}">
-							<div class="col-sm-6 col-md-3"> 					
-								<div class="thumbnail">																	
-									<!--  썸네일 이미지 -->	
-									<div class="img">	
-										<a href="<%=rootPath %>/Open/${profile.memberId}">					
-											<img data-src="holder.js/200X300" src="${profile.profilePhotoURL}" class="img-responsive img-circle" style="min-height:300px;" alt="Responsive image">
-										</a>							
-									</div>										
-									<!--  주요스펙 -->						
-									<div class="caption">									
-										<h3><a href="<%=rootPath %>/Open/${profile.memberId}">${profile.profileName}</a></h3>
-										<p>${profile.profileGrade }학년 /${profile.primarySpec }</p>										
-									</div>
-								</div>	
-							</div>							
+							<div class="col-xs-6 col-sm-4 col-md-3"> 					
+								<div class="person">
+									<a href="<%=rootPath %>/Open/${profile.memberId}">
+										<img src="<%=imagesPath %>/basic_profile_icon_male.jpg" class="img-responsive img-rounded" alt="Profile image">
+										<h2>${profile.profileName}</h2>
+										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
+										<span>프로필 보기&nbsp;&raquo;</span>
+									</a>
+								</div><!-- /.person -->	
+							</div>						
 						</c:if>					
 						</c:forEach> 
 						</div>
@@ -138,20 +117,15 @@
 	              		<div class="row text-center">
 						<c:forEach var="profile" items="${profiles}">
 						<c:if test="${profile.profileGrade eq 1}">
-							<div class="col-sm-6 col-md-3"> 					
-								<div class="thumbnail">																	
-									<!--  썸네일 이미지 -->	
-									<div class="img">	
-										<a href="<%=rootPath %>/Open/${profile.memberId}">					
-											<img data-src="holder.js/200X300" src="${profile.profilePhotoURL}" class="img-responsive img-circle" style="min-height:300px;" alt="Responsive image">
-										</a>							
-									</div>										
-									<!--  주요스펙 -->						
-									<div class="caption">									
-										<h3><a href="<%=rootPath %>/Open/${profile.memberId}">${profile.profileName}</a></h3>
-										<p>${profile.profileGrade }학년 /${profile.primarySpec }</p>										
-									</div>
-								</div>	
+							<div class="col-xs-6 col-sm-4 col-md-3"> 					
+								<div class="person">
+									<a href="<%=rootPath %>/Open/${profile.memberId}">
+										<img src="<%=imagesPath %>/basic_profile_icon_male.jpg" class="img-responsive img-rounded" alt="Profile image">
+										<h2>${profile.profileName}</h2>
+										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
+										<span>프로필 보기&nbsp;&raquo;</span>
+									</a>
+								</div><!-- /.person -->	
 							</div>	
 						</c:if>					
 						</c:forEach> 

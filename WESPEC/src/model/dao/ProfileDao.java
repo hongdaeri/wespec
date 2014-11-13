@@ -299,4 +299,43 @@ public class ProfileDao {
 			JdbcUtil.close(pstmt, conn);
 		}			
 	}	
+	
+	/********************************************************************************
+	 *																				* 
+	 *																				*  
+	 * 																				* 
+	 * 						       INSERT PART										* 
+	 *																				* 
+	 * 																				* 
+	 ********************************************************************************/
+	
+	public void insertMember(String studentCode, String studentName, String studentGender, int studentGrade, String studentBirth) 
+	{
+		PreparedStatement pstmt = null;
+		Connection conn = null;	
+
+		String query = "INSERT INTO PROFILE";
+			   query += "(member_id, profile_name, profile_gender, profile_photo_url,profile_grade, profile_birth) ";
+		if(studentGender.equals("M"))	  
+			   query += "values(?,?,?,'/skin/images/basic_profile_icon_male.jpg',?,?) ";
+		else
+			   query += "values(?,?,?,'/skin/images/basic_profile_icon_female.jpg',?,?) ";
+		
+		try {
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, studentCode);    
+			pstmt.setString(2, studentName);
+			pstmt.setString(3, studentGender);
+			pstmt.setInt(4, studentGrade);	
+			pstmt.setString(5, studentBirth);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt, conn);
+		}		
+	}
 }

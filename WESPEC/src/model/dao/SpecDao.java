@@ -575,6 +575,30 @@ public class SpecDao {
 		}
 	}
 	
+	public void insertMember(String studentCode) 
+	{
+		PreparedStatement pstmt = null;
+		Connection conn = null;	
+
+		String query = "INSERT INTO SPEC";
+			   query += "(member_id) ";		  
+			   query += "values(?)";		
+		
+		try {
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, studentCode); 		 
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt, conn);
+		}		
+	}	
+	
+	
 	/********************************************************************************
 	 *																				* 
 	 *																				*  

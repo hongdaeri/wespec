@@ -57,6 +57,15 @@ public class ExceptionService extends HttpServlet {
 			return false;		
 	}
 	
+	public static boolean isAdmin(HttpServletRequest request) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String memberGroup = (String)session.getAttribute("memberGroup");			
+		if(memberGroup != null && memberGroup.equals("A"))
+			return true;
+		else
+			return false;		
+	}
+	
 	public static void printAlert(HttpServletRequest request, HttpServletResponse response,String message, String url) throws ServletException, IOException {
 		
 		PrintWriter out = response.getWriter();	

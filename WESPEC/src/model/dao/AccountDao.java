@@ -50,6 +50,39 @@ public class AccountDao {
 		return member;				
 	}
 		
+	/********************************************************************************
+	 *																				* 
+	 *																				*  
+	 * 																				* 
+	 * 						       INSERT PART										* 
+	 *																				* 
+	 * 																				* 
+	 ********************************************************************************/
+	public void insertMember(String studentCode, String studentBirth) 
+	{
+		PreparedStatement pstmt = null;
+		Connection conn = null;	
+
+		String query = "INSERT INTO MEMBER";
+			   query += "(member_id, member_password, member_group, member_reg_date) ";
+			   query += "values(?,?,'S',?) ";
+		
+		try {
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, studentCode);    
+			pstmt.setString(2, studentBirth);				 
+			pstmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));			 
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt, conn);
+		}		
+	}	
+	
 
 	/********************************************************************************
 	 *																				* 

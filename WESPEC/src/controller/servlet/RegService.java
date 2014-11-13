@@ -210,6 +210,7 @@ public class RegService extends HttpServlet{
 		if(param.equals("p") || param.equals("p_sns") || param.equals("p_photo"))			
 			ExceptionService.printAlert(request, response, "회원님의 프로필이 정상적으로 변경되었습니다","/Register");
 					
-		response.sendRedirect(request.getContextPath() +"/Register");		
+		response.sendRedirect(request.getContextPath() +"/Register");	
+		
 	}
 }

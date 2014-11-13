@@ -10,6 +10,7 @@
     <title>WESPEC in Software</title>
 
     <!-- Bootstrap -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css" />
     <link href="<%=skinPath %>/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%=skinPath %>/css/style.css" rel="stylesheet" media="screen">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -59,6 +60,11 @@
 	        }
 	    });
 	</script>
+	
+	<style>
+	
+
+	</style>
 
 
 </head>
