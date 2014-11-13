@@ -51,13 +51,15 @@ public class AccountService extends HttpServlet{
 			nextPage = "/skin/module/logout.jsp";			
 		}
 		else if(requestURL.equals("/join")) 
+		{
 			if(!ExceptionService.isLogin(request))			
 				ExceptionService.printAlert(request, response, "로그인하지 않으셨습니다.","/login");
 			if(!ExceptionService.isAdmin(request))
 				ExceptionService.printAlert(request, response, "관리자만 이용할 수 있는 기능입니다.","/");
+			else insertMember();
 			
-			insertMember();
 			nextPage = "/skin/module/join.jsp";		
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(nextPage);
 		rd.forward(request, response);

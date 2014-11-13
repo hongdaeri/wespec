@@ -26,8 +26,8 @@
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<h2>${profile.profileName}</h2>
-							<input type="text" name="engName" value="${profile.profileEngName}" /> /
-							<input type="text" name="chiName" value="${profile.profileChiName}" />
+							<input type="text" name="engName" value="${profile.profileEngName}" placeholder="영문이름" /> /
+							<input type="text" name="chiName" value="${profile.profileChiName}" placeholder="한자이름"/>
 						</div>
 					</div>
 
@@ -48,7 +48,7 @@
 						</tr>
 						<tr>
 							<td class="active">생년월일</td>
-							<td><input type="text" name="birth" value="${profile.profileBirth}"/></td>
+							<td>${profile.profileBirth}</td>
 							<td class="active">거주지</td>
 							<td><input type="text" name="address" value="${profile.profileAddress}"/></td>
 						</tr>

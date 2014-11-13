@@ -38,7 +38,7 @@
 							<div class="col-xs-6 col-sm-4 col-md-3"> 					
 								<div class="person">
 									<a href="<%=rootPath %>/Open/${profile.memberId}">
-										<img src="<%=imagesPath %>/basic_profile_icon_male.jpg" class="img-responsive img-rounded" alt="Profile image">
+										<img src="${profile.profilePhotoURL}" class="img-responsive img-rounded" alt="Profile image">
 										<h2>${profile.profileName}</h2>
 										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
 										<span>프로필 보기&nbsp;&raquo;</span>
@@ -57,7 +57,7 @@
 							<div class="col-xs-6 col-sm-4 col-md-3"> 					
 								<div class="person">
 									<a href="<%=rootPath %>/Open/${profile.memberId}">
-										<img src="<%=imagesPath %>/basic_profile_icon_male.jpg" class="img-responsive img-rounded" alt="Profile image">
+										<img src="${profile.profilePhotoURL}" class="img-responsive img-rounded" alt="Profile image">
 										<h2>${profile.profileName}</h2>
 										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
 										<span>프로필 보기&nbsp;&raquo;</span>
@@ -78,13 +78,13 @@
 							<div class="col-xs-6 col-sm-4 col-md-3"> 					
 								<div class="person">
 									<a href="<%=rootPath %>/Open/${profile.memberId}">
-										<img src="<%=imagesPath %>/basic_profile_icon_male.jpg" class="img-responsive img-rounded" alt="Profile image">
+										<img src="${profile.profilePhotoURL}" class="img-responsive img-rounded" alt="Profile image">
 										<h2>${profile.profileName}</h2>
 										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
 										<span>프로필 보기&nbsp;&raquo;</span>
 									</a>
 								</div><!-- /.person -->	
-							</div>	
+							</div>
 						</c:if>					
 						</c:forEach> 
 						</div>
@@ -99,13 +99,13 @@
 							<div class="col-xs-6 col-sm-4 col-md-3"> 					
 								<div class="person">
 									<a href="<%=rootPath %>/Open/${profile.memberId}">
-										<img src="<%=imagesPath %>/basic_profile_icon_male.jpg" class="img-responsive img-rounded" alt="Profile image">
+										<img src="${profile.profilePhotoURL}" class="img-responsive img-rounded" alt="Profile image">
 										<h2>${profile.profileName}</h2>
 										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
 										<span>프로필 보기&nbsp;&raquo;</span>
 									</a>
 								</div><!-- /.person -->	
-							</div>						
+							</div>					
 						</c:if>					
 						</c:forEach> 
 						</div>
@@ -120,7 +120,7 @@
 							<div class="col-xs-6 col-sm-4 col-md-3"> 					
 								<div class="person">
 									<a href="<%=rootPath %>/Open/${profile.memberId}">
-										<img src="<%=imagesPath %>/basic_profile_icon_male.jpg" class="img-responsive img-rounded" alt="Profile image">
+										<img src="${profile.profilePhotoURL}" class="img-responsive img-rounded" alt="Profile image">
 										<h2>${profile.profileName}</h2>
 										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
 										<span>프로필 보기&nbsp;&raquo;</span>

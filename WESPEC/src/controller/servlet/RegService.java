@@ -83,7 +83,6 @@ public class RegService extends HttpServlet{
 			profile.setProfileChiName(request.getParameter("chiName")); 
 			profile.setProfileEngName(request.getParameter("engName")); 
 			profile.setProfileAddress(request.getParameter("address")); 
-			profile.setProfileBirth(request.getParameter("birth"));
 			profile.setProfilePhone(request.getParameter("phone"));
 			profile.setProfileEmail(request.getParameter("email"));
 			profile.setProfileGrade(Integer.parseInt(request.getParameter("grade")));
