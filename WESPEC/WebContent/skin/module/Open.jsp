@@ -2,7 +2,6 @@
 <%@ include file="/common/common.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/head.jsp" flush="false" />
-${profile.profilePhotoURL}
 
 <%-- 해당 페이지가 없으면 리다이렉션.  --%> 
 <c:if test="${profile.profileName eq null}">
@@ -18,15 +17,8 @@ ${profile.profilePhotoURL}
 			<div class="col-md-3">
 				<!--  이미지 이펙트  -->
 				<div id="effect-6" class="effects clearfix">
-					<div class="img">
-						
-						<c:if test="${profile.profilePhotoURL eq null}">
-							<img src="<%=imagesPath %>/tumb.jpg" alt="">
-						</c:if>
-						<c:if test="${profile.profilePhotoURL ne null}">
-							<img src="user/upload/${profile.profilePhotoURL}" width="300">
-						</c:if>
-						
+					<div class="img">						
+							<img src="${profile.profilePhotoURL}">								
 					</div>
 				</div>
 				<!-- 이미지이펙트끝 -->

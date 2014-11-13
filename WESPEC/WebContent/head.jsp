@@ -13,7 +13,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="<%=request.getContextPath()%>" title="메인화면"><strong>WESPEC</strong></a>
+              <a class="navbar-brand" href="/" title="메인화면"><strong>WESPEC</strong></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -39,10 +39,11 @@
                 <div class="input-group">                            
                   <input type="text" class="form-control" placeholder="Search.." name="s_name">
                   <span class="input-group-btn">                   
-                    <button class="btn btn-success" type="button" onClick="submit();">Search</button>                 
+                    <input type="submit" class="btn btn-success" type="button" onSubmit="submit();" value="Search">           
                     <button class="btn btn-danger" data-toggle="modal" data-target="#searchModal">
 					  Detail
 					</button>
+					
                   </span>                                 
                 </div>
               </form>

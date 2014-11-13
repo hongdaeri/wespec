@@ -269,8 +269,16 @@ public class ProfileDao {
 		PreparedStatement pstmt = null;
 		Connection conn = null;			
 		
-		String primarySpecResult = this.selectBySection(memberId, "PROFILE_PRIMARY_SPEC");
-		primarySpecResult +=(" / " + primarySpec);
+		String temp = this.selectBySection(memberId, "PROFILE_PRIMARY_SPEC");
+		String primarySpecResult;
+		if(temp != null)
+		{
+			primarySpecResult =temp;
+			primarySpecResult +=(" / " + primarySpec);
+		}
+		else
+			primarySpecResult = " / " + primarySpec;
+		
 		
 		String query = "UPDATE PROFILE ";
 	   	   query += "SET PROFILE_PRIMARY_SPEC = ? ";
