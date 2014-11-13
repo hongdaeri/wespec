@@ -13,13 +13,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="/" title="메인화면"><strong>WESPEC</strong></a>
+              <a class="navbar-brand" href="/" title="메인화면"><strong>WESPEC</strong> in Software</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">in Software</a></li>
+                <li class="active"></li>
                  <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
@@ -42,15 +42,14 @@
                     <input type="submit" class="btn btn-success" type="button" onSubmit="submit();" value="Search">           
                     <button class="btn btn-danger" data-toggle="modal" data-target="#searchModal">
 					  Detail
-					</button>
-					
+					</button>					
                   </span>                                 
                 </div>
               </form>
+                             
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" data-toggle="modal" data-target="#loginModal">Login</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <span class="caret"></span></a>
+                <li class="dropdown active">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="<%=request.getContextPath()%>/OPEN/<%=memberId%>">내 프로필/이력 보기</a></li>
                     <li><a href="<%=request.getContextPath()%>/Register">프로필/이력 등록</a></li>                   

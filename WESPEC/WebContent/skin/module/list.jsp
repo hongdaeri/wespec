@@ -6,12 +6,32 @@
 <article>
 	<section>
 		<div class="row">
-			<div class="col-md-12" id="jumbo">
+			<div class="col-md-6" id="jumbo">
 				<div class="jumbotron">
-               		<h1>What is WESPEC</h1>
-               		<p>WESPEC으로 당신의 이력을 관리해보세요.</p>
-               		<p><a class="btn btn-default btn-lg" role="button" href="<%=request.getContextPath() %>/Register">Register</a></p>
+               		<h1>Hello,World!</h1>
+               		<p> &nbsp;WESPEC으로 당신의 이력을 관리해보세요.</p>
+               		<p class="text-center"><a class="btn btn-primary btn-lg" role="button" href="<%=request.getContextPath() %>/Register">프로필/이력 등록</a></p>
              	</div>                            
+			</div>
+			<div class="col-md-6" id="jumbo">
+				<div class="jumbotron">
+					<!--  prograssbar -->
+					<h1>프로젝트 진행도</h1>
+					<div class="progress">
+					  <div class="progress-bar progress-bar-success" style="width: 20%">
+					    <span class="sr-only">20% Complete (success)</span>
+					  </div>
+					  <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 35%">
+					    <span class="sr-only">35% Complete (warning)</span>
+					  </div>
+					  <div class="progress-bar progress-bar-danger" style="width: 30%">
+					    <span class="sr-only">30% Complete (danger)</span>
+					  </div>
+					</div>
+					
+					
+					<p class="text-center"><a class="btn btn-default btn-lg" role="button" href="https://github.com/h0ngz/wespec/commits/master" target="_BLANK">Go Github</a></p>
+				</div>
 			</div>
 		</div>
 	</section>
