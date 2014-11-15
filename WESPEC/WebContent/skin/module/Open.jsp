@@ -359,41 +359,42 @@
 			</table>
 		</div>
 		<!-- 학력사항 section END -->
-		
-		<!-- 병역사항 section  -->
-		<div class="panel panel-default">
-			<!-- Table Name -->
-			<div class="panel-heading">	<b>병역</b>	</div>
-			<!-- Table -->
-			<table class="table table-hover" ID="s8">
-				<tr>
-					<th class="col-md-2">복무기간</th>
-					<th class="col-md-2">군별</th>
-					<th class="col-md-2">계급</th>
-					<th class="col-md-2">병과</th>
-					<th class="col-md-2">공개범위</th>
-					<th class="col-md-2 text-right"></th>
-				</tr>
-				<c:choose>
-					<c:when test="${ spec.military.isRegister() }">
-						<tr>
-							<td class="col-md-2">${spec.military.militaryPeriod}</td>
-							<td class="col-md-2">${spec.military.militaryGroup}</td>
-							<td class="col-md-2">${spec.military.militaryRank}</td>
-							<td class="col-md-2">${spec.military.militaryWork}</td>
-							<td class="col-md-2">${spec.military.publicScope}</td>
-							<td class="col-md-2 text-right"></td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<td align="center" colspan="6">등록된 병역사항이 없습니다.</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-			</table>					
-		</div>
-		<!--  section END -->
+		<c:if test="${profile.profileGender eq 'M' }">
+			<!-- 병역사항 section  -->
+			<div class="panel panel-default">
+				<!-- Table Name -->
+				<div class="panel-heading">	<b>병역</b>	</div>
+				<!-- Table -->
+				<table class="table table-hover" ID="s8">
+					<tr>
+						<th class="col-md-2">복무기간</th>
+						<th class="col-md-2">군별</th>
+						<th class="col-md-2">계급</th>
+						<th class="col-md-2">병과</th>
+						<th class="col-md-2">공개범위</th>
+						<th class="col-md-2 text-right"></th>
+					</tr>
+					<c:choose>
+						<c:when test="${ spec.military.isRegister() }">
+							<tr>
+								<td class="col-md-2">${spec.military.militaryPeriod}</td>
+								<td class="col-md-2">${spec.military.militaryGroup}</td>
+								<td class="col-md-2">${spec.military.militaryRank}</td>
+								<td class="col-md-2">${spec.military.militaryWork}</td>
+								<td class="col-md-2">${spec.military.publicScope}</td>
+								<td class="col-md-2 text-right"></td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td align="center" colspan="6">등록된 병역사항이 없습니다.</td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
+				</table>					
+			</div>
+			<!--  section END -->
+		</c:if>
 	</div>
 </div>
 
