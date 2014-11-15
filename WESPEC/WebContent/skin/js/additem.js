@@ -60,7 +60,7 @@ function addItem_s1() {
         s1.innerHTML=s1.innerHTML 
                 +'<table class="table table-hover">' 
                 +'	<tr>' 
-                +'		<td class="col-md-2"><input type="date" class="form-control" name="certificateDate" title="예) 2014.11.15"  data-toggle="tooltip" data-placement="bottom"/></td>' 
+                +'		<td class="col-md-2"><input type="date" class="form-control" name="certificateDate" title="예) 2014.11.15"  /></td>' 
                 +'      <td class="col-md-2"><input type="text" class="form-control" name="certificateName" title="예) 컴퓨터활용능력"/></td>' 
                 +'      <td class="col-md-2"><input type="text" class="form-control" name="certificateGrade" title="예) 1급"/></td>' 
 				+'      <td class="col-md-2"><input type="text" class="form-control" name="certificateOrg" title="예) 대한상공회의소"/></td>' 

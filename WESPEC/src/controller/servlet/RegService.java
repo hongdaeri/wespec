@@ -126,7 +126,7 @@ public class RegService extends HttpServlet{
 			 language.setMemberId(memberId);
 			 language.setLanguageName(request.getParameter("languageName"));
 			 language.setLanguageExamName(request.getParameter("languageExamName"));
-			 language.setLanguageExamGrade(request.getParameter("languageExamGrade"));
+			 language.setLanguageExamGrade(request.getParameter("languageExamGrade") + request.getParameter("languageExamGradeOption"));
 			 language.setLanguageExamOrg(request.getParameter("languageExamOrg"));
 			 language.setPublicScope(request.getParameter("publicScope"));
 			 String primarySpec = language.getLanguageExamName() + " " + language.getLanguageExamGrade();

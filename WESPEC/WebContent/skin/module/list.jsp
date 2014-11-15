@@ -56,11 +56,11 @@
 	               		<div class="row text-center">	
 	               		<c:forEach var="profile" items="${profiles}" varStatus="status">   
 							<div class="col-xs-6 col-sm-4 col-md-3"> 					
-								<div class="person">
+								<div class="person" data-toggle="tooltip" data-placement="right" title="${profile.primarySpec}">
 									<a href="<%=rootPath %>/Open/${profile.memberId}">
 										<img src="${profile.profilePhotoURL}" class="img-responsive img-rounded" alt="Profile image">
 										<h2>${profile.profileName}</h2>
-										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
+										<h3>${profile.profileGrade}학년</h3>				
 										<span>프로필 보기&nbsp;&raquo;</span>
 									</a>
 								</div><!-- /.person -->	
@@ -68,6 +68,7 @@
 						</c:forEach>												
 						</div>						
 					</div>
+					
 					<!-- 4학년 학생 리스트 --> 
 					<div class="tab-pane active" id="tab4">
 	              		<p>&nbsp;</p>              		
@@ -75,11 +76,11 @@
 						<c:forEach var="profile" items="${profiles}">
 						<c:if test="${profile.profileGrade eq 4}">
 							<div class="col-xs-6 col-sm-4 col-md-3"> 					
-								<div class="person">
+								<div class="person" data-toggle="tooltip" data-placement="right" title="${profile.primarySpec}">
 									<a href="<%=rootPath %>/Open/${profile.memberId}">
 										<img src="${profile.profilePhotoURL}" class="img-responsive img-rounded" alt="Profile image">
 										<h2>${profile.profileName}</h2>
-										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
+										<h3>${profile.profileGrade}학년</h3>				
 										<span>프로필 보기&nbsp;&raquo;</span>
 									</a>
 								</div><!-- /.person -->	
@@ -96,11 +97,11 @@
 						<c:forEach var="profile" items="${profiles}">
 						<c:if test="${profile.profileGrade eq 3}">						
 							<div class="col-xs-6 col-sm-4 col-md-3"> 					
-								<div class="person">
+								<div class="person" data-toggle="tooltip" data-placement="right" title="${profile.primarySpec}">
 									<a href="<%=rootPath %>/Open/${profile.memberId}">
 										<img src="${profile.profilePhotoURL}" class="img-responsive img-rounded" alt="Profile image">
 										<h2>${profile.profileName}</h2>
-										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
+										<h3>${profile.profileGrade}학년</h3>				
 										<span>프로필 보기&nbsp;&raquo;</span>
 									</a>
 								</div><!-- /.person -->	
@@ -117,15 +118,15 @@
 						<c:forEach var="profile" items="${profiles}">
 						<c:if test="${profile.profileGrade eq 2}">
 							<div class="col-xs-6 col-sm-4 col-md-3"> 					
-								<div class="person">
+								<div class="person" data-toggle="tooltip" data-placement="right" title="${profile.primarySpec}">
 									<a href="<%=rootPath %>/Open/${profile.memberId}">
 										<img src="${profile.profilePhotoURL}" class="img-responsive img-rounded" alt="Profile image">
 										<h2>${profile.profileName}</h2>
-										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
+										<h3>${profile.profileGrade}학년</h3>				
 										<span>프로필 보기&nbsp;&raquo;</span>
 									</a>
 								</div><!-- /.person -->	
-							</div>					
+							</div>				
 						</c:if>					
 						</c:forEach> 
 						</div>
@@ -138,15 +139,15 @@
 						<c:forEach var="profile" items="${profiles}">
 						<c:if test="${profile.profileGrade eq 1}">
 							<div class="col-xs-6 col-sm-4 col-md-3"> 					
-								<div class="person">
+								<div class="person" data-toggle="tooltip" data-placement="right" title="${profile.primarySpec}">
 									<a href="<%=rootPath %>/Open/${profile.memberId}">
 										<img src="${profile.profilePhotoURL}" class="img-responsive img-rounded" alt="Profile image">
 										<h2>${profile.profileName}</h2>
-										<h3>${profile.profileGrade}학년  ${profile.primarySpec}</h3>				
+										<h3>${profile.profileGrade}학년</h3>				
 										<span>프로필 보기&nbsp;&raquo;</span>
 									</a>
 								</div><!-- /.person -->	
-							</div>	
+							</div>
 						</c:if>					
 						</c:forEach> 
 						</div>
@@ -155,8 +156,19 @@
 					<script>
 						  $(function () {
 							$('#listTab a:first').tab('show')
-						  })
+						  })						  
 					</script>
+					<script>
+					$(document).ready(function () {
+						$(function () {
+						  $('[data-toggle="tooltip"]').tooltip({
+							 
+							  viewport: {selector: '.tab-pane', padding: 2}
+						  })
+						})
+					})
+					</script>
+				
 	
 				</div>              
 			</div>
