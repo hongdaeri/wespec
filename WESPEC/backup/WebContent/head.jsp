@@ -34,19 +34,19 @@
                 </li>
               </ul>
                
-                <!-- Search bar -->
+              <!-- Search bar -->
               <form class="navbar-form navbar-left" action="<%=request.getContextPath() %>/Search" role="search">
                 <div class="input-group">                            
                   <input type="text" class="form-control" placeholder="Search.." name="s_name">
                   <span class="input-group-btn">                   
-                    <input type="submit" class="btn btn-success" type="button" onClick="submit();" value="Search">           
+                    <input type="submit" class="btn btn-success" type="button" onSubmit="submit();" value="Search">           
                     <button class="btn btn-danger" data-toggle="modal" data-target="#searchModal">
 					  Detail
-					</button>
-					
+					</button>					
                   </span>                                 
                 </div>
               </form>
+                             
               <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown active">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>

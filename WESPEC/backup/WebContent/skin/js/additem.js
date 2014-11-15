@@ -179,7 +179,7 @@ function addItem_s6() {
             +'      <td class="col-md-2"><select name="languageLevel" class="form-control"><option value="상" name="languageLevel">상</option><option value="중" name="languageLevel">중</option><option value="하" name="languageLevel">하</option></select></td>' 
             +'      <td class="col-md-2"></td>' 
 			+'      <td class="col-md-2"></td>' 
-			+'      <td class="col-md-2"><select name="publicScope" class="form-control"><option value="전체공개" name="publicScope">전체공개</option><option value="교수공개" name="publicScope">교수공개</option><option value="비공개" name="publicScope">비공개</option></select></td>' 
+			+'      <td class="col-md-2"><select name="publicScope"><option value="전체공개" name="publicScope">전체공개</option><option value="교수공개" name="publicScope">교수공개</option><option value="비공개" name="publicScope">비공개</option></select></td>' 
 			+'      <td class="col-md-2 text-right"><button title="항목삭제" type="button" class="btn btn-primary btn-xs" onClick="submit()">등록</button></td>' 
 			+'      <input type="hidden" name="param" value="s6"/>' 
             +'	</tr>'; 
@@ -232,4 +232,5 @@ function addItem_s8() {
             +'</table>'; 
     s8.style.display = ""; 
 }
+
 

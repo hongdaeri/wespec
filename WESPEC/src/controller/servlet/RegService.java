@@ -110,7 +110,7 @@ public class RegService extends HttpServlet{
 		else if(param.equals("s1"))	// ÀÚ°ÝÁõ
 		{
 			Certificate certificate = new Certificate();
-			certificate.setCertificateDate(request.getParameter("certificateDate"));
+			certificate.setCertificateDate(request.getParameter("certificateDate").replaceAll("-", "."));
 			certificate.setCertificateName(request.getParameter("certificateName"));
 			certificate.setCertificateGrade(request.getParameter("certificateGrade"));
 			certificate.setCertificateOrg(request.getParameter("certificateOrg"));

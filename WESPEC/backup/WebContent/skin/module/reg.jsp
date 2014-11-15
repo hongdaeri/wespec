@@ -2,14 +2,11 @@
 <%@ include file="/common/common.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/head.jsp" flush="false" />
-<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
-
- 
 
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
-			<form action="<%=rootPath%>/register" method="post" name="profile">
+			<form action="<%=rootPath%>/register" method="post" class="form-inline" name="profile">
 				<input type="hidden" name="param" value="p" />
 				<!-- 프로필 사진 영역 -->
 				<div class="col-md-3">
@@ -84,7 +81,7 @@
 		<hr>
 
 		<!--  이력 영역 -->
-		<form action="<%=rootPath%>/register" name="spec" method="post">
+		<form action="<%=rootPath%>/register" class="form-inline" role="form" name="spec" method="post">
 			<!--  자격증 section  -->
 			<div class="panel panel-default">
 				<!-- Table Name -->
@@ -372,7 +369,7 @@
 				</table>
 			</div>
 			<!-- 학력사항 section END -->
-
+			
 			<!-- 병역사항 section  -->
 			<div class="panel panel-default">
 				<!-- Table Name -->
@@ -380,16 +377,7 @@
 				<!-- Table -->
 				<table class="table table-hover" ID="s8">
 					<tr>
-						<th class="col-md-2">
-	 <div class="form-group">
- <div class="input-group">
-     <input type="date" class="form-control" id="exampleInputEmail2">
-    <div class="input-group-addon">~</div>
-    <input type="date" class="form-control" id="exampleInputEmail2">
-  </div>
-</div>
-
-</th>
+						<th class="col-md-2">복무기간</th>
 						<th class="col-md-2">군별</th>
 						<th class="col-md-2">계급</th>
 						<th class="col-md-2">병과</th>
@@ -485,7 +473,7 @@
         		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         		<h4 class="modal-title" id="myModalLabel">사진 Upload</h4>
         	</div>
-
+      		
 			<div class="modal-body">
 		        <div class="form-group">
 		    		<label for="exampleInputFile">현재 등록 사진</label><br>
@@ -509,5 +497,37 @@
   	</form>
 </div>
 
+<script>
+//이미지 롤오버 스크립트 
+$(document).ready(function(){
+    if (Modernizr.touch) {
+        // show the close overlay button
+        $(".close-overlay").removeClass("hidden");
+        // handle the adding of hover class when clicked
+        $(".img").click(function(e){
+            if (!$(this).hasClass("hover")) {
+                $(this).addClass("hover");
+            }
+        });
+        // handle the closing of the overlay
+        $(".close-overlay").click(function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            if ($(this).closest(".img").hasClass("hover")) {
+                $(this).closest(".img").removeClass("hover");
+            }
+        });
+    } else {
+        // handle the mouseenter functionality
+        $(".img").mouseenter(function(){
+            $(this).addClass("hover");
+        })
+        // handle the mouseleave functionality
+        .mouseleave(function(){
+            $(this).removeClass("hover");
+        });
+    }
+});
 
+</script>
 <jsp:include page="/tail.jsp" flush="false" />

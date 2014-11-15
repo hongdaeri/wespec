@@ -6,7 +6,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
-			<form action="<%=rootPath%>/register" method="post" name="profile">
+			<form action="<%=rootPath%>/register" method="post" class="form-inline" name="profile">
 				<input type="hidden" name="param" value="p" />
 				<!-- 프로필 사진 영역 -->
 				<div class="col-md-3">
@@ -48,7 +48,7 @@
 						</tr>
 						<tr>
 							<td class="active">생년월일</td>
-							<td>${profile.profileBirth}</td>
+							<td><input type="text" name="birth" value="${profile.profileBirth}" readonly /></td>
 							<td class="active">거주지</td>
 							<td><input type="text" name="address" value="${profile.profileAddress}"/></td>
 						</tr>
@@ -81,7 +81,7 @@
 		<hr>
 
 		<!--  이력 영역 -->
-		<form action="<%=rootPath%>/register" name="spec" method="post">
+		<form action="<%=rootPath%>/register" class="form-inline" role="form" name="spec" method="post">
 			<!--  자격증 section  -->
 			<div class="panel panel-default">
 				<!-- Table Name -->
@@ -96,9 +96,7 @@
 						<th class="col-md-2">등급</th>
 						<th class="col-md-2">발행기관</th>
 						<th class="col-md-2">공개범위</th>
-						<th class="col-md-2 text-right"><button title="자격증 추가"
-								type="button" class="btn btn-primary btn-xs"
-								onclick="addItem_s1()">추가</button></th>
+						<th class="col-md-2 text-right"><button title="자격증 추가" type="button" class="btn btn-primary btn-xs"	onclick="addItem_s1()">추가</button></th>
 					</tr>
 					<c:choose>
 						<c:when test="${ empty spec.certificates}">
@@ -477,7 +475,7 @@
 			<div class="modal-body">
 		        <div class="form-group">
 		    		<label for="exampleInputFile">현재 등록 사진</label><br>
-		    		<img src="${profile.profilePhotoURL}" alt="" style="max-width:450px">
+		    		<img src="${profile.profilePhotoURL}" alt="" style="max-height:450px">
 		  		</div>  	
 				<div class="form-group">
     				<label for="exampleInputFile">사진파일 첨부</label>
@@ -496,4 +494,37 @@
   	</div>
   	</form>
 </div>
+
+<script>
+//이미지 롤오버 스크립트 
+$(document).ready(function(){
+    if (Modernizr.touch) {
+        // show the close overlay button
+        $(".close-overlay").removeClass("hidden");
+        // handle the adding of hover class when clicked
+        $(".img").click(function(e){
+            if (!$(this).hasClass("hover")) {
+                $(this).addClass("hover");
+            }
+        });
+        // handle the closing of the overlay
+        $(".close-overlay").click(function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            if ($(this).closest(".img").hasClass("hover")) {
+                $(this).closest(".img").removeClass("hover");
+            }
+        });
+    } else {
+        // handle the mouseenter functionality
+        $(".img").mouseenter(function(){
+            $(this).addClass("hover");
+        })
+        // handle the mouseleave functionality
+        .mouseleave(function(){
+            $(this).removeClass("hover");
+        });
+    }
+});
+</script>
 <jsp:include page="/tail.jsp" flush="false" />
