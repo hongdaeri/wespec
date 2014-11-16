@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>    
 <%@ include file="/head_sub.jsp" %>
 
+
 <body>
     <header>
         <nav class="navbar navbar-default" role="navigation">
@@ -50,14 +51,27 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown active">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="<%=request.getContextPath()%>/OPEN/<%=memberId%>">내 프로필/이력 보기</a></li>
-                    <li><a href="<%=request.getContextPath()%>/Register">프로필/이력 등록</a></li>                   
+                  <ul class="dropdown-menu" style="text-align:center;" role="menu">
+                    <li>                  
+						<p align="center">							  		
+							<a href="#" data-toggle="modal" data-target="#photoModal"><br>
+							<img src="${photoUrl}"  class="profile-sample"  alt="Profile image">
+							</a>
+						</p>	
+						<script>
+			             	 $('.profile-sample').circularise({ width:"100px" });
+			            </script>								
+	                </li>
+                     <li><a href="<%=request.getContextPath()%>/Register"><button type="button" class="btn btn-link btn-xs btn-block">비밀번호 변경 <!--  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>--></button></a></li>
                     <li class="divider"></li>
-                    <li><a href="<%=request.getContextPath()%>/logout">Logout</a></li>
+                    <li><a href="<%=request.getContextPath()%>/OPEN/<%=memberId%>"><button type="button" class="btn btn-info btn-block">내 프로필/이력 보기</button></a></li>
+                    <li><a href="<%=request.getContextPath()%>/Register"><button type="button" class="btn btn-primary btn-block">내 프로필/이력 등록 </button></a></li>                   
+                    <li class="divider"></li>                    
+                    <li><a href="<%=request.getContextPath()%>/logout"><button type="button" class="btn btn-default btn-xs btn-block">Logout <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></button></a></li>
                   </ul>
                 </li>
               </ul>
+             
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>

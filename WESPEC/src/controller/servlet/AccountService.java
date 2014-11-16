@@ -80,9 +80,13 @@ public class AccountService extends HttpServlet{
 		
 		if( member !=null  && member.getMemberPassword().equals(memberPw))
 		{	
+			ProfileDao profileDao = new ProfileDao();
+		
+			String photoUrl = profileDao.selectBySection(memberId, "PROFILE_PHOTO_URL");
 			HttpSession session = request.getSession();
 			session.setAttribute("memberId",memberId);
 			session.setAttribute("memberGroup",member.getMemberGroup());
+			session.setAttribute("photoUrl", photoUrl);
 			response.sendRedirect(request.getContextPath() + "/List");
 		}
 		else 

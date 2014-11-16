@@ -85,7 +85,8 @@ public class UploadServlet extends HttpServlet {
             e.printStackTrace(out);
             out.println("</PRE>");
         }
-        response.sendRedirect(request.getContextPath() +"/Register");
+        System.out.println(request.getHeader("REFERER"));
+        response.sendRedirect(request.getHeader("REFERER"));
     }
 
     //업로드한 정보가 파일인경우 처리

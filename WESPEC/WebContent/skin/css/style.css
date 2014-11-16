@@ -44,7 +44,7 @@ html, body { font-family: 'Nanum Gothic', sans-serif; }
   position: relative;
   float: left;
   margin-bottom: 5px;
-  width: 200px; <!-- 이부분 그림 이미지 크기..인데 100으로주면 깨짐..-->
+  width: 100%; <!-- 이부분 그림 이미지 크기..인데 100으로주면 깨짐..-->
   overflow: hidden;
 }
 .effects .img:nth-child(n) {

@@ -22,4 +22,6 @@
 <%				
 	String memberId = (String)session.getAttribute("memberId");
 	boolean login = memberId == null ? false : true;
+	String photoUrl = (String)session.getAttribute("photoUrl");
+	String memberGroup = (String)session.getAttribute("memberGroup");
 %>
