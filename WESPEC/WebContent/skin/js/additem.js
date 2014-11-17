@@ -34,18 +34,18 @@ Cats[3][2]="CPT";	// 급
 
 
 //특정 채널을 선택하면 해당 카테고리를 생성
-function BuildCats(num)
+function BuildCats(num,form)
 {
 
 	//해당 채널의 서브 카테고리 배열 길이만큼 반복
 	for(i=0;i<Cats[num].length;i++)
 	{
 		//카테고리에 해당하는 콤보박스의 값을 채움
-		document.spec.languageExamName.options[i]=new Option(Cats[num][i],Cats[num][i]);
+		form.languageExamName.options[i]=new Option(Cats[num][i],Cats[num][i]);
 		
 	}
 	//select 리스트 길이 지정
-	document.spec.languageExamName.length=Cats[num].length;
+	form.languageExamName.length=Cats[num].length;
 }
 
 function addItem_s1() { 
@@ -83,7 +83,7 @@ function addItem_s2() {
     s2.innerHTML=s2.innerHTML 
             +'<table class="table table-hover">' 
             +'	<tr>' 
-            +'		<td class="col-md-2"><SELECT class="form-control" Name="languageName" onChange="BuildCats(this.selectedIndex);"><OPTION Value="">------<OPTION Value="영어">영어<OPTION Value="일어">일어<OPTION Value="중국어">중국어</Select></td>' 
+            +'		<td class="col-md-2"><SELECT class="form-control" Name="languageName" onChange="BuildCats(this.selectedIndex,spec);"><OPTION Value="">------<OPTION Value="영어">영어<OPTION Value="일어">일어<OPTION Value="중국어">중국어</Select></td>' 
             +'      <td class="col-md-2"><SELECT class="form-control" Name="languageExamName"><OPTION Value="">-------</Select></td>' 
             +'      <td class="col-md-2"><div class="input-group"><input type="text" class="form-control" name="languageExamGrade" /><div class="input-group-btn"><SELECT class="form-control" Name="languageExamGradeOption"><OPTION Value="점">점<OPTION Value="급">급</Select></div></div></td>' 
 			+'      <td class="col-md-2"><input type="text" class="form-control" name="languageExamOrg" title="예) 한국토익위원회" /></td>' 

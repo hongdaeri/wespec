@@ -464,6 +464,4 @@
 </div>
 
 
-
-<script src="<%=skinPath %>/js/additem.js" charset="utf-8"></script>
 <jsp:include page="/tail.jsp" flush="false" />

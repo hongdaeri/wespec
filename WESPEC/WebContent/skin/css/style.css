@@ -337,3 +337,70 @@ a.expand {
   font-size:12pt;
   text-align: left;
 }
+
+
+<!-- 상세검색바 -->
+
+label {margin-right:20px;}
+
+input[type=checkbox].css-checkbox {
+ position: absolute; 
+ overflow: hidden; 
+ clip: rect(0 0 0 0); 
+ height:1px; 
+ width:1px; 
+ margin:-1px; 
+ padding:0;
+ border:0;
+ }
+
+input[type=checkbox].css-checkbox + label.css-label {
+ padding-left:20px;
+ height:15px; 
+ display:inline-block;
+ line-height:15px;
+ background-repeat:no-repeat;
+ background-position: 0 0;
+ font-size:10pt;
+ vertical-align:middle;
+ cursor:pointer;
+ }
+
+input[type=checkbox].css-checkbox:checked + label.css-label {
+ background-position: 0 -15px;
+ }
+
+.css-label{
+ background-image:url(../images/dark-check-green.png);
+ }
+ 
+ 
+input[type=radio].css-r-checkbox {
+	position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+}
+
+input[type=radio].css-r-checkbox + label.css-r-label, input[type=radio].css-r-checkbox + label.css-r-label.clr {
+	padding-left:21px;
+	height:16px; 
+	display:inline-block;
+	line-height:16px;
+	background-repeat:no-repeat;
+	background-position: 0 0;
+	font-size:10pt;
+	vertical-align:middle;
+	cursor:pointer;
+
+}
+
+input[type=radio].css-r-checkbox:checked + label.css-r-label, input[type=radio].css-r-checkbox + label.css-r-label.chk {
+	background-position: 0 -16px;
+}
+label.css-r-label {
+	background-image:url(../images/radio.png);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}

@@ -77,7 +77,7 @@ public class UploadServlet extends HttpServlet {
                 if(item.isFormField()){ //파일이 아닌경우
                     processFormField(out, item);
                 } else { //파일인 경우
-                    processUploadFile(out, item, contextRootPath,memberId);
+                    processUploadFile(request,out, item, contextRootPath,memberId);
                 }
             }  
         } catch(Exception e) {
@@ -90,7 +90,7 @@ public class UploadServlet extends HttpServlet {
     }
 
     //업로드한 정보가 파일인경우 처리
-    private void processUploadFile(PrintWriter out, FileItem item, String contextRootPath,String memberId) throws Exception 
+    private void processUploadFile(HttpServletRequest request,PrintWriter out, FileItem item, String contextRootPath,String memberId) throws Exception 
     {
 //        String name = item.getFieldName(); 			//파일의 필드 이름 얻기
         String fileName = item.getName(); 			//파일명 얻기
@@ -113,6 +113,10 @@ public class UploadServlet extends HttpServlet {
 	        String photoURL = "/user/upload/"+  uploadedFileName;  
 	        ProfileDao profileDao = new ProfileDao();
 	        profileDao.updatePhoto(memberId, photoURL);
+	        
+	        // 변경된 프로필 세션에 반영
+	        HttpSession session = request.getSession();
+	        session.setAttribute("photoUrl", photoURL);
          
         
     }
