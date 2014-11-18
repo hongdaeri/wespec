@@ -78,9 +78,9 @@
            
            <!--  Detail Search Layer -->    
 		  <div class="detail_search_box collapse" id="detail" style="background-color:#f8f8f8; padding:10px 20px; border-top:1px solid #dedede; ">
-	    	<form action="#" name="d_search" method="get" accept-charset="utf-8" class="form-inline" role="form">			    	
-	    	<div class="container">
-	    		<div class="panel panel-default" style="padding:10px;">
+	    	<form action="<%=request.getContextPath()%>/Search" name="d_search" method="post" class="form-inline" role="form">			    	
+	    	<div class="container">	    		
+	    		<div class="panel panel-default">
 					<div class="panel-body">				
 						 <div class="row">
 							<div class="col-md-10 col-sm-12 col-xs-12">
@@ -127,19 +127,23 @@
 							   		</div>					   						   				   		
 							   		<div class="col-md-4 col-xs-12 text-right">
 							   		<h5>
-							   			<input type="radio" name="radiog_lite" id="radio_all" class="css-r-checkbox" checked/><label for="radio_all" class="css-r-label radGroup1 radGroup1">전체</label> &nbsp;
-							   			<input type="radio" name="radiog_lite" id="radio_m" class="css-r-checkbox" /><label for="radio_m" class="css-r-label radGroup1 radGroup1">남자</label> &nbsp;
-							   			<input type="radio" name="radiog_lite" id="radio_f" class="css-r-checkbox" /><label for="radio_f" class="css-r-label radGroup1 radGroup1">여자&nbsp;&nbsp;&nbsp;</label>						   		
+							   			<input type="radio" name="gender" id="radio_all" class="css-r-checkbox" checked/><label for="radio_all" class="css-r-label radGroup1 radGroup1">전체</label> &nbsp;
+							   			<input type="radio" name="gender" id="radio_m" class="css-r-checkbox" value="M"/><label for="radio_m" class="css-r-label radGroup1 radGroup1">남자</label> &nbsp;
+							   			<input type="radio" name="gender" id="radio_f" class="css-r-checkbox" value="F"/><label for="radio_f" class="css-r-label radGroup1 radGroup1">여자&nbsp;&nbsp;&nbsp;</label>						   		
 							   		</h5>						   		
 							   		</div>					   			
 							  	</div><!--  row2 END -->
 							</div>
 							<div class="col-md-2 col-sm-12 col-xs-12">
-								<button type="button" class="btn btn-lg btn-block" style="background:#444; color:#fff;">DETAIL<br>SEARCH</button>
+								<button type="button" class="btn btn-lg btn-block" onClick="submit();" style="background:#444; color:#fff;">DETAIL<br>SEARCH</button>
 							</div>
-						</div>					  		
-					</div>				   					   		
-				</div>
+						</div>																	  		
+					</div>	
+					<div class="alert  alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		  				<strong>Tip!</strong> 상세검색은 프로필/이력을 등록한 학생에 한하여 검색됩니다.
+					</div>														   					   		
+				</div>				
 			 </div>
 			</form>
     	  </div> 

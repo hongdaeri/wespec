@@ -63,7 +63,7 @@ public class ProfileDao {
 		return profile;				
 	}
 	
-	// 학생 프로필 개별 검색
+	// 학생 프로필 전체 검색
 	public List<Profile> select() {	
 		List<Profile> profiles = new ArrayList<Profile>();
 		ResultSet rs = null;
@@ -164,6 +164,56 @@ public class ProfileDao {
 		}		
 		return resultId;
 	}	
+	
+	
+	// 학생 프로필 전체 검색
+		public List<Profile> selectByMemberId(List<String> members) {	
+			List<Profile> profiles = new ArrayList<Profile>();
+			ResultSet rs = null;
+			PreparedStatement pstmt = null;
+			Connection conn = null;		
+			
+			String subQuery = this.makeSubQueryByMembers(members);
+			String query = "SELECT * FROM PROFILE";
+			query +=" WHERE " + subQuery;
+			
+			try {				
+				conn = JdbcUtil.getConnection(conn);
+				pstmt = conn.prepareStatement(query);		
+				rs = pstmt.executeQuery();	
+				
+				while(rs.next())
+				{						
+					Profile profile = new Profile();	
+					profile.setMemberId(rs.getString("MEMBER_ID"));			
+					profile.setProfileName(rs.getString("PROFILE_NAME"));			
+					profile.setProfileGrade(rs.getInt("PROFILE_GRADE"));			
+					profile.setProfileGender(rs.getString("PROFILE_GENDER"));			
+					profile.setProfileChiName(rs.getString("PROFILE_CHI_NAME"));			
+					profile.setProfileEngName(rs.getString("PROFILE_ENG_NAME"));			
+					profile.setProfileAddress(rs.getString("PROFILE_ADDRESS"));			
+					profile.setProfileBirth(rs.getString("PROFILE_BIRTH"));			
+					profile.setProfilePhone(rs.getString("PROFILE_PHONE"));			
+					profile.setProfileEmail(rs.getString("PROFILE_EMAIL"));			
+					profile.setProfileSnsFacebook(rs.getString("PROFILE_SNS_FACEBOOK"));			
+					profile.setProfileSnsTwitter(rs.getString("PROFILE_SNS_TWITTER"));			
+					profile.setProfileSnsNBlog(rs.getString("PROFILE_SNS_NBLOG"));			
+					profile.setProfileSnsInstagram(rs.getString("PROFILE_SNS_INSTAGRAM"));			
+					profile.setProfileSnsTumblr(rs.getString("PROFILE_SNS_TUMBLR"));			
+					profile.setProfileSnsPinterest(rs.getString("PROFILE_SNS_PINTEREST"));		
+					profile.setProfilePhotoURL(rs.getString("PROFILE_PHOTO_URL"));			
+					profile.setHit(rs.getInt("PROFILE_HIT"));	
+					profile.setPrimarySpec(rs.getString("PROFILE_PRIMARY_SPEC"));
+					profiles.add(profile);
+					profile=null;
+				}			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs, pstmt, conn );
+			}	
+			return profiles;				
+		}
 	/********************************************************************************
 	 *																				* 
 	 *																				*  
@@ -337,5 +387,29 @@ public class ProfileDao {
 		} finally {
 			JdbcUtil.close(pstmt, conn);
 		}		
+	}
+	
+	/********************************************************************************
+	 *																				* 
+	 *																				*  
+	 * 																				* 
+	 * 						       FUNCTION PART									* 
+	 *																				* 
+	 * 																				* 
+	 ********************************************************************************/
+	
+	// 상세검색시 WHERE 문을 만들어주는 메서드
+	private String makeSubQueryByMembers(List<String> members)
+	{
+		String subQuery ="";
+		for(int i=0; i < members.size(); i++)
+		{
+			if(i==0)
+				subQuery = "MEMBER_ID = '" + members.get(i) + "' ";
+			else
+				subQuery += "OR MEMBER_ID = '" + members.get(i) + "' ";
+		}
+		System.out.println("Maked SubQuery = " + subQuery);
+		return subQuery;
 	}
 }

@@ -43,7 +43,6 @@ public class ListService extends HttpServlet {
 		
 		ProfileDao profileDao = new ProfileDao();
 		List <Profile> profiles = new ArrayList<Profile>();
-
 					
 		// Profile DAO 클래스를 이용해 request에 Profiles 객체 실어 전송
 		profiles = profileDao.select();		

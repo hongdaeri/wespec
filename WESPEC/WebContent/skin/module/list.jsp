@@ -3,6 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/head.jsp" flush="false" />
 
+<%-- 해당 페이지가 없으면 리다이렉션.  --%> 
+<c:if test="${profiles eq null}">
+	<jsp:forward page="/Exception">
+		<jsp:param name="ex" value="NotFoundStudent" />
+	</jsp:forward>	
+</c:if>
+
 <article>
 	<section>
 		<div class="row">

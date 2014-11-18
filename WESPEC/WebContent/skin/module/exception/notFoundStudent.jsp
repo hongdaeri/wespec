@@ -4,7 +4,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<h1>해당 학생이 존재하지 않습니다. : ${profile.profileName}</h1>
+		<h1>해당 학생이 존재하지 않습니다.</h1>
 	</div>
 </div>
 

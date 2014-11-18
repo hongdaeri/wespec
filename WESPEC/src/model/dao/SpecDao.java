@@ -345,6 +345,98 @@ public class SpecDao {
 			JdbcUtil.close(rs, pstmt, conn );
 		}		
 	}
+	
+	// 특정 테이블의 입력항목이 있는 회원 리스트만 추출
+	public List<String> selectHaveSpecByMemberId(List<String> members, String tableName) { 
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+		List<String> newMembers = new ArrayList<String>();
+		
+		String subQuery = this.makeSubQueryByMembers(members);
+		String query = "SELECT DISTINCT MEMBER_ID FROM " + tableName;
+		query +=" WHERE " + subQuery;		
+		
+		try {
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();				
+		
+			while(rs.next())
+			{	
+				newMembers.add(rs.getString(1));			
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn );
+		}
+		return newMembers;		
+	}
+	
+	// 특정 테이블의 입력항목이 있는 회원 리스트만 추출
+	public List<String> selectHaveSpecByMemberId(List<String> members, String tableName, String  languageExamName, String languageGrade) { 
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+		List<String> newMembers = new ArrayList<String>();
+		
+		String subQuery = this.makeSubQueryByMembers(members);
+		String query = "SELECT DISTINCT MEMBER_ID FROM " + tableName;
+		query +=" WHERE " + subQuery;
+		query +=" AND (LANGUAGE_EXAM_NAME = ? AND LANGUAGE_EXAM_GRADE > ? ) ";
+		
+		try {
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, languageExamName);
+			pstmt.setString(2, languageGrade);		
+			rs = pstmt.executeQuery();				
+		
+			while(rs.next())
+			{	
+				newMembers.add(rs.getString(1));			
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn );
+		}
+		return newMembers;		
+	}
+	
+	// 스펙이 존재하는 회원리스트 추출.
+	public List<String> selectHaveSpecByAll() { 
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+		List<String> newMembers = new ArrayList<String>();
+		
+		// 이력이 등록된 회원 찾기.
+		String query = "SELECT MEMBER_ID FROM SPEC WHERE SPEC_LAST_CHANGE_DATE IS NOT NULL";
+		
+		try {
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				newMembers.add(rs.getString(1));			
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn );
+		}
+		return newMembers;		
+	}
+	
 
 	/********************************************************************************
 	 *																				* 
@@ -376,6 +468,7 @@ public class SpecDao {
 			pstmt.setString(6, certificate.getPublicScope());
 			pstmt.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
 			pstmt.executeUpdate();
+			this.updateSpec(certificate.getMemberId(), "CERTIFICATE", 2);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -404,6 +497,7 @@ public class SpecDao {
 			pstmt.setString(6, academic.getPublicScope());
 			pstmt.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
 			pstmt.executeUpdate();
+			this.updateSpec(academic.getMemberId(), "ACADEMIC", 2);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -431,6 +525,7 @@ public class SpecDao {
 			pstmt.setString(5, award.getPublicScope());
 			pstmt.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
 			pstmt.executeUpdate();
+			this.updateSpec(award.getMemberId(), "AWARD", 2);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -459,6 +554,7 @@ public class SpecDao {
 			pstmt.setString(6, language.getPublicScope());
 			pstmt.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
 			pstmt.executeUpdate();
+			this.updateSpec(language.getMemberId(), "LANGUAGE_EXAM", 2);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -488,6 +584,7 @@ public class SpecDao {
 			pstmt.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
 			pstmt.setBoolean(8, military.isRegister());
 			pstmt.executeUpdate();
+			this.updateSpec(military.getMemberId(), "MILITARY", 2);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -515,6 +612,7 @@ public class SpecDao {
 			pstmt.setString(5, portfolio.getPublicScope());
 			pstmt.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
 			pstmt.executeUpdate();
+			this.updateSpec(portfolio.getMemberId(), "PORTFOLIO", 2);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -541,6 +639,7 @@ public class SpecDao {
 			pstmt.setString(4, programmingLanguage.getPublicScope());
 			pstmt.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
 			pstmt.executeUpdate();
+			this.updateSpec(programmingLanguage.getMemberId(), "PROGRAMMING_LANGUAGE", 2);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -568,13 +667,16 @@ public class SpecDao {
 			pstmt.setString(5, training.getPublicScope());
 			pstmt.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
 			pstmt.executeUpdate();
+			this.updateSpec(training.getMemberId(), "TRAINING", 2);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(pstmt, conn);
 		}
+		
 	}
 	
+	//회원가입시 필요함.
 	public void insertMember(String studentCode) 
 	{
 		PreparedStatement pstmt = null;
@@ -597,6 +699,7 @@ public class SpecDao {
 			JdbcUtil.close(pstmt, conn);
 		}		
 	}	
+	
 	
 	
 	/********************************************************************************
@@ -633,4 +736,67 @@ public class SpecDao {
 			JdbcUtil.close(pstmt, conn);
 		}		
 	}	
+	
+	
+	
+	/********************************************************************************
+	 *																				* 
+	 *																				*  
+	 * 																				* 
+	 * 						       UPDATE PART										* 
+	 *																				* 
+	 * 																				* 
+	 ********************************************************************************/
+	
+	// 스펙사항이 변경될때마다 변경 날짜와 변경위치 기록 하는 메서드
+	private void updateSpec(String memberId, String changeLocation, int changePoint ) 
+	{
+		PreparedStatement pstmt = null;
+		Connection conn = null;			
+		
+		String query = "UPDATE SPEC ";
+	   	   query += "SET SPEC_CHANGE_LOCATION = ? , SPEC_CHANGE_POINT = ? , SPEC_LAST_CHANGE_DATE = ? ";
+	   	   query += "WHERE MEMBER_ID = ? ";
+		
+		try {			
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, changeLocation);
+			pstmt.setInt(2, changePoint);
+			pstmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+			pstmt.setString(4, memberId);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt, conn);
+		}		
+	}	
+	/********************************************************************************
+	 *																				* 
+	 *																				*  
+	 * 																				* 
+	 * 						       FUNCTION PART									* 
+	 *																				* 
+	 * 																				* 
+	 ********************************************************************************/
+	
+	// 상세검색시 WHERE 문을 만들어주는 메서드
+	private String makeSubQueryByMembers(List<String> members)
+	{
+		String subQuery ="";
+		for(int i=0; i < members.size(); i++)
+		{
+			if(i==0)
+				subQuery = "MEMBER_ID = '" + members.get(i) + "' ";
+			else
+				subQuery += "OR MEMBER_ID = '" + members.get(i) + "' ";
+		}
+		System.out.println("Maked SubQuery = " + subQuery);
+		return subQuery;
+	}
+	
 }
