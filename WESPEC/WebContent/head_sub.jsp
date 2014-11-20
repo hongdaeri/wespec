@@ -21,13 +21,14 @@
     
     <!-- css -->
 	<link rel="stylesheet" href="<%=skinPath %>/css/style.css" />
-	    
+	<link rel="stylesheet" href="<%=skinPath %>/css/tip-yellowsimple.css" type="text/css" />    
 	<!-- js -->
 	<script src="<%=skinPath %>/js/wespec.js"></script>
 	<script src="<%=skinPath %>/js/jquery-1.9.1.min.js"></script>
 	<script src="<%=skinPath %>/js/modernizr.js"></script>
 	<script src="<%=skinPath %>/js/jspatch.js"></script>
-	<script src="<%=skinPath %>/js/additem.js" charset="utf-8"></script>
+	<script src="<%=skinPath %>/js/buildcats.js" charset="utf-8"></script>
+	<script src="<%=skinPath %>/js/jquery.poshytip.js"></script>
 	<!--  collaps -->
 	<script src="<%=skinPath %>/js/collaps.js" ></script>
 	<%-- jquery.circularise --%>

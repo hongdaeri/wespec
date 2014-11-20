@@ -110,7 +110,7 @@ public class RegService extends HttpServlet{
 		else if(param.equals("s1"))	// 자격증
 		{
 			Certificate certificate = new Certificate();
-			certificate.setCertificateDate(request.getParameter("certificateDate").replaceAll("-", "."));
+			certificate.setCertificateDate(request.getParameter("certificateDate_year") + ". " + request.getParameter("certificateDate_month"));
 			certificate.setCertificateName(request.getParameter("certificateName"));
 			certificate.setCertificateGrade(request.getParameter("certificateGrade"));
 			certificate.setCertificateOrg(request.getParameter("certificateOrg"));
@@ -137,7 +137,7 @@ public class RegService extends HttpServlet{
 		{
 			Award award = new Award();
 			award.setMemberId(memberId);
-			award.setAwardDate(request.getParameter("awardDate"));
+			award.setAwardDate(request.getParameter("awardDate_year") + ". " + request.getParameter("awardDate_month"));
 			award.setAwardSubject(request.getParameter("awardSubject"));
 			award.setAwardOrg(request.getParameter("awardOrg"));
 			award.setPublicScope(request.getParameter("publicScope"));
@@ -149,21 +149,26 @@ public class RegService extends HttpServlet{
 		}
 		else if(param.equals("s4")) // 교육 및 연수
 		{
-			Training trainning = new Training();
-			trainning.setMemberId(memberId);
-			trainning.setTrainingName(request.getParameter("trainingName"));
-			trainning.setTrainingPeriod(request.getParameter("trainingPeriod"));
-			trainning.setTrainingOrg(request.getParameter("trainingOrg"));
-			trainning.setPublicScope(request.getParameter("publicScope"));
+			Training training = new Training();
+			training.setMemberId(memberId);
+			String portfolioPeriod = request.getParameter("trainingPeriod_year1") + ". " + request.getParameter("trainingPeriod_month1");
+			portfolioPeriod += " - " + request.getParameter("trainingPeriod_year2") + ". " + request.getParameter("trainingPeriod_month2");
+			
+			training.setTrainingName(request.getParameter("trainingName"));
+			training.setTrainingPeriod(portfolioPeriod);
+			training.setTrainingOrg(request.getParameter("trainingOrg"));
+			training.setPublicScope(request.getParameter("publicScope"));
 			 
-			specDao.insert(trainning);
+			specDao.insert(training);
 		}
 		else if(param.equals("s5")) // 포트폴리오
 		{
 			Portfolio portfolio = new Portfolio();
 			portfolio.setMemberId(memberId);
+			String portfolioPeriod = request.getParameter("portfolioPeriod_year1") + ". " + request.getParameter("portfolioPeriod_month1");
+			portfolioPeriod += " - " + request.getParameter("portfolioPeriod_year2") + ". " + request.getParameter("portfolioPeriod_month2");
 			portfolio.setPortfolioName(request.getParameter("portfolioName"));
-			portfolio.setPortfolioPeriod(request.getParameter("portfolioPeriod"));
+			portfolio.setPortfolioPeriod(portfolioPeriod);
 			portfolio.setPortfolioLink(request.getParameter("portfolioLink"));
 			portfolio.setPublicScope(request.getParameter("publicScope"));
 			 
@@ -183,9 +188,11 @@ public class RegService extends HttpServlet{
 		{
 			Academic academic = new Academic();
 			academic.setMemberId(memberId);
+			String academicPeriod = request.getParameter("academicPeriod_year1") + ". " + request.getParameter("academicPeriod_month1");
+			academicPeriod += " - " + request.getParameter("academicPeriod_year2") + ". " + request.getParameter("academicPeriod_month2");
 			academic.setAcademicName(request.getParameter("academicName"));
 			academic.setAcademicMajor(request.getParameter("academicMajor"));
-			academic.setAcademicPeriod(request.getParameter("academicPeriod"));
+			academic.setAcademicPeriod(academicPeriod);
 			academic.setAcademicState(request.getParameter("academicState"));
 			academic.setPublicScope(request.getParameter("publicScope"));
 			 
@@ -195,7 +202,10 @@ public class RegService extends HttpServlet{
 		{
 			Military military = new Military();
 			military.setMemberId(memberId);
-			military.setMilitaryPeriod(request.getParameter("militaryPeriod"));
+			String militaryPeriod = request.getParameter("militaryPeriod_year1") + ". " + request.getParameter("militaryPeriod_month1");
+			militaryPeriod += " - " + request.getParameter("militaryPeriod_year2") + ". " + request.getParameter("militaryPeriod_month2");
+			
+			military.setMilitaryPeriod(militaryPeriod);
 			military.setMilitaryGroup(request.getParameter("militaryGroup"));
 			military.setMilitaryRank(request.getParameter("militaryRank"));
 			military.setMilitaryWork(request.getParameter("militaryWork"));
