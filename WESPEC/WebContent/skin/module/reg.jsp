@@ -2,7 +2,11 @@
 <%@ include file="/common/common.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/head.jsp" flush="false" />
-
+<%
+	String tooltip_year ="<strong>년도를 입력하세요 (숫자 4자리)</strong><br>예) 2014";
+	String tooltip_month ="<strong>월을 입력하세요 (숫자 2자리)</strong><br>예) 05";
+	
+%>
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
@@ -26,8 +30,8 @@
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<h2>${profile.profileName}</h2>
-							<input type="text" name="engName" value="${profile.profileEngName}" placeholder="영문이름" /> /
-							<input type="text" name="chiName" value="${profile.profileChiName}" placeholder="한자이름"/>
+							<input type="text" name="engName" value="${profile.profileEngName}" placeholder="영문이름" class="tooltip_bottom" title="<strong>영문이름을 입력하세요</strong><br>예) Hong Gildong"/> /
+							<input type="text" name="chiName" value="${profile.profileChiName}" placeholder="한자이름" class="tooltip_bottom" title="<strong>한문이름 입력하세요 (한문명이 없는경우 한글로 작성)</strong><br>예) 金 佶洞 , 洪 바울"/>
 						</div>
 					</div>
 
@@ -50,12 +54,11 @@
 							<td class="active">생년월일</td>
 							<td><input type="text" name="birth" value="${profile.profileBirth}" readonly /></td>
 							<td class="active">거주지</td>
-							<td><input type="text" name="address" value="${profile.profileAddress}"/></td>
+							<td><input type="text" name="address" value="${profile.profileAddress}" class="tooltip_bottom" title="<strong>거주지는 구 또는 읍까지만 입력하세요</strong><br>예) 서울시 마포구, 평택시 팽성읍"/></td>
 						</tr>
 						<tr>
 							<td class="active">연락처</td>
-							<td class=""><input type="text" name="phone"
-								value="${profile.profilePhone}" /></td>
+							<td class=""><input type="text" name="phone" value="${profile.profilePhone}" maxlength="13" class="tooltip_bottom" title="<strong>다음과 같이 하이픈(-)을 꼭 포함하세요</strong><br>010-1234-4567 - O<br> 01012344567  - X" /></td>
 							<td class="active">이메일</td>
 							<td><input type="text" name="email" value="${profile.profileEmail}" /></td>
 						</tr>
@@ -125,14 +128,14 @@
 					<table class="table table-hover">
                 		<tr>
                 			<td class="col-md-2">
-	                			<input type="text" id="tooltip" class="form-control" name="certificateDate_year" size="5" maxlength="4" title="예)2014">
+	                			<input type="text" class="tooltip_bottom form-control" name="certificateDate_year" size="5" maxlength="4" id="tooltip" title="<%=tooltip_year%>">
 	                			<span style="vertical-align:bottom" >&nbsp;.&nbsp;</span>
-	                			<input type="text" id="tooltip" class="form-control" name="certificateDate_month" size="3" maxlength="2" title="예)09">
+	                			<input type="text" class="tooltip_bottom form-control" name="certificateDate_month" size="3" maxlength="2" id="tooltip" title="<%=tooltip_month%>">
                 			</td>
-                     		<td class="col-md-2"><input type="text" class="form-control" name="certificateName" title="예) 컴퓨터활용능력"/></td>
-                      		<td class="col-md-2"><input type="text" class="form-control" name="certificateGrade" title="예) 1급"/></td>
-				      		<td class="col-md-3"><input type="text" class="form-control" name="certificateOrg" title="예) 대한상공회의소"/></td>
-				      		<td class="col-md-2"><select name="publicScope" class="form-control"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개">비공개</option></select></td>
+                     		<td class="col-md-2"><input type="text" class="tooltip_bottom form-control" name="certificateName" title="<strong>자격증명을 입력하세요</strong><br>예) 컴퓨터활용능력"/></td>
+                      		<td class="col-md-2"><input type="text" class="tooltip_bottom form-control" name="certificateGrade" title="<strong>급수가 없는 자격증의 경우 공란으로 남겨주세요</strong><br>예) 1급"/></td>
+				      		<td class="col-md-3"><input type="text" class="tooltip_bottom form-control" name="certificateOrg" title="<strong>자격증에 표기되어있는 발행처/발행기관을 입력하세요</strong><br>예) 한국산업인력공단, 대한상공회의소"/></td>
+				      		<td class="col-md-2"><select name="publicScope" class="tooltip_bottom form-control"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개">비공개</option></select></td>
 				      		<td class="col-md-1 text-right"><button title="항목삭제" type="button" class="btn btn-primary btn-xs" onClick="submit()">등록</button></td>
                 		</tr> 
                 	</table>
@@ -183,11 +186,11 @@
 					<form action="<%=rootPath%>/register?param=s2" class="form-inline" role="form" name="language_exam" method="post">
 					<table class="table table-hover">
                 		<tr>                			
-                			<td class="col-md-2"><SELECT class="form-control " Name="languageName" onChange="BuildCats(this.selectedIndex,language_exam);"><OPTION Value="">------<OPTION Value="영어">영어<OPTION Value="일어">일어<OPTION Value="중국어">중국어</Select></td>
-			                <td class="col-md-2"><SELECT class="form-control" Name="languageExamName"><OPTION Value="">-------</Select></td>
-			                <td class="col-md-2"><div class="input-group"><input type="text" class="form-control" name="languageExamGrade" /><div class="input-group-btn"><SELECT class="form-control" Name="languageExamGradeOption"><OPTION Value="점">점<OPTION Value="급">급</Select></div></div></td>
-						    <td class="col-md-3"><input type="text" class="form-control" name="languageExamOrg" title="예) 한국토익위원회" /></td>
-						    <td class="col-md-2"><select class="form-control" name="publicScope"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개" >비공개</option></select></td>
+                			<td class="col-md-2"><SELECT class="tooltip_bottom form-control " Name="languageName" onChange="BuildCats(this.selectedIndex,language_exam);"><OPTION Value="">------<OPTION Value="영어">영어<OPTION Value="일어">일어<OPTION Value="중국어">중국어</Select></td>
+			                <td class="col-md-2"><SELECT class="tooltip_bottom form-control" Name="languageExamName"><OPTION Value="">-------</Select></td>
+			                <td class="col-md-2"><div class="input-group"><input type="text" class="tooltip_bottom form-control" name="languageExamGrade" title="<strong>점수 또는 급수를 입력하세요. 취득의 경우 PASS 라고 입력하세요</strong><br>예) 750, 3, PASS"/><div class="input-group-btn"><SELECT class="tooltip_bottom form-control" Name="languageExamGradeOption"><OPTION Value="점">점<OPTION Value="급">급</Select></div></div></td>
+						    <td class="col-md-3"><input type="text" class="tooltip_bottom form-control" name="languageExamOrg" title="<strong>증빙 기관을 입력하세요. (토익의 경우 ETS)</strong><br>예) ETS" /></td>
+						    <td class="col-md-2"><select class="tooltip_bottom form-control" name="publicScope"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개" >비공개</option></select></td>
 						    <td class="col-md-1 text-right"><button title="항목삭제" type="button" class="btn btn-primary btn-xs" onClick="submit()">등록</button></td>
                 		</tr> 
                 	</table>
@@ -237,10 +240,10 @@
 					<form action="<%=rootPath%>/register?param=s3" class="form-inline" role="form" name="award" method="post">
 					<table class="table table-hover">
                 		<tr>                			
-                			<td class="col-md-2"><input type="text" class="form-control" name="awardDate_year" size="5" maxlength="4" title="예)2014"><span style="vertical-align:bottom" >&nbsp;.&nbsp;</span><input type="text" class="form-control" name="awardDate_month" size="3" maxlength="2"></td>
-               				<td class="col-md-4"><input type="text" class="form-control" name="awardSubject" style="width:100%;" title="예) 2014 상상실현창의공모전 최우수상" /></td>
-			      			<td class="col-md-3"><input type="text" class="form-control" name="awardOrg" title="예) KT&G"/></td>
-			      			<td class="col-md-2"><select name="publicScope" class="form-control"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개">비공개</option></select></td>
+                			<td class="col-md-2"><input type="text" class="tooltip_bottom form-control" name="awardDate_year" size="5" maxlength="4" id="tooltip" title="<%=tooltip_year%>"><span style="vertical-align:bottom" >&nbsp;.&nbsp;</span><input type="text" class="tooltip_bottom form-control" name="awardDate_month" size="3" maxlength="2" id="tooltip" title="<%=tooltip_month%>"></td>
+               				<td class="col-md-4"><input type="text" class="tooltip_bottom form-control" name="awardSubject" style="width:100%;" title="<strong>수상명은 정확하고, 구체적으로 최종 결과까지 표현해주세요</strong><br>2014 상상실현창의공모전 최우수상<br>청룡기 육상선수권대회 은메달<br>청주시장배 아마추어 풋살대회 준우승" /></td>
+			      			<td class="col-md-3"><input type="text" class="tooltip_bottom form-control" name="awardOrg" title="<strong>수여기관은 정확한 기관명을 입력하세요</strong><br>예) 충청북도교육청, SKT, KT&G"/></td>
+			      			<td class="col-md-2"><select name="publicScope" class="tooltip_bottom form-control"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개">비공개</option></select></td>
 			      			<td class="col-md-1 text-right"><button title="항목삭제" type="button" class="btn btn-primary btn-xs" onClick="submit()">등록</button></td>
 						</tr> 
                 	</table>
@@ -291,10 +294,10 @@
 					<form action="<%=rootPath%>/register?param=s4" class="form-inline" role="form" name="training" method="post">
 					<table class="table table-hover">
                 		<tr>                			
-                			<td class="col-md-3"><input type="text" class="form-control" name="trainingPeriod_year1" size="4" maxlength="4" title="예)2014"><span style="vertical-align:bottom" >&nbsp;.&nbsp;</span><input type="text" class="form-control" name="trainingPeriod_month1" size="2" maxlength="2"> <span style="vertical-align:middle" >&nbsp;~&nbsp;</span><input type="text" class="form-control" name="trainingPeriod_year2" size="4" maxlength="4" title="예)2014"><span style="vertical-align:bottom" >&nbsp;.&nbsp;</span><input type="text" class="form-control" name="trainingPeriod_month2" size="2" maxlength="2"></td> 
-			                <td class="col-md-4"><input type="text" class="form-control" name="trainingName" style="width:100%;" title="예) 청년취업아카데미 빅데이터 분석 전문가 과정"/></td>
-						    <td class="col-md-2"><input type="text" class="form-control" name="trainingOrg" title="예) 고용노동부"/></td>
-						    <td class="col-md-2"><select name="publicScope"  class="form-control"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개">비공개</option></select></td>
+                			<td class="col-md-3"><input type="text" class="tooltip_bottom form-control" name="trainingPeriod_year1" size="4" maxlength="4" id="tooltip" title="<%=tooltip_year%>"><span style="vertical-align:bottom" >&nbsp;.&nbsp;</span><input type="text" class="tooltip_bottom form-control" name="trainingPeriod_month1" size="2" maxlength="2" id="tooltip" title="<%=tooltip_month%>"> <span style="vertical-align:middle" >&nbsp;~&nbsp;</span><input type="text" class="tooltip_bottom form-control" name="trainingPeriod_year2" size="4" maxlength="4" id="tooltip" title="<%=tooltip_year%>"><span style="vertical-align:bottom" >&nbsp;.&nbsp;</span><input type="text" class="tooltip_bottom form-control" name="trainingPeriod_month2" size="2" maxlength="2" id="tooltip" title="<%=tooltip_month%>"></td> 
+			                <td class="col-md-4"><input type="text" class="tooltip_bottom form-control" name="trainingName" style="width:100%;" title="<strong>교육/연수명을 입력하세요</strong><br>예) 청년취업아카데미 빅데이터 분석전문가 과정"/></td>
+						    <td class="col-md-2"><input type="text" class="tooltip_bottom form-control" name="trainingOrg" title="<strong>교육/연수 기관명을 입력하세요</strong><br>예) 고용노동부, OO정보원"/></td>
+						    <td class="col-md-2"><select name="publicScope"  class="tooltip_bottom form-control"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개">비공개</option></select></td>
 						    <td class="col-md-1 text-right"><button title="항목삭제" type="button" class="btn btn-primary btn-xs" onClick="submit()">등록</button></td>
                 		</tr> 
                 	</table>
@@ -344,10 +347,10 @@
 					<form action="<%=rootPath%>/register?param=s5" class="form-inline" role="form" name="portfolio" method="post">
 					<table class="table table-hover">
                 		<tr>                			
-                			<td class="col-md-3"><input type="text" class="form-control" name="portfolioPeriod_year1" size="4" maxlength="4" title="예)2014"><span style="vertical-align:bottom" >&nbsp;.&nbsp;</span><input type="text" class="form-control" name="portfolioPeriod_month1" size="2" maxlength="2"> <span style="vertical-align:middle" >&nbsp;~&nbsp;</span><input type="text" class="form-control" name="portfolioPeriod_year2" size="4" maxlength="4" title="예)2014"><span style="vertical-align:bottom" >&nbsp;.&nbsp;</span><input type="text" class="form-control" name="portfolioPeriod_month2" size="2" maxlength="2"></td>
-			                <td class="col-md-3"><input type="text" class="form-control" name="portfolioName" style="width:100%" title="예) 개방형 이력관리 시스템 위스펙"/></td>
-						    <td class="col-md-3"><input type="text" class="form-control" name="portfolioLink" style="width:100%" title="예) http://wespec.co.kr"/></td>
-						    <td class="col-md-2"><select name="publicScope" class="form-control"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개">비공개</option></select></td>
+                			<td class="col-md-3"><input type="text" class="tooltip_bottom form-control" name="portfolioPeriod_year1" size="4" maxlength="4" title="<%=tooltip_year%>"><span style="vertical-align:bottom" >&nbsp;.&nbsp;</span><input type="text" class="tooltip_bottom form-control" name="portfolioPeriod_month1" size="2" maxlength="2" title="<%=tooltip_month%>"> <span style="vertical-align:middle" >&nbsp;~&nbsp;</span><input type="text" class="tooltip_bottom form-control" name="portfolioPeriod_year2" size="4" maxlength="4" title="<%=tooltip_year%>"><span style="vertical-align:bottom" >&nbsp;.&nbsp;</span><input type="text" class="tooltip_bottom form-control" name="portfolioPeriod_month2" size="2" maxlength="2" title="<%=tooltip_month%>"></td>
+			                <td class="col-md-3"><input type="text" class="tooltip_bottom form-control" name="portfolioName" style="width:100%" title="<strong>프로젝트의 정식명칭을 입력하세요</strong><br>예) 개방형 오픈 이력 시스템 - 위스펙"/></td>
+						    <td class="col-md-3"><input type="text" class="tooltip_bottom form-control" name="portfolioLink" style="width:100%" title="<strong>프로젝트와 관련된 링크를 입력하세요 <br>(없으면 공란으로 남겨주세요)</strong><br>예) http://wespec.co.kr"/></td>
+						    <td class="col-md-2"><select name="publicScope" class="tooltip_bottom form-control"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개">비공개</option></select></td>
 						    <td class="col-md-1 text-right"><button title="항목삭제" type="button" class="btn btn-primary btn-xs" onClick="submit()">등록</button></td>
 						</tr> 
                 	</table>
@@ -399,11 +402,11 @@
 					<form action="<%=rootPath%>/register?param=s6" class="form-inline" role="form" name="programming_language" method="post">
 					<table class="table table-hover">
                 		<tr>                			
-                			<td class="col-md-2"><input type="text" class="form-control" name="languageName" class="form-control"/></td>
-		                  	<td class="col-md-2"><select name="languageLevel" class="form-control"><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td>
+                			<td class="col-md-2"><input type="text" class="tooltip_bottom form-control" name="languageName" class="tooltip_bottom form-control"/></td>
+		                  	<td class="col-md-2"><select name="languageLevel" class="tooltip_bottom form-control"><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td>
 		                  	<td class="col-md-2"></td>
 					      	<td class="col-md-3"></td>
-					      	<td class="col-md-2"><select name="publicScope" class="form-control"><option value="전체공개">전체공개</option><option value="교수공개" >교수공개</option><option value="비공개">비공개</option></select></td>
+					      	<td class="col-md-2"><select name="publicScope" class="tooltip_bottom form-control"><option value="전체공개">전체공개</option><option value="교수공개" >교수공개</option><option value="비공개">비공개</option></select></td>
 					      	<td class="col-md-1 text-right"><button title="항목삭제" type="button" class="btn btn-primary btn-xs" onClick="submit()">등록</button></td>
 			     		</tr> 
                 	</table>
@@ -455,11 +458,11 @@
 					<form action="<%=rootPath%>/register?param=s7" class="form-inline" role="form" name="academic" method="post">
 					<table class="table table-hover">
                 		<tr>                			
-                			<td class="col-md-3"><input type="text" class="form-control" name="academicPeriod_year1" size="4" maxlength="4" title="예)2014"><span style="vertical-align:bottom" >.&nbsp;</span><input type="text" class="form-control" name="academicPeriod_month1" size="2" maxlength="2"><span style="vertical-align:middle" >&nbsp;~&nbsp;</span><input type="text" class="form-control" name="academicPeriod_year2" size="4" maxlength="4" title="예)2014"><span style="vertical-align:bottom" >.&nbsp;</span><input type="text" class="form-control" name="academicPeriod_month2" size="2" maxlength="2"></td>
-          					<td class="col-md-2"><input type="text" class="form-control" name="academicName" style="width:100%" title="예) 음성고등학교"/></td>
-               				<td class="col-md-2"><input type="text" class="form-control" name="academicMajor" style="width:100%" title="예) 인문계"/></td>
-			     			<td class="col-md-2"><select name="academicState" class="form-control"><option value="졸업">졸업</option><option value="재학">재학</option><option value="중퇴" >중퇴</option><option value="휴학">휴학</option></select></td>
-			    			<td class="col-md-2"><select name="publicScope" class="form-control"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개">비공개</option></select></td>
+                			<td class="col-md-3"><input type="text" class="tooltip_bottom form-control" name="academicPeriod_year1" size="4" maxlength="4" title="<%=tooltip_year%>"><span style="vertical-align:bottom" >.&nbsp;</span><input type="text" class="tooltip_bottom form-control" name="academicPeriod_month1" size="2" maxlength="2" title="<%=tooltip_month%>"><span style="vertical-align:middle" >&nbsp;~&nbsp;</span><input type="text" class="tooltip_bottom form-control" name="academicPeriod_year2" size="4" maxlength="4" title="<%=tooltip_year%>"><span style="vertical-align:bottom" >.&nbsp;</span><input type="text" class="tooltip_bottom form-control" name="academicPeriod_month2" size="2" maxlength="2" title="<%=tooltip_month%>"></td>
+          					<td class="col-md-2"><input type="text" class="tooltip_bottom form-control" name="academicName" style="width:100%" title="<strong>학교명을 입력하세요</strong><br>예) 음성고등학교, 한국교통대학교"/></td>
+               				<td class="col-md-2"><input type="text" class="tooltip_bottom form-control" name="academicMajor" style="width:100%" title="<strong>전공을 입력하세요 (없으면 공란으로 남겨주세요)</strong><br>예) 소프트웨어학과"/></td>
+			     			<td class="col-md-2"><select name="academicState" class="tooltip_bottom form-control"><option value="졸업">졸업</option><option value="재학">재학</option><option value="중퇴" >중퇴</option><option value="휴학">휴학</option></select></td>
+			    			<td class="col-md-2"><select name="publicScope" class="tooltip_bottom form-control"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개">비공개</option></select></td>
 			  				<td class="col-md-1 text-right"><button title="항목삭제" type="button" class="btn btn-primary btn-xs" onClick="submit()">등록</button></td>
                 		</tr> 
                 	</table>
@@ -508,18 +511,18 @@
 					<table class="table table-hover">
                 		<tr>  
                 			<td class="col-md-3">
-                				<input type="text" class="form-control" name="militaryPeriod_year1" size="4" maxlength="4" title="예)2014">
+                				<input type="text" class="tooltip_bottom form-control" name="militaryPeriod_year1" size="4" maxlength="4" title="<%=tooltip_year%>">
                 				<span style="vertical-align:bottom" >&nbsp;.&nbsp;</span>
-                				<input type="text" class="form-control" name="militaryPeriod_month1" size="2" maxlength="2">
+                				<input type="text" class="tooltip_bottom form-control" name="militaryPeriod_month1" size="2" maxlength="2" title="<%=tooltip_month%>">
                 				<span style="vertical-align:middle" >&nbsp;~&nbsp;</span>
-                				<input type="text" class="form-control" name="militaryPeriod_year2" size="4" maxlength="4" title="예)2014">
+                				<input type="text" class="tooltip_bottom form-control" name="militaryPeriod_year2" size="4" maxlength="4" title="<%=tooltip_year%>">
                 				<span style="vertical-align:bottom" >&nbsp;.&nbsp;</span>
-                				<input type="text" class="form-control" name="militaryPeriod_month2" size="2" maxlength="2">
+                				<input type="text" class="tooltip_bottom form-control" name="militaryPeriod_month2" size="2" maxlength="2" title="<%=tooltip_month%>">
                 			</td>
-							<td class="col-md-2"><input type="text" class="form-control" name="militaryGroup" title="예) 육군"/></td>
-							<td class="col-md-2"><input type="text" class="form-control" name="militaryRank" title="예) 병장"/></td>
-							<td class="col-md-2"><input type="text" class="form-control" name="militaryWork" title="예) 보병"/></td>
-							<td class="col-md-2"><select name="publicScope" class="form-control"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개">비공개</option></select></td>
+							<td class="col-md-2"><input type="text" class="tooltip_bottom form-control" name="militaryGroup" title="<strong>군별을 입력하세요</strong><br>예) 육군, 공군, 해군, 의경, 공익"/></td>
+							<td class="col-md-2"><input type="text" class="tooltip_bottom form-control" name="militaryRank" title="<strong>계급을 입력하세요</strong><br>예) 병장, 이병, 중위, 소위, 대위"/></td>
+							<td class="col-md-2"><input type="text" class="tooltip_bottom form-control" name="militaryWork" title="<strong>병과를 입력하세요</strong><br>예) 보병, 의무병, 공병, 포병"/></td>
+							<td class="col-md-2"><select name="publicScope" class="tooltip_bottom form-control"><option value="전체공개">전체공개</option><option value="교수공개">교수공개</option><option value="비공개">비공개</option></select></td>
 							<td class="col-md-1 text-right"><button title="항목삭제" type="button" class="btn btn-primary btn-xs" onClick="submit()">등록</button></td>              			
 						</tr> 
                 	</table>
@@ -587,7 +590,8 @@
 </div>
 
 <script>
-$('#tooltip').poshytip({
+<!-- 툴팁 스크립트 -->
+$('.tooltip_bottom').poshytip({
 	className: 'tip-yellowsimple',
 	showOn: 'focus',
 	alignTo: 'target',
