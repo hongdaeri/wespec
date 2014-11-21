@@ -182,4 +182,27 @@ public class AccountDao {
 			JdbcUtil.close(pstmt, conn);
 		}	
 	}	
+	// 비밀번호 변경
+	public void updatePassword(String memberId, String password) 
+	{
+		PreparedStatement pstmt = null;
+		Connection conn = null;	
+		
+		String query = "UPDATE MEMBER ";
+			   query += "SET MEMBER_PASSWORD=? ";
+			   query += "WHERE MEMBER_ID = ? ";
+		
+		try {
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, password);    
+			pstmt.setString(2, memberId);   			 
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt, conn);
+		}		
+	}	
 }

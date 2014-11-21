@@ -63,7 +63,7 @@
 			             	 $('.profile-sample').circularise({ width:"100px" });
 			            </script>								
 	                </li>
-                     <li><a href="<%=request.getContextPath()%>/Register"><button type="button" class="btn btn-link btn-xs btn-block">비밀번호 변경 <!--  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>--></button></a></li>
+                     <li><a href="#" data-toggle="modal" data-target="#passwordChange"><button type="button" class="btn btn-link btn-xs btn-block">비밀번호 변경 <!--  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>--></button></a></li>
                     <li class="divider"></li>
                     <li><a href="<%=request.getContextPath()%>/OPEN/<%=memberId%>"><button type="button" class="btn btn-info btn-block">내 프로필/이력 보기</button></a></li>
                     <li><a href="<%=request.getContextPath()%>/Register"><button type="button" class="btn btn-primary btn-block">내 프로필/이력 등록 </button></a></li>                   
@@ -77,10 +77,11 @@
           </div><!-- /.container-fluid --> 
            
            <!--  Detail Search Layer -->    
-		  <div class="detail_search_box collapse" id="detail" style="background-color:#f8f8f8; padding:10px 20px; border-top:1px solid #dedede; ">
+		  <div class="detail_search_box collapse" id="detail" style="padding:10px 20px; background-color:#f8f8f8;  border-top:1px solid #dedede; ">
 	    	<form action="<%=request.getContextPath()%>/Search" name="d_search" method="post" class="form-inline" role="form">			    	
 	    	<div class="container">	    		
 	    		<div class="panel panel-default">
+	    			<h3>&nbsp;&nbsp;상세검색</h3><hr>
 					<div class="panel-body">				
 						 <div class="row">
 							<div class="col-md-10 col-sm-12 col-xs-12">

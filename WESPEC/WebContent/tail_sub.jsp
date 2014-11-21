@@ -1,20 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>    
 <%@ include file="/common/common.jsp" %>
 
-     <!-- Search Modal -->
-	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- Search Modal -->
+	<div class="modal fade" id="passwordChange" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Detail Search</h4>
+	        <h4 class="modal-title" id="myModalLabel">비밀번호 변경</h4>
 	      </div>
-	      <div class="modal-body">
-	        <p>자세한 검색 yo</p>
+	      <form role="form" name="changePw" action="<%=request.getContextPath()%>/skin/module/passwordChange.jsp" method="post">
+	      <div class="modal-body">			
+			<div class="form-group">
+				<label for="password1">변경할 비밀번호</label>
+				<input type="password" class="form-control" id="password" name="password" placeholder="변경할 비밀번호">
+			</div>
+			<div class="form-group">
+				<label for="password2">변경할 비밀번호 확인</label>
+				<input type="password" class="form-control" id="password2" name="password2" placeholder="변경할 비밀번호 확인">
+			</div>				
+			
 	      </div>
 	      <div class="modal-footer">	        
-	        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-filter"></span> RUN</button>
+	        <button type="button" class="btn btn-primary" onClick="check_pw();"><span class="glyphicon glyphicon-cog"></span> 변경</button>
 	      </div>
+	      </form>
+	      <script>
+	      function check_pw() {
+	    	  if(document.changePw.password.value == document.changePw.password2.value) {
+	    		  document.changePw.submit();
+	    	  }
+	    	  else{
+	    		  alert('입력한 두 비밀번호가 일치하지 않습니다. 다시입력하세요');
+	    		  return;
+	    	  }
+	      }
+	      </script>
 	    </div>
 	  </div>
 	</div>

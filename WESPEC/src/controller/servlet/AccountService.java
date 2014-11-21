@@ -1,6 +1,7 @@
 package controller.servlet;
 
 import javax.servlet.annotation.WebServlet;
+
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,7 +22,7 @@ import model.dao.SpecDao;
  * @author wespec.co.kr
  **/
 
-@WebServlet(urlPatterns = {"/login","/join", "/logout"})
+@WebServlet(urlPatterns = {"/login","/join", "/logout" , "/Account"})
 public class AccountService extends HttpServlet{	
 	private static final long serialVersionUID = -8567273307264010369L;
 	
@@ -59,7 +60,7 @@ public class AccountService extends HttpServlet{
 			else insertMember();
 			
 			nextPage = "/skin/module/join.jsp";		
-		}
+		}		
 		
 		RequestDispatcher rd = request.getRequestDispatcher(nextPage);
 		rd.forward(request, response);
@@ -71,27 +72,26 @@ public class AccountService extends HttpServlet{
 	{
 		response.setContentType("text/html; charset=euc-kr");
 		request.setCharacterEncoding("euc-kr");
-		
+		AccountDao accountDao = new AccountDao();	
+	
 		String memberId = request.getParameter("memberId");
-		String memberPw = request.getParameter("memberPw");
-		
-		AccountDao accountDao = new AccountDao();
+		String memberPw = request.getParameter("memberPw");		
 		Member member = accountDao.select(memberId);
-		
+			
 		if( member !=null  && member.getMemberPassword().equals(memberPw))
 		{	
-			ProfileDao profileDao = new ProfileDao();
-		
-			String photoUrl = profileDao.selectBySection(memberId, "PROFILE_PHOTO_URL");
-			HttpSession session = request.getSession();
-			session.setAttribute("memberId",memberId);
-			session.setAttribute("memberGroup",member.getMemberGroup());
-			session.setAttribute("photoUrl", photoUrl);
-			response.sendRedirect(request.getContextPath() + "/List");
+				ProfileDao profileDao = new ProfileDao();
+			
+				String photoUrl = profileDao.selectBySection(memberId, "PROFILE_PHOTO_URL");
+				HttpSession session = request.getSession();
+				session.setAttribute("memberId",memberId);
+				session.setAttribute("memberGroup",member.getMemberGroup());
+				session.setAttribute("photoUrl", photoUrl);
+				response.sendRedirect(request.getContextPath() + "/List");
 		}
 		else 
 			ExceptionService.printAlert(request, response, "계정 정보가 올바르지 않습니다. 확인후 다시 입력해주세요.");
-		
+			
 	}
 	
 	public void insertMember() 
