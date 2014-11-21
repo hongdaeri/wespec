@@ -24,13 +24,13 @@
                  <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Menu 1</a></li>
-                    <li><a href="#">Menu 2</a></li>
-                    <li><a href="#">Menu 3</a></li>
+                    <li><a href="#">통계 서비스</a></li>
+                    <li><a href="#">출력 서비스 </a></li>
+                    <li><a href="#">Administrator</a></li>
                     <li class="divider"></li> <!-- 경계선 -->
-                    <li><a href="#">Link</a></li>
+                    <li><a href="#">WESPEC MANUAL</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="#">About WESPEC</a></li>
                   </ul>
                 </li>
               </ul>
