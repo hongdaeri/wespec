@@ -6,6 +6,14 @@
 	String tooltip_year ="<strong>년도를 입력하세요 (숫자 4자리)</strong><br>예) 2014";
 	String tooltip_month ="<strong>월을 입력하세요 (숫자 2자리)</strong><br>예) 05";
 	
+	String[] languageList = {
+			"C",			"C++",			"Python",			"Java",
+			"Visual Basic",	"Lisp",			"PHP",				"ASP",
+			"JSP",			"C#",			"Ruby",				"HTML",
+			"Javascript",	"Node.js",		"Android",			"Oracle",
+			"Swift",		"Objective-C"
+			};
+	boolean languageListChk = false;
 %>
 
 
@@ -368,80 +376,28 @@
 					<b>소프트웨어 개발 능력</b>
 				</div>
 				<!-- Table -->
+				<form action="<%=rootPath%>/register?param=s6" class="form-inline" role="form" name="programming_language" method="post">
 				<table class="table table-hover" ID="s6">
 					<tr>
-						<td class="col-md-11">
-							<form action="<%=rootPath%>/register?param=s6" class="form-inline" role="form" name="programming_language" method="post">
-								<div class="row">
-				    			   	<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl1" class="css-checkbox" type="checkbox" name="ability" value="Certificate" /><label for="abl1" class="css-label">C</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl2" class="css-checkbox" type="checkbox" name="ability" value="Award" /><label for="abl2" class="css-label">C++</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl3" class="css-checkbox" type="checkbox" name="ability" value="Portfoilo" /><label for="abl3" class="css-label">Python</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl4" class="css-checkbox" type="checkbox" name="ability" value="Training" /><label for="abl4" class="css-label">Java</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl5" class="css-checkbox" type="checkbox" name="ability" value="Service" /><label for="abl5" class="css-label">Visual Basic</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl6" class="css-checkbox" type="checkbox" name="ability" value="Club" /><label for="abl6" class="css-label">LISP</label>
-							   		</div>					   	
-							  	</div>
-							  	<!--  row1 END -->
-							  	<!--  row2 -->
-							  	<div class="row">
-				    			   	<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl7" class="css-checkbox" type="checkbox" name="ability" value="Certificate" /><label for="abl7" class="css-label">PHP</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl8" class="css-checkbox" type="checkbox" name="ability" value="Award" /><label for="abl8" class="css-label">ASP</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl9" class="css-checkbox" type="checkbox" name="ability" value="Portfoilo" /><label for="abl9" class="css-label">JSP</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl10" class="css-checkbox" type="checkbox" name="ability" value="Training" /><label for="abl10" class="css-label">C#</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl11" class="css-checkbox" type="checkbox" name="ability" value="Service" /><label for="abl11" class="css-label">Ruby</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl12" class="css-checkbox" type="checkbox" name="ability" value="Club" /><label for="abl12" class="css-label">HTML</label>
-							   		</div>					   	
-							  	</div>
-							  	<!--  row2 END -->
-							  	<!--  row3 -->
-							  	<div class="row">
-				    			   	<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl13" class="css-checkbox" type="checkbox" name="ability" value="Certificate" /><label for="abl13" class="css-label">Javascript</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl14" class="css-checkbox" type="checkbox" name="ability" value="Award" /><label for="abl14" class="css-label">Node.js</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl15" class="css-checkbox" type="checkbox" name="ability" value="Portfoilo" /><label for="abl15" class="css-label">Android</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl16" class="css-checkbox" type="checkbox" name="ability" value="Training" /><label for="abl16" class="css-label">Oracle</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl17" class="css-checkbox" type="checkbox" name="ability" value="Service" /><label for="abl17" class="css-label">Swift</label>
-							   		</div>
-							   		<div class="col-md-2 col-sm-4 col-xs-6">
-							   			<input id="abl18" class="css-checkbox" type="checkbox" name="ability" value="Club" /><label for="abl18" class="css-label">Objective-C</label>
-							   		</div>					   	
-							  	</div>
-							  	<!--  row3 END -->                 
-                			</form>						
+						<td class="col-md-11" style="padding:20px 40px;">						
+		    			   	<div class="row">
+								<c:forEach var="item" items="<%= languageList %>" varStatus="status">
+									<div class="col-md-2 col-sm-3 col-xs-4">
+										<input id="abl${status.index}" class="css-checkbox" type="checkbox" name="ability" value="${item}" 
+											<c:forEach var="pl" items="${spec.programmingLanguages}">
+												<c:if test="${pl.languageName eq item}">
+														checked
+												</c:if>
+											</c:forEach>
+									/><label for="abl${status.index}" class="css-label">${item}</label>
+									</div>	
+								</c:forEach>
+							</div>	   					
 						</td>
-						<td class="col-md-1 text-right" style="vertical-align:middle;"><button title="등록" type="button" class="btn btn-primary btn-xs" onClick="">등록</button></td>
+						<td class="col-md-1 text-right" style="vertical-align:middle;"><button title="등록" type="button" class="btn btn-primary btn-xs" onClick="submit();">등록</button></td>
 					</tr>				
-				</table>				
+				</table>
+				</form>				
 			</div>
 			<!--  section END -->
 

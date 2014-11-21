@@ -174,15 +174,17 @@ public class RegService extends HttpServlet{
 			 
 			specDao.insert(portfolio);
 		}
-		else if(param.equals("s6")) // 선호프로그래밍 랭귀지
+		else if(param.equals("s6")) // 소프트웨어 개발 능력
 		{
 			ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
 			programmingLanguage.setMemberId(memberId);
-			programmingLanguage.setLanguageName(request.getParameter("languageName"));
-			programmingLanguage.setLanguageLevel(request.getParameter("languageLevel"));
-			programmingLanguage.setPublicScope(request.getParameter("publicScope"));
-			 
-			specDao.insert(programmingLanguage);
+			String[] chkbox = request.getParameterValues("ability");
+			specDao.deleteByProgrammingLanguage(memberId);
+			for(int i=0; i<chkbox.length; i++)
+			{
+				programmingLanguage.setLanguageName(chkbox[i]);
+				specDao.insert(programmingLanguage);
+			}			
 		}
 		else if(param.equals("s7")) // 학력사항
 		{

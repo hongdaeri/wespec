@@ -266,8 +266,7 @@ public class SpecDao {
 			{		
 				ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
 				programmingLanguage.setRegNo(rs.getInt("LANGUAGE_NO"));
-				programmingLanguage.setLanguageName(rs.getString("LANGUAGE_NAME"));
-				programmingLanguage.setLanguageLevel(rs.getString("LANGUAGE_LEVEL"));		
+				programmingLanguage.setLanguageName(rs.getString("LANGUAGE_NAME"));	
 				programmingLanguage.setPublicScope(rs.getString("LANGUAGE_SCOPE"));
 				
 				spec.programmingLanguages.add(programmingLanguage);				
@@ -627,17 +626,15 @@ public class SpecDao {
 		Connection conn = null;	
 		
 		String query = "INSERT INTO PROGRAMMING_LANGUAGE";
-			   query += "(MEMBER_ID, LANGUAGE_NAME, LANGUAGE_LEVEL, LANGUAGE_SCOPE, LANGUAGE_REG_DATE)";
-			   query += "VALUES(?,?,?,?,?)";
+			   query += "(MEMBER_ID, LANGUAGE_NAME, LANGUAGE_REG_DATE)";
+			   query += "VALUES(?,?,?)";
 		
 		try {
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, programmingLanguage.getMemberId());
-			pstmt.setString(2, programmingLanguage.getLanguageName());
-			pstmt.setString(3, programmingLanguage.getLanguageLevel());
-			pstmt.setString(4, programmingLanguage.getPublicScope());
-			pstmt.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
+			pstmt.setString(2, programmingLanguage.getLanguageName());		
+			pstmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
 			pstmt.executeUpdate();
 			this.updateSpec(programmingLanguage.getMemberId(), "PROGRAMMING_LANGUAGE", 2);
 		} catch (SQLException e) {
@@ -736,6 +733,26 @@ public class SpecDao {
 			JdbcUtil.close(pstmt, conn);
 		}		
 	}	
+	
+	//소프트웨어개발능력 전용 메소드 : 등록전 기존 내용 지우는 역활
+	public void deleteByProgrammingLanguage(String memberId) 
+	{
+		PreparedStatement pstmt = null;
+		Connection conn = null;			
+		
+		String query = "DELETE FROM PROGRAMMING_LANGUAGE";
+			   query += " WHERE MEMBER_ID = " + memberId;
+		
+		try {
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt, conn);
+		}		
+	}
 	
 	
 	
