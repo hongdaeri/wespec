@@ -229,7 +229,7 @@ public class ProfileDao {
 		Connection conn = null;	
 		
 		String query = "UPDATE PROFILE ";
-			   query += "SET PROFILE_CHI_NAME=?, PROFILE_ENG_NAME=?, PROFILE_ADDRESS =?, PROFILE_BIRTH =?, PROFILE_PHONE =?, PROFILE_EMAIL=?, PROFILE_GRADE =?, PROFILE_HIT =?, PROFILE_REG_DATE =? ";
+			   query += "SET PROFILE_CHI_NAME=?, PROFILE_ENG_NAME=?, PROFILE_ADDRESS =?, PROFILE_PHONE =?, PROFILE_EMAIL=?, PROFILE_GRADE =?, PROFILE_HIT =?, PROFILE_REG_DATE =? ";
 			   query += "WHERE MEMBER_ID = ? ";
 		
 		try {
@@ -238,14 +238,13 @@ public class ProfileDao {
 			
 			pstmt.setString(1, profile.getProfileChiName());    
 			pstmt.setString(2, profile.getProfileEngName());   
-			pstmt.setString(3, profile.getProfileAddress());    
-			pstmt.setString(4, profile.getProfileBirth());    
-			pstmt.setString(5, profile.getProfilePhone());   
-			pstmt.setString(6, profile.getProfileEmail());    
-			pstmt.setInt(7, profile.getProfileGrade());   
-			pstmt.setInt(8, profile.getHit());   
-			pstmt.setTimestamp(9, new Timestamp(System.currentTimeMillis()));
-			pstmt.setString(10, profile.getMemberId());
+			pstmt.setString(3, profile.getProfileAddress());   	   
+			pstmt.setString(4, profile.getProfilePhone());   
+			pstmt.setString(5, profile.getProfileEmail());    
+			pstmt.setInt(6, profile.getProfileGrade());   
+			pstmt.setInt(7, profile.getHit());   
+			pstmt.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
+			pstmt.setString(9, profile.getMemberId());
 			 
 			pstmt.executeUpdate();
 			
