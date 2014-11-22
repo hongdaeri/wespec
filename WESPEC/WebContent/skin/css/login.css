@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 body {
 	background: #333 !important;	
 }
@@ -8,7 +10,10 @@ body {
   margin-left:50%;
   margin-bottom: 80px;
 }
-
+a, a:hover { color:#fff;}
+span {
+	font-family: 'Nanum Gothic', sans-serif; 
+}
 .form-signin {
   z-index: 1;
   max-width: 380px;

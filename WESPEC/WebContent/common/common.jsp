@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+<%@ page import="java.net.URLDecoder" %>
 <%-- /* 각종 Path 정의 및 기본값 정의 */ --%>
 <%
 	// Basic Path 
@@ -39,6 +39,8 @@
 <%	
 	Cookie[] cookies = request.getCookies();
 	String rememberId = "";
+	String rememberName ="";
+	String rememberPhoto ="";
 	
 	if(cookies!=null)
 	{
@@ -46,6 +48,12 @@
 		{
 			if(cookies[i].getName().equals("rememberId"))
 				rememberId = cookies[i].getValue();
+			
+			if(cookies[i].getName().equals("rememberName"))
+				rememberName = URLDecoder.decode(cookies[i].getValue(),"euc-kr");
+			
+			if(cookies[i].getName().equals("rememberPhoto"))
+				rememberPhoto = cookies[i].getValue();	
 		}
 	}
 %>

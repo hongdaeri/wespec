@@ -7,14 +7,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import model.dao.ProfileDao;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -77,7 +81,7 @@ public class UploadServlet extends HttpServlet {
                 if(item.isFormField()){ //파일이 아닌경우
                     processFormField(out, item);
                 } else { //파일인 경우
-                    processUploadFile(request,out, item, contextRootPath,memberId);
+                    processUploadFile(request,out, item, contextRootPath,memberId,response);
                 }
             }  
         } catch(Exception e) {
@@ -90,7 +94,7 @@ public class UploadServlet extends HttpServlet {
     }
 
     //업로드한 정보가 파일인경우 처리
-    private void processUploadFile(HttpServletRequest request,PrintWriter out, FileItem item, String contextRootPath,String memberId) throws Exception 
+    private void processUploadFile(HttpServletRequest request,PrintWriter out, FileItem item, String contextRootPath,String memberId, HttpServletResponse response) throws Exception 
     {
 //        String name = item.getFieldName(); 			//파일의 필드 이름 얻기
         String fileName = item.getName(); 			//파일명 얻기
@@ -117,8 +121,18 @@ public class UploadServlet extends HttpServlet {
 	        // 변경된 프로필 세션에 반영
 	        HttpSession session = request.getSession();
 	        session.setAttribute("photoUrl", photoURL);
-         
-        
+	        
+	        // 변경된 프로필 사진 쿠키에 반영( 쿠키가 있을시)
+	        Cookie[] cookies = request.getCookies();
+	        if(cookies!=null)	    	
+	    		for(int i=0; i<cookies.length; i++)	    			    			
+	    			if(cookies[i].getName().equals("rememberPhoto"))
+	    			{
+	    				Cookie photoCookie = new Cookie("rememberPhoto",photoURL);
+	    				photoCookie.setMaxAge(60*60*24*365);//1년
+	    				response.addCookie(photoCookie);	
+	    		
+	    			}     
     }
     
     private void processFormField(PrintWriter out, FileItem item) throws Exception

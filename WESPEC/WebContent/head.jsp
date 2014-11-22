@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>    
 <%@ include file="/head_sub.jsp" %>
 
-
 <body>
     <header>
         <nav class="navbar navbar-default" role="navigation">

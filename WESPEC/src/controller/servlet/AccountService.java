@@ -3,8 +3,7 @@ package controller.servlet;
 import javax.servlet.annotation.WebServlet;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,7 +25,7 @@ import model.dao.SpecDao;
  * @author wespec.co.kr
  **/
 
-@WebServlet(urlPatterns = {"/login","/join", "/logout" , "/Account"})
+@WebServlet(urlPatterns = {"/login","/join", "/logout", "/delCookie", "/Account"})
 public class AccountService extends HttpServlet{	
 	private static final long serialVersionUID = -8567273307264010369L;
 	
@@ -64,7 +63,11 @@ public class AccountService extends HttpServlet{
 			else insertMember();
 			
 			nextPage = "/skin/module/join.jsp";		
-		}		
+		}
+		else if(requestURL.equals("/delCookie")) 
+		{		
+			nextPage = "/skin/module/delCookie.jsp";			
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(nextPage);
 		rd.forward(request, response);
@@ -86,27 +89,45 @@ public class AccountService extends HttpServlet{
 			
 		if( member !=null  && member.getMemberPassword().equals(memberPw))
 		{	
-				// 아이디 기억하기 기능
-				if(rememberId != null)	// 체크박스가 체크가 되어있다면 쿠키생성
-				{
-					Cookie cookie = new Cookie("rememberId",memberId);		
-					cookie.setMaxAge(60*60*24*365);//1년
-					response.addCookie(cookie);
-				}
-				else					// 체크가 되어있지 않다면 쿠키소멸
-				{
-					Cookie cookie = new Cookie("rememberId",null);		
-					cookie.setMaxAge(0);//1년
-					response.addCookie(cookie);
-				}
-				
-				
 				ProfileDao profileDao = new ProfileDao();			
 				String photoUrl = profileDao.selectBySection(memberId, "PROFILE_PHOTO_URL");
+				String profileName = profileDao.selectBySection(memberId, "PROFILE_NAME");
 				HttpSession session = request.getSession();
 				session.setAttribute("memberId",memberId);
 				session.setAttribute("memberGroup",member.getMemberGroup());
 				session.setAttribute("photoUrl", photoUrl);
+				
+				// 아이디 기억하기 기능
+				if(rememberId != null)	// 체크박스가 체크가 되어있다면 쿠키생성
+				{
+					// 아이디 기억
+					Cookie cookie = new Cookie("rememberId",memberId);		
+					cookie.setMaxAge(60*60*24*365);//1년
+					response.addCookie(cookie);
+					// 이름 기억
+					Cookie namecookie = new Cookie("rememberName",URLEncoder.encode(profileName,"euc-kr"));		
+					namecookie.setMaxAge(60*60*24*365);//1년
+					response.addCookie(namecookie);
+					// 프로필 사진 기억
+					Cookie photoCookie = new Cookie("rememberPhoto",photoUrl);
+					photoCookie.setMaxAge(60*60*24*365);//1년
+					response.addCookie(photoCookie);
+				}
+				else // 체크가 되어있지 않다면 쿠키소멸
+				{
+					Cookie cookie = new Cookie("rememberId",null);		
+					cookie.setMaxAge(0);
+					response.addCookie(cookie);
+					
+					Cookie photoCookie = new Cookie("rememberPhoto",null);		
+					photoCookie.setMaxAge(0);
+					response.addCookie(photoCookie);
+					
+					Cookie namecookie = new Cookie("rememberName",null);		
+					namecookie.setMaxAge(0);
+					response.addCookie(namecookie);
+				}
+				
 				response.sendRedirect(request.getContextPath() + "/List");
 		}
 		else 

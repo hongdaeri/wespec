@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/head.jsp" flush="false" />
 
-
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
