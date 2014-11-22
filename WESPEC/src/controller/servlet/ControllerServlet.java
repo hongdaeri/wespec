@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.vo.*;
-import model.dao.ProfileDao;
-import model.dao.SpecDao;
 
 /************************************
  * URL¸ÅÇÎ ¼­ºí¸´						*

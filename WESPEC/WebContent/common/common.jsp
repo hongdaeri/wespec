@@ -31,7 +31,7 @@
 			"Visual Basic",	"Lisp",			"PHP",				"ASP",
 			"JSP",			"C#",			"Ruby",				"HTML",
 			"Javascript",	"Node.js",		"Android",			"Oracle",
-			"Swift",		"Objective-C"
+			"Swift",		"Objective-C",  "Delphi"
 			};
 %>
 
