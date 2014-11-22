@@ -40,6 +40,7 @@ public class DeleteService extends HttpServlet{
 		SpecDao specDao = new SpecDao();
 		specDao.deleteSpec(tableName, tableNo);
 		
+		
 		response.sendRedirect(request.getContextPath()+"/Register");
 			
 	}

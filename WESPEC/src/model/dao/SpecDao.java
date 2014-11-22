@@ -345,6 +345,67 @@ public class SpecDao {
 		}		
 	}
 	
+	//주요스펙 검색
+	public String selectByMainSpec(String memberId) { 
+
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+		String mainSpec="";
+		
+		// 자격증 항목들 스펙에 추가
+		try {
+			String query = "SELECT * FROM CERTIFICATE WHERE MEMBER_ID = ? AND CERTIFICATE_SCOPE = '전체공개'";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+				mainSpec += rs.getString("CERTIFICATE_NAME") + " " + rs.getString("CERTIFICATE_GRADE") + " / ";
+		} catch (SQLException e) {			
+			e.printStackTrace();		
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn );
+		}
+		
+		
+		// 어학능력 항목들 스펙에 추가
+		try {
+			String query2 = "SELECT * FROM LANGUAGE_EXAM WHERE MEMBER_ID = ? AND LANGUAGE_EXAM_SCOPE = '전체공개'";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query2);
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();			
+			while(rs.next())		
+				mainSpec += rs.getString("LANGUAGE_EXAM_NAME") + " " + rs.getString("LANGUAGE_EXAM_GRADE") + " / ";
+		} catch (SQLException e) {			
+			e.printStackTrace();		
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn );
+		}
+		
+		
+		// 수상실적 항목들 스펙에 추가
+		try {
+			String query3 = "SELECT * FROM AWARD WHERE MEMBER_ID = ? AND AWARD_SCOPE = '전체공개'";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query3);
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();	
+			while(rs.next())
+				mainSpec += rs.getString("AWARD_SUBJECT") + " / ";
+		} catch (SQLException e) {			
+			e.printStackTrace();		
+		} 	finally {
+			JdbcUtil.close(rs, pstmt, conn );
+		}
+		
+		//마지막 '/' 지우기.
+		if(mainSpec.length()>1)
+			mainSpec = mainSpec.substring(0, mainSpec.length()-2);
+		return mainSpec;		 
+	}
+	
 	// 특정 테이블의 입력항목이 있는 회원 리스트만 추출
 	public List<String> selectHaveSpecByMemberId(List<String> members, String tableName) { 
 		
@@ -672,7 +733,7 @@ public class SpecDao {
 		}
 		
 	}
-	
+		
 	//회원가입시 필요함.
 	public void insertMember(String studentCode) 
 	{

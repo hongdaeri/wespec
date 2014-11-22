@@ -3,8 +3,6 @@ package controller.servlet;
 import javax.servlet.annotation.WebServlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -116,8 +114,6 @@ public class RegService extends HttpServlet{
 			certificate.setCertificateOrg(request.getParameter("certificateOrg"));
 			certificate.setPublicScope(request.getParameter("publicScope"));
 			certificate.setMemberId(memberId);
-			String primarySpec = certificate.getCertificateName() + " " + certificate.getCertificateGrade();
-			profileDao.updatePrimarySpec(memberId, primarySpec);
 			specDao.insert(certificate);					
 		}
 		else if(param.equals("s2"))	// 어학능력
@@ -129,8 +125,6 @@ public class RegService extends HttpServlet{
 			 language.setLanguageExamGrade(request.getParameter("languageExamGrade") + request.getParameter("languageExamGradeOption"));
 			 language.setLanguageExamOrg(request.getParameter("languageExamOrg"));
 			 language.setPublicScope(request.getParameter("publicScope"));
-			 String primarySpec = language.getLanguageExamName() + " " + language.getLanguageExamGrade();
-			 profileDao.updatePrimarySpec(memberId, primarySpec);
 			 specDao.insert(language);
 		}
 		else if(param.equals("s3")) // 수상실적
@@ -140,11 +134,7 @@ public class RegService extends HttpServlet{
 			award.setAwardDate(request.getParameter("awardDate_year") + ". " + request.getParameter("awardDate_month"));
 			award.setAwardSubject(request.getParameter("awardSubject"));
 			award.setAwardOrg(request.getParameter("awardOrg"));
-			award.setPublicScope(request.getParameter("publicScope"));
-			PrintWriter out = response.getWriter();	
-			out.print(profileDao.selectBySection(memberId, "PROFILE_PRIMARY_SPEC"));	
-			String primarySpec = award.getAwardSubject();
-			profileDao.updatePrimarySpec(memberId, primarySpec);
+			award.setPublicScope(request.getParameter("publicScope"));	
 			specDao.insert(award);
 		}
 		else if(param.equals("s4")) // 교육 및 연수
@@ -171,7 +161,6 @@ public class RegService extends HttpServlet{
 			portfolio.setPortfolioPeriod(portfolioPeriod);
 			portfolio.setPortfolioLink(request.getParameter("portfolioLink"));
 			portfolio.setPublicScope(request.getParameter("publicScope"));
-			 
 			specDao.insert(portfolio);
 		}
 		else if(param.equals("s6")) // 소프트웨어 개발 능력
