@@ -287,37 +287,30 @@
 			<div class="panel-heading">
 				<b>소프트웨어 개발 능력</b>
 			</div>
-			<!-- Table -->
+			<!-- Table -->			
 			<table class="table table-hover" ID="s6">
 				<tr>
-					<th class="col-md-2">언어(기술)명</th>
-					<th class="col-md-2">수준</th>
-					<th class="col-md-2"></th>
-					<th class="col-md-2"></th>
-					<th class="col-md-2">공개범위</th>
-					<th class="col-md-2 text-right"></th>
-				</tr>
-				<c:choose>
-					<c:when test="${ empty spec.programmingLanguages }">
-						<tr>
-							<td align="center" colspan="6">등록된 사항이 없습니다.</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var="programmingLanguage"
-							items="${spec.programmingLanguages}">
-							<tr>
-								<td class="col-md-2">${programmingLanguage.languageName}</td>
-								<td class="col-md-2">${programmingLanguage.languageLevel}</td>
-								<td class="col-md-2"></td>
-								<td class="col-md-2"></td>
-								<td class="col-md-2">${programmingLanguage.publicScope}</td>
-								<td class="col-md-2 text-right"></td>
-							</tr>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
+					<td class="col-md-11" style="padding:20px 40px;">						
+	    			   	<div class="row">
+							<c:forEach var="item" items="<%= languageList %>" varStatus="status">
+								<div class="col-md-2 col-sm-3 col-xs-4">								 
+									<input id="abl${status.index}" class="css-checkbox" disabled type="checkbox" name="ability" readonly value="${item}" 
+										<c:forEach var="pl" items="${spec.programmingLanguages}">
+											<c:if test="${pl.languageName eq item}">
+													checked  
+											</c:if>
+										</c:forEach>
+								/><label for="abl${status.index}" class="css-label">${item}</label>
+								</div>									
+							</c:forEach>
+							<script>
+							
+							</script>
+						</div>	   					
+					</td>
+				</tr>				
 			</table>
+						
 		</div>
 		<!--  section END -->
 

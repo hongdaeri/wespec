@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>    
 <%@ include file="/common/common.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="kr">
@@ -39,11 +40,11 @@
 		
 		<form class="form-signin" action="<%=rootPath %>/login" method="post">    
 		<h2 class="form-signin-heading">Welcome to Wespec<br>Please login</h2>
-			<input type="text" class="form-control" name="memberId" placeholder="Student Code" autofocus="autofocus" /><br>
+			<input type="text" class="form-control" name="memberId" placeholder="Student Code" autofocus="autofocus" value="<%=rememberId%>"/><br>
 			<input type="password" class="form-control" name="memberPw" placeholder="Password" /><br/>
 			<div class="row">
-				<div class="col-md-6"> <input type="checkbox" name="rememberId" value="rememberId"/> <abbr title="다음 접속시 아이디가 자동입력 됩니다.">Remember your ID</abbr></div>
-				<div class="col-md-6"> <input type="checkbox" name="autoLogin" value="autoLogin"/> <abbr title="다음 접속시 시스템에 자동로그인 됩니다. 개인 PC에서만 이 항목을 체크하세요.">Auto Login</abbr></div>
+				<div class="col-md-6"> <input type="checkbox" name="rememberId" value="on" <% if(rememberId.length() > 1) out.print("checked"); %>/> <abbr title="다음 접속시 아이디가 자동입력 됩니다.">Remember your ID</abbr></div>
+				<div class="col-md-6"> <input type="checkbox" name="autoLogin" value="on"/> <abbr title="다음 접속시 시스템에 자동로그인 됩니다. 개인 PC에서만 이 항목을 체크하세요.">Auto Login</abbr></div>
 			</div>
 			<br/>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>

@@ -53,7 +53,7 @@
 				<div class="modal-body">
 			        <div class="form-group">
 			    		<label for="exampleInputFile">현재 등록 사진</label><br>
-			    		<img src="${profile.profilePhotoURL}" alt="" style="max-height:400px">
+			    		<img src="${profile.profilePhotoURL}" alt="" style="max-height:350px">
 			  		</div>  	
 					<div class="form-group">
 	    				<label for="exampleInputFile">사진파일 첨부</label>

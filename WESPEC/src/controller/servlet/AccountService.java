@@ -3,8 +3,12 @@ package controller.servlet;
 import javax.servlet.annotation.WebServlet;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -75,13 +79,29 @@ public class AccountService extends HttpServlet{
 		AccountDao accountDao = new AccountDao();	
 	
 		String memberId = request.getParameter("memberId");
-		String memberPw = request.getParameter("memberPw");		
+		String memberPw = request.getParameter("memberPw");	
+		String rememberId = request.getParameter("rememberId");
+		
 		Member member = accountDao.select(memberId);
 			
 		if( member !=null  && member.getMemberPassword().equals(memberPw))
 		{	
-				ProfileDao profileDao = new ProfileDao();
-			
+				// 아이디 기억하기 기능
+				if(rememberId != null)	// 체크박스가 체크가 되어있다면 쿠키생성
+				{
+					Cookie cookie = new Cookie("rememberId",memberId);		
+					cookie.setMaxAge(60*60*24*365);//1년
+					response.addCookie(cookie);
+				}
+				else					// 체크가 되어있지 않다면 쿠키소멸
+				{
+					Cookie cookie = new Cookie("rememberId",null);		
+					cookie.setMaxAge(0);//1년
+					response.addCookie(cookie);
+				}
+				
+				
+				ProfileDao profileDao = new ProfileDao();			
 				String photoUrl = profileDao.selectBySection(memberId, "PROFILE_PHOTO_URL");
 				HttpSession session = request.getSession();
 				session.setAttribute("memberId",memberId);

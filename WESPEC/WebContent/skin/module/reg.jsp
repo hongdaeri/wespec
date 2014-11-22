@@ -2,19 +2,6 @@
 <%@ include file="/common/common.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/head.jsp" flush="false" />
-<%
-	String tooltip_year ="<strong>년도를 입력하세요 (숫자 4자리)</strong><br>예) 2014";
-	String tooltip_month ="<strong>월을 입력하세요 (숫자 2자리)</strong><br>예) 05";
-	
-	String[] languageList = {
-			"C",			"C++",			"Python",			"Java",
-			"Visual Basic",	"Lisp",			"PHP",				"ASP",
-			"JSP",			"C#",			"Ruby",				"HTML",
-			"Javascript",	"Node.js",		"Android",			"Oracle",
-			"Swift",		"Objective-C"
-			};
-	boolean languageListChk = false;
-%>
 
 
 <div class="row">
