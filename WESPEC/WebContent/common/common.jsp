@@ -35,7 +35,7 @@
 			};
 %>
 <%
-	String[] rankName = { "1st", "2nd", "3th", "4td" };
+	String[] rankName = { "1st", "2nd", "3rd", "4th", "5th" };
 %>
 <%--/* ÄíÅ°¼³Á¤ */ --%>
 <%	

@@ -1185,8 +1185,21 @@ public class SpecDao {
 		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}
 		
 		try {
+			// 선호 프로그래밍 개발능력 및 언어
+			String query = "select language_name, count(*) as 'cnt' from programming_language group by language_name ";
+			query += "ORDER BY 'cnt' DESC LIMIT 8";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.swAbilityRank.put(rs.getString(1), rs.getInt(2));
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}
+		
+		try {
 			// 소프트웨어개발능력 등록  '기술'과 '가능학생수'
-			String query = " select language_name, IFNULL(count(*),0) from programming_language group by language_name;";
+			String query = " select language_name, IFNULL(count(*),0) from programming_language group by language_name";
 			conn = JdbcUtil.getConnection(conn);
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();			

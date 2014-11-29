@@ -54,7 +54,8 @@ public class Statistics {
 	// 소프트웨어개발능력 PART
 	private double avgSwAbilityCount;									// 학생들 평균 소프트웨어능력 갯수
 	public List<Integer> distributionMap_swAbility;						// 소프트웨어개발능력 등록갯수 도표. 
-	public HashMap<String, Integer> totalRegStudentCountMap_SWAbility; // 언어명, 가능학생수
+	public HashMap<String, Integer> totalRegStudentCountMap_SWAbility; 	// 언어명, 가능학생수
+	public HashMap<String, Integer> swAbilityRank; 						// 선호 언어명, 가능학생수
 	
 	
 	// 병역 PART
@@ -93,6 +94,7 @@ public class Statistics {
 		// 소프트웨어 개발능력
 		distributionMap_swAbility = new ArrayList<Integer>();		
 		totalRegStudentCountMap_SWAbility = new HashMap<String, Integer>();
+		swAbilityRank = new HashMap<String, Integer>();
 	}
 
 	public int getTotalStudentCount() {
@@ -233,6 +235,10 @@ public class Statistics {
 
 	public HashMap<String, Integer> getTotalRegStudentCountMap_SWAbility() {
 		return totalRegStudentCountMap_SWAbility;
+	}
+
+	public HashMap<String, Integer> getSwAbilityRank() {
+		return swAbilityRank;
 	}
 
 	public int getTotalStudentCount_military() {
@@ -381,7 +387,13 @@ public class Statistics {
 		this.totalRegStudentCountMap_SWAbility = totalRegStudentCountMap_SWAbility;
 	}
 
+	public void setSwAbilityRank(HashMap<String, Integer> swAbilityRank) {
+		this.swAbilityRank = swAbilityRank;
+	}
+
 	public void setTotalStudentCount_military(int totalStudentCount_military) {
 		this.totalStudentCount_military = totalStudentCount_military;
 	}
+
+	
 }
