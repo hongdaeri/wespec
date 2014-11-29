@@ -6,11 +6,11 @@
   </welcome-file-list>
   <error-page>
     <error-code>404</error-code>
-    <location>/skin/error/error_404.jsp</location>
+    <location>/skin/module/exception/404.jsp</location>
   </error-page>
   <error-page>
     <error-code>505</error-code>
-    <location>/skin/error/error_505.jsp</location>
+    <location>/skin/module/exception/505.jsp</location>
   </error-page>
   <session-config>
     <session-timeout>180</session-timeout>

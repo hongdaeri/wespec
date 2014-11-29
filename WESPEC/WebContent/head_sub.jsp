@@ -67,9 +67,4 @@
 	    }
 	});
 	</script>
-	<script>
-	
-		
-	
-	</script>
 </head>

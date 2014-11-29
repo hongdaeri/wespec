@@ -1,63 +1,60 @@
 package model.vo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /* Statistics Value Object */
 public class Statistics {
 	
 	// 전체 PART
-	private int totalStudentCount;					// 전체학생수 (4학년제외)
-	private int totalSpecRegCount;					// 이력을 등록한 학생의 총 수
+	private int totalStudentCount;						// 전체학생수 (4학년제외)
+	private int totalSpecRegCount;						// 이력을 등록한 학생의 총 수
+	private double totalRegRatio;						// 이력등록률
 	
 	// 프로필 PART
 	
 	// 토익 PART
-	private double avgToeicScore;					// 학생들 평균 토익 점수
-	private int topmostToeicScore;					// 토익 최고 점수
-	private int totalRegStudentCount_toeic;			// 토익항목 등록학생 수
-	private String[] toeicKing;						// 토익왕 3명
-	private int[] toeicKingScore;					// 토익왕 3명의 점수
-	private int[] totalRegStudentCountGraph_toeic;	// 토익을 등록한 학생중 점수대별 도표
+	private int avgToeicScore;						 	// 학생들 평균 토익 점수
+	private int topmostToeicScore;						// 토익 최고 점수
+	private int totalRegStudentCount_toeic;				// 토익항목 등록학생 수
+	public List<String> toeicKingName;					// 토익왕 3명
+	public List<Integer> toeicKingScore;				// 토익왕 3명의 점수
+	public List<String> toeicKingId;					// 토익왕 3명의 점수
+	public List<String> toeicKingPhoto;					// 토익왕 3명의 점수
+	public List<Integer> distributionMap_toeic;			// 토익을 등록한 학생중 점수대별 도표
 	
 	// 자격증 PART
-	private double avgCertificateCount;				// 학생들 평균 자격증 갯수
-	private int totalRegStudentCount_certificate;	// 자격증항목 등록학생수
-	private String[] certificateKing;				// 자격증 왕 3명
-	private int[]  certificateKingCount;			// 자격증 왕 3명의 자격증 등록갯수
-	private int[] totalRegStudentCountGraph_certi;	// 자격증을 등록한 학생중 1개~10개까지 도표
+	private double avgCertificateCount;					// 학생들 평균 자격증 갯수
+	private int totalRegStudentCount_certificate;		// 자격증항목 등록학생수
+	public List<String> certificateKingName;			// 자격증 왕 3명의 이름
+	public List<Integer>  certificateKingCount;			// 자격증 왕 3명의 자격증 등록갯수
+	public List<String> certificateKingId;				// 자격증 왕 3명의 아이디
+	public List<String> certificateKingPhoto;			// 자격증 왕 3명의 사진
+	public List<Integer> distributionMap_certi;			// 자격증을 등록한 학생중 1개~10개까지 도표
 	
 	// 포트폴리오 PART
 	private double avgPortfolioCount;					// 학생들 평균 포트폴리오 갯수
 	private int totalRegStudentCount_portfolio;			// 포트폴리오를 등록한 학생의 수
-	private String[] portfolioKing;						// 포트폴리오 왕 3명
-	private int[] portfolioKingCount;					// 포트폴리오  왕 3명의 포트폴리오 갯수
-	private int[] totalRegStudentCountGraph_portfolio; 	// 포트폴리오를 등록한 학생중 1개~10개까지 도표
+	public List<String> portfolioKingName;				// 포트폴리오 왕 3명의 이름
+	public List<String> portfolioKingId;				// 포트폴리오 왕 3명의 아이디
+	public List<String> portfolioKingPhoto;				// 포트폴리오 왕 3명의 사진
+	public List<Integer> portfolioKingCount;			// 포트폴리오  왕 3명의 포트폴리오 갯수
+	public List<Integer> distributionMap_portfolio; 	// 포트폴리오를 등록한 학생중 1개~10개까지 도표
 
 	// 수상실적 PART
-	private double avgAwardCount;					// 학생들 평균 수상실적 갯수
-	private int totalRegStudentCount_award;			// 수상실적을 등록한 학생의 수
-	private int[] totalRegStudentCountGraph_award;	// 수상실적을 등록한 학생중 1개~10개까지 도표
+	private double avgAwardCount;						// 학생들 평균 수상실적 갯수
+	private int totalRegStudentCount_award;				// 수상실적을 등록한 학생의 수
+	public List<String> awardKingName;					// 수상실적 왕 3명의 이름
+	public List<String> awardKingId;					// 수상실적 왕 3명의 아이디
+	public List<String> awardKingPhoto;					// 수상실적 왕 3명의 사진
+	public List<Integer> awardKingCount;				// 수상실적  왕 3명의 수상실적 갯수
+	public List<Integer> distributionMap_award;			// 수상실적을 등록한 학생중 1개~10개까지 도표
 
 	// 소프트웨어개발능력 PART
-	private double avgSwAbilityCount;				// 학생들 평균 소프트웨어능력 갯수
-	private int[] totalRegStudentCountGraph_swAbility;	// 소프트웨어개발능력 등록갯수 도표. 
-	private int totalStudentCount_c;				// c언어 가능학생 수
-	private int totalStudentCount_cpp;				// c++ 가능학생 수
-	private int totalStudentCount_cSharp;			// c# 가능학생 수
-	private int totalStudentCount_python;			// 파이썬 가능학생 수
-	private int totalStudentCount_java;				// 자바 가능학생 수
-	private int totalStudentCount_jsp;				// jsp 가능학생 수 
-	private int totalStudentCount_visualBasic;		// vB 가능학생 수
-	private int totalStudentCount_lisp;				// LISP 가능학생 수
-	private int totalStudentCount_php;				// PHP가능학생 수
-	private int totalStudentCount_asp;				// ASP 가능학생 수
-	private int totalStudentCount_ruby;				// 루비 가능학생 수
-	private int totalStudentCount_html;				// html 가능학생 수
-	private int totalStudentCount_js;				// 자바스크립트 가능학생 수
-	private int totalStudentCount_nodeJs;			// nodejs 가능학생 수
-	private int totalStudentCount_android;			// 안드로이드 가능학생 수
-	private int totalStudentCount_oracle;			// 오라클 가능학생 수
-	private int totalStudentCount_swift;			// swift 가능학생 수
-	private int totalStudentCount_objectiveC;		// 오브젝트C 가능학생 수
-	private int totalStudentCount_delphi; 			// 델파이 가능학생 수
+	private double avgSwAbilityCount;									// 학생들 평균 소프트웨어능력 갯수
+	public List<Integer> distributionMap_swAbility;						// 소프트웨어개발능력 등록갯수 도표. 
+	public HashMap<String, Integer> totalRegStudentCountMap_SWAbility; // 언어명, 가능학생수
 	
 	
 	// 병역 PART
@@ -67,23 +64,35 @@ public class Statistics {
 	public Statistics()
 	{
 		// 토익
-		toeicKing = new String[3];							//3명
-		toeicKingScore = new int[3];						//3명
-		totalRegStudentCountGraph_toeic = new int[9];		// 100~900점대 
+		toeicKingId = new ArrayList<String>();
+		toeicKingName = new ArrayList<String>();
+		toeicKingPhoto = new ArrayList<String>(); 					//3명
+		toeicKingScore = new ArrayList<Integer>();					//3명
+		distributionMap_toeic= new ArrayList<Integer>();			// 100~900점대 
 		
 		//자격증
-		certificateKing = new String[3];					//3명
-		certificateKingCount = new int[3];					//3명
-		totalRegStudentCountGraph_certi = new int[11];		// 1개~10개 , 10개이상
+		certificateKingName = new ArrayList<String>();	
+		certificateKingPhoto = new ArrayList<String>();	
+		certificateKingId = new ArrayList<String>();	
+		certificateKingCount = new ArrayList<Integer>();			
+		distributionMap_certi = new ArrayList<Integer>();			
 		
 		//포트폴리오
-		portfolioKing = new String[3];						//3명
-		portfolioKingCount = new int[3];					//3명
-		totalRegStudentCountGraph_portfolio = new int[11]; 	// 1개~10개 , 10개이상
+		portfolioKingName = new ArrayList<String>();	
+		portfolioKingId = new ArrayList<String>();
+		portfolioKingPhoto = new ArrayList<String>();
+		portfolioKingCount = new ArrayList<Integer>();						
+		distributionMap_portfolio = new ArrayList<Integer>();	 	
 		
 		// 수상실적
-		totalRegStudentCountGraph_award = new int[11];		// 1개~10개 , 10개이상
-		totalRegStudentCountGraph_swAbility = new int [11];	// 1개~10개 , 10개이상	
+		awardKingName = new ArrayList<String>();
+		awardKingId = new ArrayList<String>();
+		awardKingPhoto = new ArrayList<String>();
+		awardKingCount = new ArrayList<Integer>();		
+		distributionMap_award = new ArrayList<Integer>();			
+		// 소프트웨어 개발능력
+		distributionMap_swAbility = new ArrayList<Integer>();		
+		totalRegStudentCountMap_SWAbility = new HashMap<String, Integer>();
 	}
 
 	public int getTotalStudentCount() {
@@ -94,7 +103,11 @@ public class Statistics {
 		return totalSpecRegCount;
 	}
 
-	public double getAvgToeicScore() {
+	public double getTotalRegRatio() {
+		return totalRegRatio;
+	}
+
+	public int getAvgToeicScore() {
 		return avgToeicScore;
 	}
 
@@ -106,16 +119,24 @@ public class Statistics {
 		return totalRegStudentCount_toeic;
 	}
 
-	public String[] getToeicKing() {
-		return toeicKing;
+	public List<String> getToeicKingName() {
+		return toeicKingName;
 	}
 
-	public int[] getToeicKingScore() {
+	public List<Integer> getToeicKingScore() {
 		return toeicKingScore;
 	}
 
-	public int[] getTotalRegStudentCountGraph_toeic() {
-		return totalRegStudentCountGraph_toeic;
+	public List<String> getToeicKingId() {
+		return toeicKingId;
+	}
+
+	public List<String> getToeicKingPhoto() {
+		return toeicKingPhoto;
+	}
+
+	public List<Integer> getDistributionMap_toeic() {
+		return distributionMap_toeic;
 	}
 
 	public double getAvgCertificateCount() {
@@ -126,16 +147,24 @@ public class Statistics {
 		return totalRegStudentCount_certificate;
 	}
 
-	public String[] getCertificateKing() {
-		return certificateKing;
+	public List<String> getCertificateKingName() {
+		return certificateKingName;
 	}
 
-	public int[] getCertificateKingCount() {
+	public List<Integer> getCertificateKingCount() {
 		return certificateKingCount;
 	}
 
-	public int[] getTotalRegStudentCountGraph_certi() {
-		return totalRegStudentCountGraph_certi;
+	public List<String> getCertificateKingId() {
+		return certificateKingId;
+	}
+
+	public List<String> getCertificateKingPhoto() {
+		return certificateKingPhoto;
+	}
+
+	public List<Integer> getDistributionMap_certi() {
+		return distributionMap_certi;
 	}
 
 	public double getAvgPortfolioCount() {
@@ -146,16 +175,24 @@ public class Statistics {
 		return totalRegStudentCount_portfolio;
 	}
 
-	public String[] getPortfolioKing() {
-		return portfolioKing;
+	public List<String> getPortfolioKingName() {
+		return portfolioKingName;
 	}
 
-	public int[] getPortfolioKingCount() {
+	public List<String> getPortfolioKingId() {
+		return portfolioKingId;
+	}
+
+	public List<String> getPortfolioKingPhoto() {
+		return portfolioKingPhoto;
+	}
+
+	public List<Integer> getPortfolioKingCount() {
 		return portfolioKingCount;
 	}
 
-	public int[] getTotalRegStudentCountGraph_portfolio() {
-		return totalRegStudentCountGraph_portfolio;
+	public List<Integer> getDistributionMap_portfolio() {
+		return distributionMap_portfolio;
 	}
 
 	public double getAvgAwardCount() {
@@ -166,92 +203,36 @@ public class Statistics {
 		return totalRegStudentCount_award;
 	}
 
-	public int[] getTotalRegStudentCountGraph_award() {
-		return totalRegStudentCountGraph_award;
+	public List<String> getAwardKingName() {
+		return awardKingName;
+	}
+
+	public List<String> getAwardKingId() {
+		return awardKingId;
+	}
+
+	public List<String> getAwardKingPhoto() {
+		return awardKingPhoto;
+	}
+
+	public List<Integer> getAwardKingCount() {
+		return awardKingCount;
+	}
+
+	public List<Integer> getDistributionMap_award() {
+		return distributionMap_award;
 	}
 
 	public double getAvgSwAbilityCount() {
 		return avgSwAbilityCount;
 	}
 
-	public int[] getTotalRegStudentCountGraph_swAbility() {
-		return totalRegStudentCountGraph_swAbility;
+	public List<Integer> getDistributionMap_swAbility() {
+		return distributionMap_swAbility;
 	}
 
-	public int getTotalStudentCount_c() {
-		return totalStudentCount_c;
-	}
-
-	public int getTotalStudentCount_cpp() {
-		return totalStudentCount_cpp;
-	}
-
-	public int getTotalStudentCount_cSharp() {
-		return totalStudentCount_cSharp;
-	}
-
-	public int getTotalStudentCount_python() {
-		return totalStudentCount_python;
-	}
-
-	public int getTotalStudentCount_java() {
-		return totalStudentCount_java;
-	}
-
-	public int getTotalStudentCount_jsp() {
-		return totalStudentCount_jsp;
-	}
-
-	public int getTotalStudentCount_visualBasic() {
-		return totalStudentCount_visualBasic;
-	}
-
-	public int getTotalStudentCount_lisp() {
-		return totalStudentCount_lisp;
-	}
-
-	public int getTotalStudentCount_php() {
-		return totalStudentCount_php;
-	}
-
-	public int getTotalStudentCount_asp() {
-		return totalStudentCount_asp;
-	}
-
-	public int getTotalStudentCount_ruby() {
-		return totalStudentCount_ruby;
-	}
-
-	public int getTotalStudentCount_html() {
-		return totalStudentCount_html;
-	}
-
-	public int getTotalStudentCount_js() {
-		return totalStudentCount_js;
-	}
-
-	public int getTotalStudentCount_nodeJs() {
-		return totalStudentCount_nodeJs;
-	}
-
-	public int getTotalStudentCount_android() {
-		return totalStudentCount_android;
-	}
-
-	public int getTotalStudentCount_oracle() {
-		return totalStudentCount_oracle;
-	}
-
-	public int getTotalStudentCount_swift() {
-		return totalStudentCount_swift;
-	}
-
-	public int getTotalStudentCount_objectiveC() {
-		return totalStudentCount_objectiveC;
-	}
-
-	public int getTotalStudentCount_delphi() {
-		return totalStudentCount_delphi;
+	public HashMap<String, Integer> getTotalRegStudentCountMap_SWAbility() {
+		return totalRegStudentCountMap_SWAbility;
 	}
 
 	public int getTotalStudentCount_military() {
@@ -266,7 +247,11 @@ public class Statistics {
 		this.totalSpecRegCount = totalSpecRegCount;
 	}
 
-	public void setAvgToeicScore(double avgToeicScore) {
+	public void setTotalRegRatio(double totalRegRatio) {
+		this.totalRegRatio = totalRegRatio;
+	}
+
+	public void setAvgToeicScore(int avgToeicScore) {
 		this.avgToeicScore = avgToeicScore;
 	}
 
@@ -278,17 +263,24 @@ public class Statistics {
 		this.totalRegStudentCount_toeic = totalRegStudentCount_toeic;
 	}
 
-	public void setToeicKing(String[] toeicKing) {
-		this.toeicKing = toeicKing;
+	public void setToeicKingName(List<String> toeicKingName) {
+		this.toeicKingName = toeicKingName;
 	}
 
-	public void setToeicKingScore(int[] toeicKingScore) {
+	public void setToeicKingScore(List<Integer> toeicKingScore) {
 		this.toeicKingScore = toeicKingScore;
 	}
 
-	public void setTotalRegStudentCountGraph_toeic(
-			int[] totalRegStudentCountGraph_toeic) {
-		this.totalRegStudentCountGraph_toeic = totalRegStudentCountGraph_toeic;
+	public void setToeicKingId(List<String> toeicKingId) {
+		this.toeicKingId = toeicKingId;
+	}
+
+	public void setToeicKingPhoto(List<String> toeicKingPhoto) {
+		this.toeicKingPhoto = toeicKingPhoto;
+	}
+
+	public void setDistributionMap_toeic(List<Integer> distributionMap_toeic) {
+		this.distributionMap_toeic = distributionMap_toeic;
 	}
 
 	public void setAvgCertificateCount(double avgCertificateCount) {
@@ -300,17 +292,24 @@ public class Statistics {
 		this.totalRegStudentCount_certificate = totalRegStudentCount_certificate;
 	}
 
-	public void setCertificateKing(String[] certificateKing) {
-		this.certificateKing = certificateKing;
+	public void setCertificateKingName(List<String> certificateKingName) {
+		this.certificateKingName = certificateKingName;
 	}
 
-	public void setCertificateKingCount(int[] certificateKingCount) {
+	public void setCertificateKingCount(List<Integer> certificateKingCount) {
 		this.certificateKingCount = certificateKingCount;
 	}
 
-	public void setTotalRegStudentCountGraph_certi(
-			int[] totalRegStudentCountGraph_certi) {
-		this.totalRegStudentCountGraph_certi = totalRegStudentCountGraph_certi;
+	public void setCertificateKingId(List<String> certificateKingId) {
+		this.certificateKingId = certificateKingId;
+	}
+
+	public void setCertificateKingPhoto(List<String> certificateKingPhoto) {
+		this.certificateKingPhoto = certificateKingPhoto;
+	}
+
+	public void setDistributionMap_certi(List<Integer> distributionMap_certi) {
+		this.distributionMap_certi = distributionMap_certi;
 	}
 
 	public void setAvgPortfolioCount(double avgPortfolioCount) {
@@ -321,17 +320,24 @@ public class Statistics {
 		this.totalRegStudentCount_portfolio = totalRegStudentCount_portfolio;
 	}
 
-	public void setPortfolioKing(String[] portfolioKing) {
-		this.portfolioKing = portfolioKing;
+	public void setPortfolioKingName(List<String> portfolioKingName) {
+		this.portfolioKingName = portfolioKingName;
 	}
 
-	public void setPortfolioKingCount(int[] portfolioKingCount) {
+	public void setPortfolioKingId(List<String> portfolioKingId) {
+		this.portfolioKingId = portfolioKingId;
+	}
+
+	public void setPortfolioKingPhoto(List<String> portfolioKingPhoto) {
+		this.portfolioKingPhoto = portfolioKingPhoto;
+	}
+
+	public void setPortfolioKingCount(List<Integer> portfolioKingCount) {
 		this.portfolioKingCount = portfolioKingCount;
 	}
 
-	public void setTotalRegStudentCountGraph_portfolio(
-			int[] totalRegStudentCountGraph_portfolio) {
-		this.totalRegStudentCountGraph_portfolio = totalRegStudentCountGraph_portfolio;
+	public void setDistributionMap_portfolio(List<Integer> distributionMap_portfolio) {
+		this.distributionMap_portfolio = distributionMap_portfolio;
 	}
 
 	public void setAvgAwardCount(double avgAwardCount) {
@@ -342,97 +348,40 @@ public class Statistics {
 		this.totalRegStudentCount_award = totalRegStudentCount_award;
 	}
 
-	public void setTotalRegStudentCountGraph_award(
-			int[] totalRegStudentCountGraph_award) {
-		this.totalRegStudentCountGraph_award = totalRegStudentCountGraph_award;
+	public void setAwardKingName(List<String> awardKingName) {
+		this.awardKingName = awardKingName;
+	}
+
+	public void setAwardKingId(List<String> awardKingId) {
+		this.awardKingId = awardKingId;
+	}
+
+	public void setAwardKingPhoto(List<String> awardKingPhoto) {
+		this.awardKingPhoto = awardKingPhoto;
+	}
+
+	public void setAwardKingCount(List<Integer> awardKingCount) {
+		this.awardKingCount = awardKingCount;
+	}
+
+	public void setDistributionMap_award(List<Integer> distributionMap_award) {
+		this.distributionMap_award = distributionMap_award;
 	}
 
 	public void setAvgSwAbilityCount(double avgSwAbilityCount) {
 		this.avgSwAbilityCount = avgSwAbilityCount;
 	}
 
-	public void setTotalRegStudentCountGraph_swAbility(
-			int[] totalRegStudentCountGraph_swAbility) {
-		this.totalRegStudentCountGraph_swAbility = totalRegStudentCountGraph_swAbility;
+	public void setDistributionMap_swAbility(List<Integer> distributionMap_swAbility) {
+		this.distributionMap_swAbility = distributionMap_swAbility;
 	}
 
-	public void setTotalStudentCount_c(int totalStudentCount_c) {
-		this.totalStudentCount_c = totalStudentCount_c;
-	}
-
-	public void setTotalStudentCount_cpp(int totalStudentCount_cpp) {
-		this.totalStudentCount_cpp = totalStudentCount_cpp;
-	}
-
-	public void setTotalStudentCount_cSharp(int totalStudentCount_cSharp) {
-		this.totalStudentCount_cSharp = totalStudentCount_cSharp;
-	}
-
-	public void setTotalStudentCount_python(int totalStudentCount_python) {
-		this.totalStudentCount_python = totalStudentCount_python;
-	}
-
-	public void setTotalStudentCount_java(int totalStudentCount_java) {
-		this.totalStudentCount_java = totalStudentCount_java;
-	}
-
-	public void setTotalStudentCount_jsp(int totalStudentCount_jsp) {
-		this.totalStudentCount_jsp = totalStudentCount_jsp;
-	}
-
-	public void setTotalStudentCount_visualBasic(int totalStudentCount_visualBasic) {
-		this.totalStudentCount_visualBasic = totalStudentCount_visualBasic;
-	}
-
-	public void setTotalStudentCount_lisp(int totalStudentCount_lisp) {
-		this.totalStudentCount_lisp = totalStudentCount_lisp;
-	}
-
-	public void setTotalStudentCount_php(int totalStudentCount_php) {
-		this.totalStudentCount_php = totalStudentCount_php;
-	}
-
-	public void setTotalStudentCount_asp(int totalStudentCount_asp) {
-		this.totalStudentCount_asp = totalStudentCount_asp;
-	}
-
-	public void setTotalStudentCount_ruby(int totalStudentCount_ruby) {
-		this.totalStudentCount_ruby = totalStudentCount_ruby;
-	}
-
-	public void setTotalStudentCount_html(int totalStudentCount_html) {
-		this.totalStudentCount_html = totalStudentCount_html;
-	}
-
-	public void setTotalStudentCount_js(int totalStudentCount_js) {
-		this.totalStudentCount_js = totalStudentCount_js;
-	}
-
-	public void setTotalStudentCount_nodeJs(int totalStudentCount_nodeJs) {
-		this.totalStudentCount_nodeJs = totalStudentCount_nodeJs;
-	}
-
-	public void setTotalStudentCount_android(int totalStudentCount_android) {
-		this.totalStudentCount_android = totalStudentCount_android;
-	}
-
-	public void setTotalStudentCount_oracle(int totalStudentCount_oracle) {
-		this.totalStudentCount_oracle = totalStudentCount_oracle;
-	}
-
-	public void setTotalStudentCount_swift(int totalStudentCount_swift) {
-		this.totalStudentCount_swift = totalStudentCount_swift;
-	}
-
-	public void setTotalStudentCount_objectiveC(int totalStudentCount_objectiveC) {
-		this.totalStudentCount_objectiveC = totalStudentCount_objectiveC;
-	}
-
-	public void setTotalStudentCount_delphi(int totalStudentCount_delphi) {
-		this.totalStudentCount_delphi = totalStudentCount_delphi;
+	public void setTotalRegStudentCountMap_SWAbility(
+			HashMap<String, Integer> totalRegStudentCountMap_SWAbility) {
+		this.totalRegStudentCountMap_SWAbility = totalRegStudentCountMap_SWAbility;
 	}
 
 	public void setTotalStudentCount_military(int totalStudentCount_military) {
 		this.totalStudentCount_military = totalStudentCount_military;
-	}	
+	}
 }

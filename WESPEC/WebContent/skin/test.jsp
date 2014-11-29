@@ -1,118 +1,146 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ include file="/common/common.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/head.jsp" flush="false" />
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+<%@ page import ="model.vo.Statistics" %><jsp:include page="/head.jsp" flush="false" />
+<%
+	Statistics statis = (Statistics)request.getAttribute("statistics");
 
-
+%>
 <style>
 
-#myCarousel .nav a small {
-	display:block;
+body {
+    padding: 30px 0px 60px;
 }
-#myCarousel .nav {
-	background:#eee;
+.panel > .list-group .list-group-item:first-child {
+    /*border-top: 1px solid rgb(204, 204, 204);*/
 }
-#myCarousel .nav a {
-	border-radius: 0px;
+@media (max-width: 767px) {
+    .visible-xs {
+        display: inline-block !important;
+    }
+    .block {
+        display: block !important;
+        width: 100%;
+        height: 1px !important;
+    }
+}
+#back-to-bootsnipp {
+    position: fixed;
+    top: 10px; right: 10px;
+}
+
+
+.c-search > .form-control {
+   border-radius: 0px;
+   border-width: 0px;
+   border-bottom-width: 1px;
+   font-size: 1.3em;
+   padding: 12px 12px;
+   height: 44px;
+   outline: none !important;
+}
+.c-search > .form-control:focus {
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none;
+}
+.c-search > .input-group-btn .btn {
+   border-radius: 0px;
+   border-width: 0px;
+   border-left-width: 1px;
+   border-bottom-width: 1px;
+   height: 44px;
+}
+
+
+.c-list {
+    padding: 0px;
+    min-height: 44px;
+}
+.title {
+    display: inline-block;
+    font-size: 1.7em;
+    font-weight: bold;
+    padding: 5px 15px;
+}
+ul.c-controls {
+    list-style: none;
+    margin: 0px;
+    min-height: 44px;
+}
+
+ul.c-controls li {
+    margin-top: 8px;
+    float: left;
+}
+
+ul.c-controls li a {
+    font-size: 1.7em;
+    padding: 11px 10px 6px;   
+}
+ul.c-controls li a i {
+    min-width: 24px;
+    text-align: center;
+}
+
+ul.c-controls li a:hover {
+    background-color: rgba(51, 51, 51, 0.2);
+}
+
+.c-toggle {
+    font-size: 1.7em;
+}
+
+.name {
+    font-size: 1.7em;
+    font-weight: 700;
+}
+
+.c-info {
+    padding: 5px 10px;
+    font-size: 1.25em;
 }
 </style>
+  
+  
 
-</head>
 
-<body>
 
-<!-- REMOVE Analytics Code -->
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-950065-32']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-<!-- Analytics Code -->
-<div class="container">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner">
-      
-        <div class="item active">
-          <img src="http://placehold.it/1200x440/cccccc/ffffff">
-           <div class="carousel-caption">
-            <h3>Headline</h3>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-          </div>
-        </div><!-- End Item -->
+            <div class="panel panel-default">
+                <div class="panel-heading c-list">
+                    <span class="title">Contacts</span>                   
+               </div>   
+                <ul class="list-group" id="contact-list">
+                    <li class="list-group-item">
+                        <div class="col-xs-12 col-sm-3">
+                            <img src="<%=request.getContextPath()%>/<%=statis.getToeicKingPhoto().get(0)%>" style="max-height:70px">
+                        </div>
+                        <div class="col-xs-12 col-sm-9">
+                            <span class="name">Scott Stevens</span><br/>
+                            
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="col-xs-12 col-sm-3">
+                           <img src="<%=request.getContextPath()%>/<%=statis.getToeicKingPhoto().get(0)%>" style="max-height:70px">
+                        </div>
+                        <div class="col-xs-12 col-sm-9">
+                            <span class="name">홍바울</span><br/>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="col-xs-12 col-sm-3">
+                            <img src="<%=request.getContextPath()%>/<%=statis.getToeicKingPhoto().get(0)%>" style="max-height:70px">
+                        </div>
+                        <div class="col-xs-12 col-sm-9">
+                            <span class="name">황태연</span><br/>                            
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>                    
+                </ul>
+            </div>
+  
  
-         <div class="item">
-          <img src="http://placehold.it/1200x440/999999/cccccc">
-           <div class="carousel-caption">
-            <h3>Headline</h3>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-          </div>
-        </div><!-- End Item -->
-        
-        <div class="item">
-          <img src="http://placehold.it/1200x440/dddddd/333333">
-           <div class="carousel-caption">
-            <h3>Headline</h3>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-          </div>
-        </div><!-- End Item -->
-        
-        <div class="item">
-          <img src="http://placehold.it/1200x440/999999/cccccc">
-           <div class="carousel-caption">
-            <h3>Headline</h3>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-          </div>
-        </div><!-- End Item -->
-                
-      </div><!-- End Carousel Inner -->
-
-
-		<ul class="nav nav-pills nav-justified">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">About<small>Lorem ipsum dolor sit</small></a></li>
-          <li data-target="#myCarousel" data-slide-to="1"><a href="#">Projects<small>Lorem ipsum dolor sit</small></a></li>
-          <li data-target="#myCarousel" data-slide-to="2"><a href="#">Portfolio<small>Lorem ipsum dolor sit</small></a></li>
-          <li data-target="#myCarousel" data-slide-to="3"><a href="#">Services<small>Lorem ipsum dolor sit</small></a></li>
-        </ul>
-
-
-    </div><!-- End Carousel -->
-</div>
-<script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script>
-	$('#myCarousel').carousel({
-		interval:   4000
-	});
-	
-	var clickEvent = false;
-	$('#myCarousel').on('click', '.nav a', function() {
-			clickEvent = true;
-			$('.nav li').removeClass('active');
-			$(this).parent().addClass('active');		
-	}).on('slid.bs.carousel', function(e) {
-		if(!clickEvent) {
-			var count = $('.nav').children().length -1;
-			var current = $('.nav li.active');
-			current.removeClass('active').next().addClass('active');
-			var id = parseInt(current.data('slide-to'));
-			if(count == id) {
-				$('.nav li').first().addClass('active');	
-			}
-		}
-		clickEvent = false;
-	});
-</script>
-</body>
-</html>
+    

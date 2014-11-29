@@ -23,7 +23,7 @@
                  <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">통계 서비스</a></li>
+                    <li><a href="<%=request.getContextPath()%>/Statistics">통계 서비스</a></li>
                     <li><a href="#">출력 서비스 </a></li>
                     <li><a href="#">Administrator</a></li>
                     <li class="divider"></li> <!-- 경계선 -->
@@ -138,11 +138,12 @@
 								<button type="button" class="btn btn-lg btn-block" onClick="submit();" style="background:#444; color:#fff;">DETAIL<br>SEARCH</button>
 							</div>
 						</div>																	  		
-					</div>	
-					<div class="alert  alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		  				<strong>Tip!</strong> 상세검색은 프로필/이력을 등록한 학생에 한하여 검색됩니다.
-					</div>														   					   		
+					</div>
+					<div class="alert alert-purple alert-dismissable">
+               			<span class="glyphicon glyphicon-certificate"></span>
+               			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+               			<strong>Tip!</strong> 상세검색은 프로필/이력을 등록한 학생에 한하여 검색됩니다.
+               		</div>														   					   		
 				</div>				
 			 </div>
 			</form>

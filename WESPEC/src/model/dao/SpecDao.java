@@ -7,9 +7,11 @@ import java.util.List;
 import jdbc.util.JdbcUtil;
 import model.vo.spec.*;
 import model.vo.Spec;
+import model.vo.Statistics;
 public class SpecDao {		
 	
 	private Spec spec = null;
+
 	
 	/********************************************************************************
 	 *																				* 
@@ -877,4 +879,345 @@ public class SpecDao {
 		return subQuery;
 	}
 	
+	
+	
+	/********************************************************************************
+	 *																				* 
+	 *																				*  
+	 * 																				* 
+	 * 						       STATISTICS PART									* 
+	 *																				* 
+	 * 																				* 
+	 ********************************************************************************/
+	
+	// 전체 PART
+	public Statistics statisticsPart_All(Statistics statis) { 
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+				
+		// 전체학생수 , 이력등록된 전체 학생수 뽑기.
+		String query = "SELECT COUNT(*), COUNT(SPEC_LAST_CHANGE_DATE) FROM SPEC;";
+		
+		try {
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.setTotalStudentCount(rs.getInt(1));	
+				statis.setTotalSpecRegCount(rs.getInt(2));	
+				statis.setTotalRegRatio((double)((int)((double)rs.getInt(2)/(double)rs.getInt(1)*1000))/10);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn );
+		}
+		return statis;		
+	}
+
+	// 토익 PART
+	public Statistics statisticsPart_TOEIC(Statistics statis) { 
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;	
+	
+		try {
+			// 토익 평균점수, 최고점수 , 토익 등록학생수
+			String query = "SELECT AVG(LANGUAGE_EXAM_GRADE), MAX(LANGUAGE_EXAM_GRADE), COUNT(LANGUAGE_EXAM_GRADE) ";
+			query += "FROM LANGUAGE_EXAM WHERE LANGUAGE_EXAM_NAME = '토익'";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.setAvgToeicScore((int)Math.round(rs.getDouble(1)));
+				statis.setTopmostToeicScore(rs.getInt(2));
+				statis.setTotalRegStudentCount_toeic(rs.getInt(3));
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}
+		
+		try {
+			// 토익왕  3명.
+			String query = "SELECT LANGUAGE_EXAM.MEMBER_ID, PROFILE.PROFILE_NAME, PROFILE.PROFILE_PHOTO_URL, LANGUAGE_EXAM_GRADE FROM LANGUAGE_EXAM , PROFILE  ";
+			query +="WHERE LANGUAGE_EXAM.MEMBER_ID = PROFILE.MEMBER_ID AND LANGUAGE_EXAM_NAME ='토익'  ";
+			query +="GROUP BY LANGUAGE_EXAM.MEMBER_ID ORDER BY LANGUAGE_EXAM_GRADE DESC LIMIT 3";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.toeicKingId.add(rs.getString(1));
+				statis.toeicKingName.add(rs.getString(2));
+				statis.toeicKingPhoto.add(rs.getString(3));
+				statis.toeicKingScore.add(rs.getInt(4));
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}
+		
+		//100점대 부터 900점대까지
+		for(int i=1; i<10; i++) {
+			try {
+				// 토익 분포 도표
+				String query = "SELECT COUNT(LANGUAGE_EXAM_GRADE) FROM LANGUAGE_EXAM ";
+				query += "WHERE LANGUAGE_EXAM_NAME = '토익' AND LANGUAGE_EXAM_GRADE LIKE  ";
+				query += "'" + i +"%'";
+	
+				conn = JdbcUtil.getConnection(conn);
+				pstmt = conn.prepareStatement(query);
+				rs = pstmt.executeQuery();			
+				while(rs.next())
+				{	
+					statis.distributionMap_toeic.add(rs.getInt(1));
+				}		
+			} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}
+		}			
+		return statis;		
+	}
+	
+	// 자격증 PART
+	public Statistics statisticsPart_CERTIFICATE(Statistics statis) { 		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;		
+		try {
+			// 자격증 등록 학생수, 평균 자격증 갯수.
+			String query = "select count(distinct member_id), count(*) from  certificate";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.setTotalRegStudentCount_certificate(rs.getInt(1));
+				statis.setAvgCertificateCount((double)rs.getInt(2) / (double)rs.getInt(1));
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}
+		
+		try {
+			// 자격증 왕  3명.
+			String query = "SELECT CERTIFICATE.MEMBER_ID, PROFILE.PROFILE_NAME, PROFILE.PROFILE_PHOTO_URL, COUNT(*) FROM CERTIFICATE, PROFILE  ";
+			query +="WHERE CERTIFICATE.member_id = PROFILE.member_id ";
+			query +="GROUP BY CERTIFICATE.member_id ORDER BY COUNT(*) DESC LIMIT 3";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.certificateKingId.add(rs.getString(1));
+				statis.certificateKingName.add(rs.getString(2));
+				statis.certificateKingPhoto.add(rs.getString(3));
+				statis.certificateKingCount.add(rs.getInt(4));
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}
+		
+		
+		try {
+			//1개 부터 10개이상까지 자격증 분포 도표
+			String query = "SELECT SUM(CASE cnt WHEN 1 THEN cnt_cnt END) AS '항목 1개 회원수' , SUM(CASE cnt WHEN 2 THEN cnt_cnt END) AS '항목 2개 회원수', SUM(CASE cnt WHEN 3 THEN cnt_cnt END) AS '항목 3개 회원수', SUM(CASE cnt WHEN 4 THEN cnt_cnt END) AS '항목 4개 회원수', SUM(CASE cnt WHEN 5 THEN cnt_cnt END) AS '항목 5개 회원수', SUM(CASE cnt WHEN 6 THEN cnt_cnt END) AS '항목 6개 회원수', SUM(CASE cnt WHEN 7 THEN cnt_cnt END) AS '항목 7개 회원수', SUM(CASE cnt WHEN 8 THEN cnt_cnt END) AS '항목 8개 회원수', SUM(CASE cnt WHEN 9 THEN cnt_cnt END) AS '항목 9개 회원수', SUM(CASE WHEN cnt > 9 THEN cnt_cnt END) AS '항목 10개 이상 회원수' FROM (SELECT cnt, IFNULL(COUNT(*), 0) AS cnt_cnt FROM (SELECT COUNT(*) AS cnt ";
+			query += "FROM CERTIFICATE GROUP BY MEMBER_ID) c1 GROUP BY cnt) c2;";
+
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.distributionMap_certi.add(rs.getInt(1));	 	//항목이 1개인 학생수
+				statis.distributionMap_certi.add(rs.getInt(2));	 	//항목이 2개인 학생수
+				statis.distributionMap_certi.add(rs.getInt(3));	 	//항목이 3개인 학생수
+				statis.distributionMap_certi.add(rs.getInt(4));	 	//항목이 4개인 학생수
+				statis.distributionMap_certi.add(rs.getInt(5));	 	//항목이 5개인 학생수
+				statis.distributionMap_certi.add(rs.getInt(6));	 	//항목이 6개인 학생수
+				statis.distributionMap_certi.add(rs.getInt(7));	 	//항목이 7개인 학생수
+				statis.distributionMap_certi.add(rs.getInt(8));	 	//항목이 8개인 학생수
+				statis.distributionMap_certi.add(rs.getInt(9));	 	//항목이 9개인 학생수
+				statis.distributionMap_certi.add(rs.getInt(10));	//항목이 10개이상 학생수
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}		
+		return statis;
+	}
+	
+	
+	
+	// 포트폴리오 PART
+	public Statistics statisticsPart_PORTFOLIO(Statistics statis) { 			
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;	
+	
+		try {
+			// 포트폴리오 등록 학생수,포트폴리오 평균갯수.
+			String query = "select count(distinct member_id), count(*) from  PORTFOLIO";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.setTotalRegStudentCount_portfolio(rs.getInt(1));
+				statis.setAvgPortfolioCount((double)rs.getInt(2) / (double)rs.getInt(1));
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}
+		
+		try {
+			// 포트폴리오 왕  3명.
+			String query = "SELECT portfolio.MEMBER_ID, PROFILE.PROFILE_NAME, PROFILE.PROFILE_PHOTO_URL, COUNT(*) FROM portfolio, PROFILE   ";
+			query +="WHERE PORTFOLIO.member_id = PROFILE.member_id ";
+			query +="GROUP BY PORTFOLIO.member_id ORDER BY COUNT(*) DESC LIMIT 3";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.portfolioKingId.add(rs.getString(1));
+				statis.portfolioKingName.add(rs.getString(2));
+				statis.portfolioKingPhoto.add(rs.getString(3));
+				statis.portfolioKingCount.add(rs.getInt(4));
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}
+		
+		try {
+			//1개 부터 10개이상까지 포트폴리오 분포 도표
+			String query = "SELECT SUM(CASE cnt WHEN 1 THEN cnt_cnt END) AS '항목 1개 회원수' , SUM(CASE cnt WHEN 2 THEN cnt_cnt END) AS '항목 2개 회원수', SUM(CASE cnt WHEN 3 THEN cnt_cnt END) AS '항목 3개 회원수', SUM(CASE cnt WHEN 4 THEN cnt_cnt END) AS '항목 4개 회원수', SUM(CASE cnt WHEN 5 THEN cnt_cnt END) AS '항목 5개 회원수', SUM(CASE cnt WHEN 6 THEN cnt_cnt END) AS '항목 6개 회원수', SUM(CASE cnt WHEN 7 THEN cnt_cnt END) AS '항목 7개 회원수', SUM(CASE cnt WHEN 8 THEN cnt_cnt END) AS '항목 8개 회원수', SUM(CASE cnt WHEN 9 THEN cnt_cnt END) AS '항목 9개 회원수', SUM(CASE WHEN cnt > 9 THEN cnt_cnt END) AS '항목 10개 이상 회원수' FROM (SELECT cnt, IFNULL(COUNT(*), 0) AS cnt_cnt FROM (SELECT COUNT(*) AS cnt ";
+			query += "FROM PORTFOLIO GROUP BY MEMBER_ID) c1 GROUP BY cnt) c2;";
+
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.distributionMap_portfolio.add(rs.getInt(1));	 	//항목이 1개인 학생수
+				statis.distributionMap_portfolio.add(rs.getInt(2));	 	//항목이 2개인 학생수
+				statis.distributionMap_portfolio.add(rs.getInt(3));	 	//항목이 3개인 학생수
+				statis.distributionMap_portfolio.add(rs.getInt(4));	 	//항목이 4개인 학생수
+				statis.distributionMap_portfolio.add(rs.getInt(5));	 	//항목이 5개인 학생수
+				statis.distributionMap_portfolio.add(rs.getInt(6));	 	//항목이 6개인 학생수
+				statis.distributionMap_portfolio.add(rs.getInt(7));	 	//항목이 7개인 학생수
+				statis.distributionMap_portfolio.add(rs.getInt(8));	 	//항목이 8개인 학생수
+				statis.distributionMap_portfolio.add(rs.getInt(9));	 	//항목이 9개인 학생수
+				statis.distributionMap_portfolio.add(rs.getInt(10));	//항목이 10개이상 학생수
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}		
+		return statis;
+	}
+	
+	
+	// 수상실적 PART
+	public Statistics statisticsPart_AWARD(Statistics statis) { 			
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;	
+	
+		try {
+			// 수상실적 등록 학생수,수상실적 평균갯수.
+			String query = "select count(distinct member_id), count(*) from  AWARD";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.setTotalRegStudentCount_award(rs.getInt(1));
+				statis.setAvgAwardCount((double)rs.getInt(2) / (double)rs.getInt(1));
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}
+		
+		try {
+			// 수상실적 왕  3명.
+			String query = "SELECT AWARD.MEMBER_ID, PROFILE.PROFILE_NAME, PROFILE.PROFILE_PHOTO_URL, COUNT(*) FROM AWARD, PROFILE  ";
+			query +="WHERE AWARD.member_id = PROFILE.member_id ";
+			query +="GROUP BY AWARD.member_id ORDER BY COUNT(*) DESC LIMIT 3";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.awardKingId.add(rs.getString(1));
+				statis.awardKingName.add(rs.getString(2));
+				statis.awardKingPhoto.add(rs.getString(3));
+				statis.awardKingCount.add(rs.getInt(4));
+		
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}
+		
+		try {
+			//1개 부터 10개이상까지 수상실적 분포 도표
+			String query = "SELECT SUM(CASE cnt WHEN 1 THEN cnt_cnt END) AS '항목 1개 회원수' , SUM(CASE cnt WHEN 2 THEN cnt_cnt END) AS '항목 2개 회원수', SUM(CASE cnt WHEN 3 THEN cnt_cnt END) AS '항목 3개 회원수', SUM(CASE cnt WHEN 4 THEN cnt_cnt END) AS '항목 4개 회원수', SUM(CASE cnt WHEN 5 THEN cnt_cnt END) AS '항목 5개 회원수', SUM(CASE cnt WHEN 6 THEN cnt_cnt END) AS '항목 6개 회원수', SUM(CASE cnt WHEN 7 THEN cnt_cnt END) AS '항목 7개 회원수', SUM(CASE cnt WHEN 8 THEN cnt_cnt END) AS '항목 8개 회원수', SUM(CASE cnt WHEN 9 THEN cnt_cnt END) AS '항목 9개 회원수', SUM(CASE WHEN cnt > 9 THEN cnt_cnt END) AS '항목 10개 이상 회원수' FROM (SELECT cnt, IFNULL(COUNT(*), 0) AS cnt_cnt FROM (SELECT COUNT(*) AS cnt ";
+			query += "FROM AWARD GROUP BY MEMBER_ID) c1 GROUP BY cnt) c2;";
+
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.distributionMap_award.add(rs.getInt(1));	 	//항목이 1개인 학생수
+				statis.distributionMap_award.add(rs.getInt(2));	 	//항목이 2개인 학생수
+				statis.distributionMap_award.add(rs.getInt(3));	 	//항목이 3개인 학생수
+				statis.distributionMap_award.add(rs.getInt(4));	 	//항목이 4개인 학생수
+				statis.distributionMap_award.add(rs.getInt(5));	 	//항목이 5개인 학생수
+				statis.distributionMap_award.add(rs.getInt(6));	 	//항목이 6개인 학생수
+				statis.distributionMap_award.add(rs.getInt(7));	 	//항목이 7개인 학생수
+				statis.distributionMap_award.add(rs.getInt(8));	 	//항목이 8개인 학생수
+				statis.distributionMap_award.add(rs.getInt(9));	 	//항목이 9개인 학생수
+				statis.distributionMap_award.add(rs.getInt(10));	//항목이 10개이상 학생수
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}		
+		return statis;
+	}
+	
+	
+	// 소프트웨어 개발 능력 PART
+	public Statistics statisticsPart_SWAbility(Statistics statis) { 			
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;	
+	
+		try {
+			// 소프트웨어개발능력 평균 갯수
+			String query = "select count(distinct member_id), count(*) from  programming_language";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.setAvgSwAbilityCount((double)rs.getInt(2) / (double)rs.getInt(1));
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}
+		
+		try {
+			// 소프트웨어개발능력 등록  '기술'과 '가능학생수'
+			String query = " select language_name, IFNULL(count(*),0) from programming_language group by language_name;";
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.totalRegStudentCountMap_SWAbility.put(rs.getString(1), rs.getInt(2));
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}
+		
+		try {
+			//1개 부터 10개이상까지 소프트웨어개발능력 등록 분포 도표
+			String query = "SELECT SUM(CASE cnt WHEN 1 THEN cnt_cnt END) AS '항목 1개 회원수' , SUM(CASE cnt WHEN 2 THEN cnt_cnt END) AS '항목 2개 회원수', SUM(CASE cnt WHEN 3 THEN cnt_cnt END) AS '항목 3개 회원수', SUM(CASE cnt WHEN 4 THEN cnt_cnt END) AS '항목 4개 회원수', SUM(CASE cnt WHEN 5 THEN cnt_cnt END) AS '항목 5개 회원수', SUM(CASE cnt WHEN 6 THEN cnt_cnt END) AS '항목 6개 회원수', SUM(CASE cnt WHEN 7 THEN cnt_cnt END) AS '항목 7개 회원수', SUM(CASE cnt WHEN 8 THEN cnt_cnt END) AS '항목 8개 회원수', SUM(CASE cnt WHEN 9 THEN cnt_cnt END) AS '항목 9개 회원수', SUM(CASE WHEN cnt > 9 THEN cnt_cnt END) AS '항목 10개 이상 회원수' FROM (SELECT cnt, IFNULL(COUNT(*), 0) AS cnt_cnt FROM (SELECT COUNT(*) AS cnt ";
+			query += "FROM PROGRAMMING_LANGUAGE GROUP BY MEMBER_ID) c1 GROUP BY cnt) c2;";
+
+			conn = JdbcUtil.getConnection(conn);
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();			
+			while(rs.next())
+			{	
+				statis.distributionMap_swAbility.add(rs.getInt(1));	 	//항목이 1개인 학생수
+				statis.distributionMap_swAbility.add(rs.getInt(2));	 	//항목이 2개인 학생수
+				statis.distributionMap_swAbility.add(rs.getInt(3));	 	//항목이 3개인 학생수
+				statis.distributionMap_swAbility.add(rs.getInt(4));	 	//항목이 4개인 학생수
+				statis.distributionMap_swAbility.add(rs.getInt(5));	 	//항목이 5개인 학생수
+				statis.distributionMap_swAbility.add(rs.getInt(6));	 	//항목이 6개인 학생수
+				statis.distributionMap_swAbility.add(rs.getInt(7));	 	//항목이 7개인 학생수
+				statis.distributionMap_swAbility.add(rs.getInt(8));	 	//항목이 8개인 학생수
+				statis.distributionMap_swAbility.add(rs.getInt(9));	 	//항목이 9개인 학생수
+				statis.distributionMap_swAbility.add(rs.getInt(10));	//항목이 10개이상 학생수
+			}		
+		} catch (SQLException e) {		e.printStackTrace();	} finally {		JdbcUtil.close(rs, pstmt, conn );	}		
+		return statis;
+	}
 }

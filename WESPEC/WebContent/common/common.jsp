@@ -34,7 +34,9 @@
 			"Swift",		"Objective-C",  "Delphi"
 			};
 %>
-
+<%
+	String[] rankName = { "1st", "2nd", "3th", "4td" };
+%>
 <%--/* ÄíÅ°¼³Á¤ */ --%>
 <%	
 	Cookie[] cookies = request.getCookies();
