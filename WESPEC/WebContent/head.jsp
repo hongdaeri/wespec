@@ -23,17 +23,17 @@
                  <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="<%=request.getContextPath()%>/Statistics">통계 서비스</a></li>
-                    <li><a href="#">출력 서비스 </a></li>
-                    <li><a href="#">Administrator</a></li>
+                    <li><a href="<%=request.getContextPath()%>/Statistics"><i class="glyphicon glyphicon-stats"></i> Statistics Service</a></li>
+                    <li><a href="javascript: window.open('<%=request.getContextPath()%>/Print/<%=memberId%>','출력 서비스','width=1024','height=768','top=100','left=100','status=yes','scrollbars=auto');"><i class="glyphicon glyphicon-print"></i> Print Service</a> </li>
+                    <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Administrator</a></li>
                     <li class="divider"></li> <!-- 경계선 -->
-                    <li><a href="#">WESPEC MANUAL</a></li>
+                    <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i> WESPEC MANUAL</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">About WESPEC</a></li>
+                    <li><a href="#"><i class="glyphicon glyphicon-leaf"></i> About WESPEC</a></li>
                   </ul>
                 </li>
               </ul>
-               
+              
                 <!-- Search bar -->
               <form class="navbar-form navbar-left" action="<%=request.getContextPath() %>/Search" role="search">
                 <div class="input-group">                            

@@ -132,8 +132,10 @@ table.sortable thead th div.mozilla {
 			<h2>위스펙 통계 서비스</h2>
 			<p>
 		      	본 서비스는 위스펙에 이력등록 이력이 있는 학생의 자료를 토대로 산출됩니다.
-		      	어학능력의 경우, 토익에 한정되며 
+		      	어학능력의 경우에는 항목의 특성 상 TOEIC시험 이력만을 기준으로 통계 데이터가 산정됩니다.<br>
+		      	추가코자 희망하는 통계자료나 항목은 관리자에게 요청 하시면 추가 반영하도록 하겠습니다.
 	      	</p>
+	      	<hr>	      
 	      	<div class="row">
 		      	<div class="col-md-2 col-sm-4 col-xs-4">
 			   		<div class="hero-widget well well-sm">
@@ -244,7 +246,7 @@ table.sortable thead th div.mozilla {
 			                        		<table class="rank_table">
 			                        			<tr>
 			                        				<td id="rank" class="col-xs-2"><%=rankName[i]%></td>
-			                        				<td id="img"><img class="rank-img img-circle" src="<%=request.getContextPath()%>/<%=statis.getToeicKingPhoto().get(i)%>"></td>
+			                        				<td id="img"><img class="rank-img img-circle" src="<%=statis.getToeicKingPhoto().get(i)%>"></td>
 			                        				<td id="name"><%=statis.getToeicKingName().get(i)%></td>
 			                        				<td id="score"><%=statis.getToeicKingScore().get(i)%>점</td>
 			                        			</tr>
@@ -374,7 +376,7 @@ table.sortable thead th div.mozilla {
 			                        		<table class="rank_table">
 			                        			<tr>
 			                        				<td id="rank" class="col-xs-2"><%=rankName[i]%></td>
-			                        				<td id="img"><img class="rank-img img-circle" src="<%=request.getContextPath()%>/<%=statis.getCertificateKingPhoto().get(i)%>"></td>
+			                        				<td id="img"><img class="rank-img img-circle" src="<%=statis.getCertificateKingPhoto().get(i)%>"></td>
 			                        				<td id="name"><%=statis.getCertificateKingName().get(i)%></td>
 			                        				<td id="score"><%=statis.getCertificateKingCount().get(i)%>개</td>
 			                        			</tr>
@@ -511,7 +513,7 @@ table.sortable thead th div.mozilla {
 			                        		<table class="rank_table">
 			                        			<tr>
 			                        				<td id="rank" class="col-xs-2"><%=rankName[i]%></td>
-			                        				<td id="img"><img class="rank-img img-circle" src="<%=request.getContextPath()%>/<%=statis.getAwardKingPhoto().get(i)%>"></td>
+			                        				<td id="img"><img class="rank-img img-circle" src="<%=statis.getAwardKingPhoto().get(i)%>"></td>
 			                        				<td id="name"><%=statis.getAwardKingName().get(i)%></td>
 			                        				<td id="score"><%=statis.getAwardKingCount().get(i)%>회</td>
 			                        			</tr>
@@ -648,7 +650,7 @@ table.sortable thead th div.mozilla {
 			                        		<table class="rank_table">
 			                        			<tr>
 			                        				<td id="rank" class="col-xs-2"><%=rankName[i]%></td>
-			                        				<td id="img"><img class="rank-img img-circle" src="<%=request.getContextPath()%>/<%=statis.getPortfolioKingPhoto().get(i)%>"></td>
+			                        				<td id="img"><img class="rank-img img-circle" src="<%=statis.getPortfolioKingPhoto().get(i)%>"></td>
 			                        				<td id="name"><%=statis.getPortfolioKingName().get(i)%></td>
 			                        				<td id="score"><%=statis.getPortfolioKingCount().get(i)%>개</td>
 			                        			</tr>
@@ -769,8 +771,7 @@ table.sortable thead th div.mozilla {
 		                        			<td id="rank" class="col-xs-3">${status.index+1}위</td>			                        				
 		                        			<td id="key"><h4>${SwAbilityMap.key}</h4></td>
 		                        			<td id="value">${SwAbilityMap.value}명</td>
-		                        		</tr>
-		                        	    									
+		                        		</tr>		                        	    									
 								 	</c:forEach>
 		                      		</table>
 								</div>								

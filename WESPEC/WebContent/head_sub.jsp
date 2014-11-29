@@ -29,6 +29,8 @@
 	<script src="<%=skinPath %>/js/jspatch.js"></script>
 	<script src="<%=skinPath %>/js/buildcats.js" charset="utf-8"></script>
 	<script src="<%=skinPath %>/js/jquery.poshytip.js"></script>
+	<!--  printJs -->
+	<script src="<%=skinPath %>/js/printResume.js"></script>
 	<!--  collaps -->
 	<script src="<%=skinPath %>/js/collaps.js" ></script>
 	<%-- jquery.circularise --%>

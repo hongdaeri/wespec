@@ -270,7 +270,7 @@
 							<tr>
 								<td class="col-md-2">${portfolio.portfolioPeriod}</td>
 								<td class="col-md-3">${portfolio.portfolioName}</td>
-								<td class="col-md-3">${portfolio.portfolioLink}</td>
+								<td class="col-md-3"><a href="${portfolio.portfolioLink}" target="_BLANK">${portfolio.portfolioLink}</a></td>
 								<td class="col-md-2">${portfolio.publicScope}</td>
 								<td class="col-md-2 text-right"></td>
 							</tr>
